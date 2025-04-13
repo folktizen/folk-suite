@@ -14,3 +14,6 @@
 
 # Dotenv file
 /contracts/**/.env
+
+# System backups
+/backup

@@ -1,6 +1,7 @@
 {
   "search.exclude": {
     "**/lib": true,
+    "**/libs": true,
     "**/cache": true,
     "*-lock.yaml": true,
     "*.lock": true

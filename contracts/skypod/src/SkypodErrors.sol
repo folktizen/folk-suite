@@ -19,6 +19,7 @@ contract SkypodErrors {
     error NotVerifiedContract();
     error InvalidFunds();
 
+    error NotAgent();
     error NotAgentOwner();
     error NotAgentCreator();
     error NotAgentOrAdmin();
