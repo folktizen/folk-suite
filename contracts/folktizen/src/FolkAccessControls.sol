@@ -106,7 +106,16 @@ contract FolkAccessControls {
         _vig[token] = vig;
         _base[token] = base;
 
-        emit TokenDetailsSet(token, threshold, rentLead, rentRemix, rentPublish, rentMint, vig, base);
+        emit TokenDetailsSet(
+            token,
+            threshold,
+            rentLead,
+            rentRemix,
+            rentPublish,
+            rentMint,
+            vig,
+            base
+        );
     }
 
     function removeTokenDetails(address token) external onlyAdmin {
@@ -137,19 +146,27 @@ contract FolkAccessControls {
         return _thresholds[token];
     }
 
-    function getTokenCycleRentLead(address token) public view returns (uint256) {
+    function getTokenCycleRentLead(
+        address token
+    ) public view returns (uint256) {
         return _cycleRentLead[token];
     }
 
-    function getTokenCycleRentPublish(address token) public view returns (uint256) {
+    function getTokenCycleRentPublish(
+        address token
+    ) public view returns (uint256) {
         return _cycleRentPublish[token];
     }
 
-    function getTokenCycleRentMint(address token) public view returns (uint256) {
+    function getTokenCycleRentMint(
+        address token
+    ) public view returns (uint256) {
         return _cycleRentMint[token];
     }
 
-    function getTokenCycleRentRemix(address token) public view returns (uint256) {
+    function getTokenCycleRentRemix(
+        address token
+    ) public view returns (uint256) {
         return _cycleRentRemix[token];
     }
 
@@ -166,7 +183,7 @@ contract FolkAccessControls {
             revert FolkErrors.InsufficientFunds();
         }
 
-        (bool _success,) = to.call{value: amount, gas: gas}("");
+        (bool _success, ) = to.call{value: amount, gas: gas}("");
 
         if (!_success) {
             revert FolkErrors.TransferFailed();
@@ -179,12 +196,20 @@ contract FolkAccessControls {
         return user.balance;
     }
 
-    function setSkypodAccessControls(address payable _skypodAccessControls) public onlyAdmin {
+    function setSkypodAccessControls(
+        address payable _skypodAccessControls
+    ) public onlyAdmin {
         skypodAccessControls = SkypodAccessControls(_skypodAccessControls);
     }
 
-    function emergencyWithdraw(uint256 amount, uint256 gasAmount) external onlyAdmin {
-        (bool success,) = payable(msg.sender).call{value: amount, gas: gasAmount}("");
+    function emergencyWithdraw(
+        uint256 amount,
+        uint256 gasAmount
+    ) external onlyAdmin {
+        (bool success, ) = payable(msg.sender).call{
+            value: amount,
+            gas: gasAmount
+        }("");
         if (!success) {
             revert SkypodErrors.TransferFailed();
         }

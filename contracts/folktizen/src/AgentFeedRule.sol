@@ -48,7 +48,10 @@ struct RuleConfiguration {
 }
 
 interface IFeedRule {
-    function configure(bytes32 configSalt, KeyValue[] calldata ruleParams) external;
+    function configure(
+        bytes32 configSalt,
+        KeyValue[] calldata ruleParams
+    ) external;
 
     function processCreatePost(
         bytes32 configSalt,
@@ -95,7 +98,10 @@ contract AgentFeedRule is IFeedRule {
         skypodAccessControls = SkypodAccessControls(accessControls);
     }
 
-    function configure(bytes32 configSalt, KeyValue[] calldata ruleParams) external override {}
+    function configure(
+        bytes32 configSalt,
+        KeyValue[] calldata ruleParams
+    ) external override {}
 
     function processCreatePost(
         bytes32 configSalt,
@@ -131,7 +137,9 @@ contract AgentFeedRule is IFeedRule {
         KeyValue[] calldata ruleParams
     ) external override {}
 
-    function setAccessControls(address payable accessControls) external onlyAdmin {
+    function setAccessControls(
+        address payable accessControls
+    ) external onlyAdmin {
         skypodAccessControls = SkypodAccessControls(accessControls);
     }
 }

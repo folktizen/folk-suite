@@ -18,7 +18,12 @@ contract SkypodUserManager {
     event UserWithdraw(address token, address user, uint256 amount);
     event DepositEnabled(address user, address token, bool allow);
     event DepositAllowance(address user, address token, uint256 allowance);
-    event DepositUsed(address user, address token, address verifiedContract, uint256 amount);
+    event DepositUsed(
+        address user,
+        address token,
+        address verifiedContract,
+        uint256 amount
+    );
 
     modifier onlyAdmin() {
         if (!accessControls.isAdmin(msg.sender)) {
@@ -58,7 +63,12 @@ contract SkypodUserManager {
         }
 
         if (max) {
-            if (IERC20(token).transfer(msg.sender, _userDeposited[msg.sender][token])) {
+            if (
+                IERC20(token).transfer(
+                    msg.sender,
+                    _userDeposited[msg.sender][token]
+                )
+            ) {
                 _userDeposited[msg.sender][token] = 0;
             }
         } else {
@@ -82,7 +92,11 @@ contract SkypodUserManager {
         emit DepositAllowance(msg.sender, token, allowance);
     }
 
-    function useDeposited(address token, address user, uint256 amount) external onlyVerifiedContract {
+    function useDeposited(
+        address token,
+        address user,
+        uint256 amount
+    ) external onlyVerifiedContract {
         if (!_allowDeposit[user][token]) {
             revert SkypodErrors.UseNotAllowed();
         }
@@ -98,24 +112,41 @@ contract SkypodUserManager {
         emit DepositUsed(user, token, msg.sender, amount);
     }
 
-    function setAccessControls(address payable _accessControls) public onlyAdmin {
+    function setAccessControls(
+        address payable _accessControls
+    ) public onlyAdmin {
         accessControls = SkypodAccessControls(_accessControls);
     }
 
-    function getUserTokenBalance(address user, address token) public view returns (uint256) {
+    function getUserTokenBalance(
+        address user,
+        address token
+    ) public view returns (uint256) {
         return _userDeposited[user][token];
     }
 
-    function getUserDepositAllowed(address user, address token) public view returns (bool) {
+    function getUserDepositAllowed(
+        address user,
+        address token
+    ) public view returns (bool) {
         return _allowDeposit[user][token];
     }
 
-    function getUserDepositAllowance(address user, address token) public view returns (uint256) {
+    function getUserDepositAllowance(
+        address user,
+        address token
+    ) public view returns (uint256) {
         return _allowedDeposit[user][token];
     }
 
-    function emergencyWithdraw(uint256 amount, uint256 gasAmount) external onlyAdmin {
-        (bool success,) = payable(msg.sender).call{value: amount, gas: gasAmount}("");
+    function emergencyWithdraw(
+        uint256 amount,
+        uint256 gasAmount
+    ) external onlyAdmin {
+        (bool success, ) = payable(msg.sender).call{
+            value: amount,
+            gas: gasAmount
+        }("");
         if (!success) {
             revert SkypodErrors.TransferFailed();
         }

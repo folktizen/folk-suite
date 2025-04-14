@@ -88,7 +88,9 @@ contract SkypodAccessControls {
         emit VerifiedContractAdded(verifiedContract);
     }
 
-    function removeVerifiedContract(address verifiedContract) external onlyAdmin {
+    function removeVerifiedContract(
+        address verifiedContract
+    ) external onlyAdmin {
         if (!_verifiedContracts[verifiedContract]) {
             revert SkypodErrors.ContractDoesntExist();
         }
@@ -167,7 +169,9 @@ contract SkypodAccessControls {
         return _admins[admin];
     }
 
-    function isVerifiedContract(address verifiedContract) public view returns (bool) {
+    function isVerifiedContract(
+        address verifiedContract
+    ) public view returns (bool) {
         return _verifiedContracts[verifiedContract];
     }
 
@@ -195,8 +199,14 @@ contract SkypodAccessControls {
         return _acceptedTokensList.values();
     }
 
-    function emergencyWithdraw(uint256 amount, uint256 gasAmount) external onlyAdmin {
-        (bool success,) = payable(msg.sender).call{value: amount, gas: gasAmount}("");
+    function emergencyWithdraw(
+        uint256 amount,
+        uint256 gasAmount
+    ) external onlyAdmin {
+        (bool success, ) = payable(msg.sender).call{
+            value: amount,
+            gas: gasAmount
+        }("");
         if (!success) {
             revert SkypodErrors.TransferFailed();
         }

@@ -10,5 +10,13 @@ abstract contract NovoPool is BasePool {
         address payable _poolManager,
         address payable _devTreasury,
         address _novo
-    ) BasePool(_accessControls, _userManager, _poolManager, _devTreasury, _novo) {}
+    )
+        BasePool(
+            _accessControls,
+            _userManager,
+            _poolManager,
+            _devTreasury,
+            _novo
+        )
+    {}
 }

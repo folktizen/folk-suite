@@ -77,7 +77,9 @@ contract SkypodPoolManager {
         uint256 _novoBalance = IERC20(novo).balanceOf(address(this));
 
         for (uint8 i = 0; i < _verifiedPools.length; i++) {
-            _amounts[i] = (_novoBalance * _poolPercent[_verifiedPools[i]]) / 100;
+            _amounts[i] =
+                (_novoBalance * _poolPercent[_verifiedPools[i]]) /
+                100;
 
             if (!IERC20(novo).transfer(_verifiedPools[i], _amounts[i])) {
                 revert SkypodErrors.PoolDepositFailed();
@@ -100,7 +102,6 @@ contract SkypodPoolManager {
                 // if (_tokens[i] == pol) {
                 //     _currency0 = Currency.wrap(address(0));
                 // }
-
                 // PoolKey memory key = PoolKey({
                 //     currency0: _currency0,
                 //     currency1: _currency1,
@@ -108,7 +109,6 @@ contract SkypodPoolManager {
                 //     tickSpacing: 60,
                 //     hooks: IHooks(address(0))
                 // });
-
                 // IERC20(_tokens[i]).approve(address(permit2), type(uint256).max);
                 // permit2.approve(
                 //     _tokens[i],
@@ -116,20 +116,16 @@ contract SkypodPoolManager {
                 //     uint160(_amount),
                 //     uint48(block.timestamp + 1 days)
                 // );
-
                 // bytes memory _commands = abi.encodePacked(
                 //     uint8(Commands.V4_SWAP)
                 // );
-
                 // bytes memory _actions = abi.encodePacked(
                 //     uint8(Actions.SWAP_EXACT_IN_SINGLE),
                 //     uint8(Actions.SETTLE_ALL),
                 //     uint8(Actions.TAKE_ALL)
                 // );
-
                 // bytes[] memory _params = new bytes[](3);
                 // bytes[] memory _inputs = new bytes[](1);
-
                 // _params[0] = abi.encode(
                 //     IV4Router.ExactInputSingleParams({
                 //         poolKey: key,
@@ -142,15 +138,16 @@ contract SkypodPoolManager {
                 // );
                 // _params[1] = abi.encode(key.currency0, _amount);
                 // _params[2] = abi.encode(key.currency1, 0);
-
                 // _inputs[0] = abi.encode(_actions, _params);
-
                 // router.execute(_commands, _inputs, block.timestamp);
             }
         }
     }
 
-    function setPoolPercents(address[] memory pools, uint256[] memory percents) public onlyAdmin {
+    function setPoolPercents(
+        address[] memory pools,
+        uint256[] memory percents
+    ) public onlyAdmin {
         uint256 total = 0;
         for (uint8 i = 0; i < pools.length; i++) {
             if (!accessControls.isPool(pools[i])) {
@@ -179,7 +176,9 @@ contract SkypodPoolManager {
         return IERC20(token).balanceOf(address(this));
     }
 
-    function setAccessControls(address payable _accessControls) public onlyAdmin {
+    function setAccessControls(
+        address payable _accessControls
+    ) public onlyAdmin {
         accessControls = SkypodAccessControls(_accessControls);
     }
 
@@ -191,8 +190,14 @@ contract SkypodPoolManager {
         pol = _pol;
     }
 
-    function emergencyWithdraw(uint256 amount, uint256 gasAmount) external onlyAdmin {
-        (bool success,) = payable(msg.sender).call{value: amount, gas: gasAmount}("");
+    function emergencyWithdraw(
+        uint256 amount,
+        uint256 gasAmount
+    ) external onlyAdmin {
+        (bool success, ) = payable(msg.sender).call{
+            value: amount,
+            gas: gasAmount
+        }("");
         if (!success) {
             revert SkypodErrors.TransferFailed();
         }

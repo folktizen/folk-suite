@@ -25,41 +25,90 @@ contract FolkAgents {
     address public poolManager;
 
     mapping(uint256 => FolkLibrary.Agent) private _activatedAgents;
-    mapping(uint256 => mapping(address => mapping(uint256 => uint256))) private _agentRentBalances;
-    mapping(uint256 => mapping(address => mapping(uint256 => uint256))) private _agentHistoricalRentBalances;
-    mapping(uint256 => mapping(address => mapping(uint256 => uint256))) private _agentBonusBalances;
-    mapping(uint256 => mapping(address => mapping(uint256 => uint256))) private _agentHistoricalBonusBalances;
-    mapping(uint256 => mapping(uint256 => FolkLibrary.CollectionWorker)) private _workers;
+    mapping(uint256 => mapping(address => mapping(uint256 => uint256)))
+        private _agentRentBalances;
+    mapping(uint256 => mapping(address => mapping(uint256 => uint256)))
+        private _agentHistoricalRentBalances;
+    mapping(uint256 => mapping(address => mapping(uint256 => uint256)))
+        private _agentBonusBalances;
+    mapping(uint256 => mapping(address => mapping(uint256 => uint256)))
+        private _agentHistoricalBonusBalances;
+    mapping(uint256 => mapping(uint256 => FolkLibrary.CollectionWorker))
+        private _workers;
     mapping(address => uint256) private _services;
     mapping(address => uint256) private _allTimeServices;
-    mapping(address => mapping(address => mapping(uint256 => uint256))) private _collectorPayment;
-    mapping(address => mapping(address => mapping(uint256 => uint256))) private _ownerPayment;
+    mapping(address => mapping(address => mapping(uint256 => uint256)))
+        private _collectorPayment;
+    mapping(address => mapping(address => mapping(uint256 => uint256)))
+        private _ownerPayment;
     mapping(address => uint256) private _devPayment;
     mapping(address => uint256) private _currentRewards;
     mapping(address => uint256) private _rewardsHistory;
-    mapping(uint256 => mapping(address => mapping(address => uint256))) private _artistCollectBalanceByToken;
+    mapping(uint256 => mapping(address => mapping(address => uint256)))
+        private _artistCollectBalanceByToken;
 
     event ActivateAgent(address wallet, uint256 agentId);
-    event BalanceAdded(address token, uint256 agentId, uint256 amount, uint256 collectionId);
-    event ArtistCollectBalanceAdded(address forArtist, address token, uint256 agentId, uint256 amount);
-    event ArtistPaid(address forArtist, address token, uint256 agentId, uint256 collectionId, uint256 amount);
+    event BalanceAdded(
+        address token,
+        uint256 agentId,
+        uint256 amount,
+        uint256 collectionId
+    );
+    event ArtistCollectBalanceAdded(
+        address forArtist,
+        address token,
+        uint256 agentId,
+        uint256 amount
+    );
+    event ArtistPaid(
+        address forArtist,
+        address token,
+        uint256 agentId,
+        uint256 collectionId,
+        uint256 amount
+    );
     event ArtistCollectBalanceSpent(
-        address forArtist, address to, address token, uint256 agentId, uint256 collectionId, uint256 amount
+        address forArtist,
+        address to,
+        address token,
+        uint256 agentId,
+        uint256 collectionId,
+        uint256 amount
     );
     event BalanceTransferred(address artist, uint256 agentId);
     event AgentMarketWalletEdited(address wallet, uint256 agentId);
     event RewardsCalculated(address token, uint256 amount);
     event AgentPaidRent(
-        address[] tokens, uint256[] collectionIds, uint256[] amounts, uint256[] bonuses, uint256 indexed agentId
+        address[] tokens,
+        uint256[] collectionIds,
+        uint256[] amounts,
+        uint256[] bonuses,
+        uint256 indexed agentId
     );
-    event AgentRecharged(address recharger, address token, uint256 agentId, uint256 collectionId, uint256 amount);
+    event AgentRecharged(
+        address recharger,
+        address token,
+        uint256 agentId,
+        uint256 collectionId,
+        uint256 amount
+    );
     event ServicesAdded(address token, uint256 amount);
     event WorkerAdded(uint256 agentId, uint256 collectionId);
     event WorkerUpdated(uint256 agentId, uint256 collectionId);
     event WorkerRemoved(uint256 agentId, uint256 collectionId);
     event ServicesWithdrawn(address token, uint256 amount);
-    event CollectorPaid(address collector, address token, uint256 amount, uint256 collectionId);
-    event OwnerPaid(address owner, address token, uint256 amount, uint256 collectionId);
+    event CollectorPaid(
+        address collector,
+        address token,
+        uint256 amount,
+        uint256 collectionId
+    );
+    event OwnerPaid(
+        address owner,
+        address token,
+        uint256 amount,
+        uint256 collectionId
+    );
     event DevTreasuryPaid(address token, uint256 amount, uint256 collectionId);
 
     modifier onlyAdmin() {
@@ -70,7 +119,10 @@ contract FolkAgents {
     }
 
     modifier onlyAgentOwnerOrCreator(uint256 agentId) {
-        if (!agentManager.getIsAgentOwner(msg.sender, agentId) && agentManager.getAgentCreator(agentId) != msg.sender) {
+        if (
+            !agentManager.getIsAgentOwner(msg.sender, agentId) &&
+            agentManager.getAgentCreator(agentId) != msg.sender
+        ) {
             revert FolkErrors.NotAgentOwner();
         }
 
@@ -117,41 +169,46 @@ contract FolkAgents {
         agentManager = SkypodAgentManager(_agentManager);
     }
 
-    function activateAgent(uint256 agentId) external onlyAgentOwnerOrCreator(agentId) {
+    function activateAgent(
+        uint256 agentId
+    ) external onlyAgentOwnerOrCreator(agentId) {
         agentManager.setAgentActive(agentId);
 
         emit ActivateAgent(msg.sender, agentId);
     }
 
-    function addWorker(FolkLibrary.CollectionWorker memory worker, uint256 agentId, uint256 collectionId)
-        external
-        onlyCollectionManager
-        onlyValidWorker(worker)
-    {
+    function addWorker(
+        FolkLibrary.CollectionWorker memory worker,
+        uint256 agentId,
+        uint256 collectionId
+    ) external onlyCollectionManager onlyValidWorker(worker) {
         _workers[agentId][collectionId] = worker;
 
         emit WorkerAdded(agentId, collectionId);
     }
 
-    function updateWorker(FolkLibrary.CollectionWorker memory worker, uint256 agentId, uint256 collectionId)
-        external
-        onlyCollectionManager
-        onlyValidWorker(worker)
-    {
+    function updateWorker(
+        FolkLibrary.CollectionWorker memory worker,
+        uint256 agentId,
+        uint256 collectionId
+    ) external onlyCollectionManager onlyValidWorker(worker) {
         _workers[agentId][collectionId] = worker;
 
         emit WorkerUpdated(agentId, collectionId);
     }
 
-    function removeWorker(uint256 agentId, uint256 collectionId) external onlyCollectionManager {
+    function removeWorker(
+        uint256 agentId,
+        uint256 collectionId
+    ) external onlyCollectionManager {
         address[] memory _tokens = skypodAccessControls.getAcceptedTokens();
 
         for (uint8 i = 0; i < _tokens.length; i++) {
             if (_agentRentBalances[agentId][_tokens[i]][collectionId] > 0) {
-                _services[_tokens[i]] += (
-                    _agentRentBalances[agentId][_tokens[i]][collectionId]
-                        + _agentBonusBalances[agentId][_tokens[i]][collectionId]
-                );
+                _services[_tokens[i]] += (_agentRentBalances[agentId][
+                    _tokens[i]
+                ][collectionId] +
+                    _agentBonusBalances[agentId][_tokens[i]][collectionId]);
 
                 _agentRentBalances[agentId][_tokens[i]][collectionId] = 0;
                 _agentBonusBalances[agentId][_tokens[i]][collectionId] = 0;
@@ -163,20 +220,30 @@ contract FolkAgents {
         emit WorkerRemoved(agentId, collectionId);
     }
 
-    function transferBalance(address[] memory tokens, address artist, uint256 agentId) external onlyCollectionManager {
+    function transferBalance(
+        address[] memory tokens,
+        address artist,
+        uint256 agentId
+    ) external onlyCollectionManager {
         for (uint8 i = 0; i < tokens.length; i++) {
-            _services[tokens[i]] += _artistCollectBalanceByToken[agentId][tokens[i]][artist];
-            _allTimeServices[tokens[i]] += _artistCollectBalanceByToken[agentId][tokens[i]][artist];
+            _services[tokens[i]] += _artistCollectBalanceByToken[agentId][
+                tokens[i]
+            ][artist];
+            _allTimeServices[tokens[i]] += _artistCollectBalanceByToken[
+                agentId
+            ][tokens[i]][artist];
             _artistCollectBalanceByToken[agentId][tokens[i]][artist] = 0;
         }
 
         emit BalanceTransferred(artist, agentId);
     }
 
-    function addArtistCollectBalance(address forArtist, address token, uint256 agentId, uint256 amount)
-        external
-        onlyMarket
-    {
+    function addArtistCollectBalance(
+        address forArtist,
+        address token,
+        uint256 agentId,
+        uint256 amount
+    ) external onlyMarket {
         _artistCollectBalanceByToken[agentId][token][forArtist] += amount;
 
         emit ArtistCollectBalanceAdded(forArtist, token, agentId, amount);
@@ -206,14 +273,24 @@ contract FolkAgents {
         if (to == forArtist) {
             emit ArtistPaid(forArtist, token, agentId, collectionId, amount);
         } else {
-            emit ArtistCollectBalanceSpent(forArtist, to, token, agentId, collectionId, amount);
+            emit ArtistCollectBalanceSpent(
+                forArtist,
+                to,
+                token,
+                agentId,
+                collectionId,
+                amount
+            );
         }
     }
 
-    function addBalance(address token, uint256 agentId, uint256 amount, uint256 collectionId, bool soldOut)
-        external
-        onlyMarket
-    {
+    function addBalance(
+        address token,
+        uint256 agentId,
+        uint256 amount,
+        uint256 collectionId,
+        bool soldOut
+    ) external onlyMarket {
         uint256 _bonus = 0;
         uint256 _rent = _handleRent(token, agentId, collectionId);
 
@@ -226,27 +303,42 @@ contract FolkAgents {
         _agentBonusBalances[agentId][token][collectionId] += _bonus;
         _agentHistoricalBonusBalances[agentId][token][collectionId] += _bonus;
 
-        if (!_activatedAgents[agentId].activeCollectionIds.contains(collectionId) && !soldOut) {
+        if (
+            !_activatedAgents[agentId].activeCollectionIds.contains(
+                collectionId
+            ) && !soldOut
+        ) {
             _activatedAgents[agentId].activeCollectionIds.add(collectionId);
         } else if (soldOut) {
             _activatedAgents[agentId].activeCollectionIds.remove(collectionId);
         }
 
-        if (!_activatedAgents[agentId].collectionIdsHistory.contains(collectionId)) {
+        if (
+            !_activatedAgents[agentId].collectionIdsHistory.contains(
+                collectionId
+            )
+        ) {
             _activatedAgents[agentId].collectionIdsHistory.add(collectionId);
         }
 
         emit BalanceAdded(token, agentId, amount, collectionId);
     }
 
-    function addRemixServices(address token, uint256 amount) external onlyMarket {
+    function addRemixServices(
+        address token,
+        uint256 amount
+    ) external onlyMarket {
         _services[token] += amount;
         _allTimeServices[token] += amount;
 
         emit ServicesAdded(token, amount);
     }
 
-    function payRent(address[] memory tokens, uint256[] memory collectionIds, uint256 agentId) external {
+    function payRent(
+        address[] memory tokens,
+        uint256[] memory collectionIds,
+        uint256 agentId
+    ) external {
         if (collectionIds.length != tokens.length) {
             revert FolkErrors.BadUserInput();
         }
@@ -260,7 +352,10 @@ contract FolkAgents {
         for (uint8 i = 0; i < collectionIds.length; i++) {
             _amounts[i] = _handleRent(tokens[i], agentId, collectionIds[i]);
 
-            if (_agentRentBalances[agentId][tokens[i]][collectionIds[i]] < _amounts[i]) {
+            if (
+                _agentRentBalances[agentId][tokens[i]][collectionIds[i]] <
+                _amounts[i]
+            ) {
                 revert FolkErrors.InsufficientBalance();
             }
 
@@ -269,15 +364,21 @@ contract FolkAgents {
             }
 
             if (
-                _activatedAgents[agentId].activeCollectionIds.length() < 1
-                    || !_activatedAgents[agentId].activeCollectionIds.contains(collectionIds[i])
+                _activatedAgents[agentId].activeCollectionIds.length() < 1 ||
+                !_activatedAgents[agentId].activeCollectionIds.contains(
+                    collectionIds[i]
+                )
             ) {
                 revert FolkErrors.NoActiveAgents();
             }
 
-            _agentRentBalances[agentId][tokens[i]][collectionIds[i]] -= _amounts[i];
+            _agentRentBalances[agentId][tokens[i]][
+                collectionIds[i]
+            ] -= _amounts[i];
 
-            _bonuses[i] = _agentBonusBalances[agentId][tokens[i]][collectionIds[i]];
+            _bonuses[i] = _agentBonusBalances[agentId][tokens[i]][
+                collectionIds[i]
+            ];
 
             _agentBonusBalances[agentId][tokens[i]][collectionIds[i]] = 0;
         }
@@ -295,7 +396,11 @@ contract FolkAgents {
         emit AgentPaidRent(tokens, collectionIds, _amounts, _bonuses, agentId);
     }
 
-    function _handleRent(address token, uint256 agentId, uint256 collectionId) internal view returns (uint256) {
+    function _handleRent(
+        address token,
+        uint256 agentId,
+        uint256 collectionId
+    ) internal view returns (uint256) {
         uint256 _rent = 0;
 
         if (_workers[agentId][collectionId].remix) {
@@ -317,14 +422,21 @@ contract FolkAgents {
         return _rent;
     }
 
-    function _handleBonus(address[] memory owners, address token, uint256 bonus, uint256 collectionId) internal {
+    function _handleBonus(
+        address[] memory owners,
+        address token,
+        uint256 bonus,
+        uint256 collectionId
+    ) internal {
         _currentRewards[token] += bonus;
         _rewardsHistory[token] += bonus;
 
         uint256 _ownerAmount = (bonus * ownerAmountPercent) / 100;
         uint256 _devAmount = (bonus * devAmountPercent) / 100;
         uint256 _distributionAmount = (bonus * distributionAmountPercent) / 100;
-        address[] memory _collectors = market.getAllCollectorsByCollectionId(collectionId);
+        address[] memory _collectors = market.getAllCollectorsByCollectionId(
+            collectionId
+        );
 
         uint256 totalWeight = 0;
         for (uint256 j = 1; j <= _collectors.length; j++) {
@@ -338,18 +450,32 @@ contract FolkAgents {
 
                 IERC20(token).transfer(_collectors[j], payment);
 
-                _collectorPayment[token][_collectors[j]][collectionId] += payment;
+                _collectorPayment[token][_collectors[j]][
+                    collectionId
+                ] += payment;
 
-                emit CollectorPaid(_collectors[j], token, payment, collectionId);
+                emit CollectorPaid(
+                    _collectors[j],
+                    token,
+                    payment,
+                    collectionId
+                );
             }
         }
 
         for (uint8 i = 0; i < owners.length; i++) {
             IERC20(token).transfer(owners[i], _ownerAmount / owners.length);
 
-            _ownerPayment[token][owners[i]][collectionId] += _ownerAmount / owners.length;
+            _ownerPayment[token][owners[i]][collectionId] +=
+                _ownerAmount /
+                owners.length;
 
-            emit OwnerPaid(owners[i], token, _ownerAmount / owners.length, collectionId);
+            emit OwnerPaid(
+                owners[i],
+                token,
+                _ownerAmount / owners.length,
+                collectionId
+            );
         }
 
         _devPayment[token] += _devAmount;
@@ -357,14 +483,21 @@ contract FolkAgents {
         emit DevTreasuryPaid(token, _devAmount, collectionId);
     }
 
-    function rechargeAgentRentBalance(address token, uint256 agentId, uint256 collectionId, uint256 amount) public {
+    function rechargeAgentRentBalance(
+        address token,
+        uint256 agentId,
+        uint256 collectionId,
+        uint256 amount
+    ) public {
         if (
-            collectionManager.getCollectionAmountSold(collectionId)
-                >= collectionManager.getCollectionAmount(collectionId)
+            collectionManager.getCollectionAmountSold(collectionId) >=
+            collectionManager.getCollectionAmount(collectionId)
         ) {
             revert FolkErrors.CollectionSoldOut();
         }
-        uint256[] memory _ids = collectionManager.getCollectionAgentIds(collectionId);
+        uint256[] memory _ids = collectionManager.getCollectionAgentIds(
+            collectionId
+        );
 
         if (_ids.length < 1) {
             revert FolkErrors.NoActiveAgents();
@@ -382,7 +515,9 @@ contract FolkAgents {
             }
         }
 
-        if (!collectionManager.getCollectionERC20TokensSet(token, collectionId)) {
+        if (
+            !collectionManager.getCollectionERC20TokensSet(token, collectionId)
+        ) {
             revert FolkErrors.TokenNotAccepted();
         }
 
@@ -390,17 +525,35 @@ contract FolkAgents {
             revert FolkErrors.PaymentFailed();
         } else {
             _agentRentBalances[agentId][token][collectionId] += amount;
-            _agentHistoricalRentBalances[agentId][token][collectionId] += amount;
+            _agentHistoricalRentBalances[agentId][token][
+                collectionId
+            ] += amount;
 
-            if (!_activatedAgents[agentId].activeCollectionIds.contains(collectionId)) {
+            if (
+                !_activatedAgents[agentId].activeCollectionIds.contains(
+                    collectionId
+                )
+            ) {
                 _activatedAgents[agentId].activeCollectionIds.add(collectionId);
             }
 
-            if (!_activatedAgents[agentId].collectionIdsHistory.contains(collectionId)) {
-                _activatedAgents[agentId].collectionIdsHistory.add(collectionId);
+            if (
+                !_activatedAgents[agentId].collectionIdsHistory.contains(
+                    collectionId
+                )
+            ) {
+                _activatedAgents[agentId].collectionIdsHistory.add(
+                    collectionId
+                );
             }
 
-            emit AgentRecharged(msg.sender, token, agentId, collectionId, amount);
+            emit AgentRecharged(
+                msg.sender,
+                token,
+                agentId,
+                collectionId,
+                amount
+            );
         }
     }
 
@@ -418,27 +571,35 @@ contract FolkAgents {
         emit ServicesWithdrawn(token, _amount);
     }
 
-    function getAgentRentBalance(address token, uint256 agentId, uint256 collectionId) public view returns (uint256) {
+    function getAgentRentBalance(
+        address token,
+        uint256 agentId,
+        uint256 collectionId
+    ) public view returns (uint256) {
         return _agentRentBalances[agentId][token][collectionId];
     }
 
-    function getAgentHistoricalRentBalance(address token, uint256 agentId, uint256 collectionId)
-        public
-        view
-        returns (uint256)
-    {
+    function getAgentHistoricalRentBalance(
+        address token,
+        uint256 agentId,
+        uint256 collectionId
+    ) public view returns (uint256) {
         return _agentHistoricalRentBalances[agentId][token][collectionId];
     }
 
-    function getAgentHistoricalBonusBalance(address token, uint256 agentId, uint256 collectionId)
-        public
-        view
-        returns (uint256)
-    {
+    function getAgentHistoricalBonusBalance(
+        address token,
+        uint256 agentId,
+        uint256 collectionId
+    ) public view returns (uint256) {
         return _agentHistoricalBonusBalances[agentId][token][collectionId];
     }
 
-    function getAgentBonusBalance(address token, uint256 agentId, uint256 collectionId) public view returns (uint256) {
+    function getAgentBonusBalance(
+        address token,
+        uint256 agentId,
+        uint256 collectionId
+    ) public view returns (uint256) {
         return _agentBonusBalances[agentId][token][collectionId];
     }
 
@@ -446,87 +607,130 @@ contract FolkAgents {
         return _allTimeServices[token];
     }
 
-    function getServicesPaidByToken(address token) public view returns (uint256) {
+    function getServicesPaidByToken(
+        address token
+    ) public view returns (uint256) {
         return _services[token];
     }
 
-    function getAgentCollectionIdsHistory(uint256 agentId) public view returns (uint256[] memory) {
+    function getAgentCollectionIdsHistory(
+        uint256 agentId
+    ) public view returns (uint256[] memory) {
         return _activatedAgents[agentId].collectionIdsHistory.values();
     }
 
-    function getAgentActiveCollectionIds(uint256 agentId) public view returns (uint256[] memory) {
+    function getAgentActiveCollectionIds(
+        uint256 agentId
+    ) public view returns (uint256[] memory) {
         return _activatedAgents[agentId].activeCollectionIds.values();
     }
 
-    function getIsActiveCollectionId(uint256 agentId, uint256 collectionId) public view returns (bool) {
-        return _activatedAgents[agentId].activeCollectionIds.contains(collectionId);
+    function getIsActiveCollectionId(
+        uint256 agentId,
+        uint256 collectionId
+    ) public view returns (bool) {
+        return
+            _activatedAgents[agentId].activeCollectionIds.contains(
+                collectionId
+            );
     }
 
-    function getCollectorPaymentByToken(address token, address collector, uint256 collectionId)
-        public
-        view
-        returns (uint256)
-    {
+    function getCollectorPaymentByToken(
+        address token,
+        address collector,
+        uint256 collectionId
+    ) public view returns (uint256) {
         return _collectorPayment[token][collector][collectionId];
     }
 
-    function getAgentOwnerPaymentByToken(address token, address owner, uint256 collectionId)
-        public
-        view
-        returns (uint256)
-    {
+    function getAgentOwnerPaymentByToken(
+        address token,
+        address owner,
+        uint256 collectionId
+    ) public view returns (uint256) {
         return _ownerPayment[token][owner][collectionId];
     }
 
-    function getCurrentRewardsByToken(address token) public view returns (uint256) {
+    function getCurrentRewardsByToken(
+        address token
+    ) public view returns (uint256) {
         return _currentRewards[token];
     }
 
-    function getRewardsHistoryByToken(address token) public view returns (uint256) {
+    function getRewardsHistoryByToken(
+        address token
+    ) public view returns (uint256) {
         return _rewardsHistory[token];
     }
 
-    function getWorkerPublish(uint256 agentId, uint256 collectionId) public view returns (bool) {
+    function getWorkerPublish(
+        uint256 agentId,
+        uint256 collectionId
+    ) public view returns (bool) {
         return _workers[agentId][collectionId].publish;
     }
 
-    function getWorkerMint(uint256 agentId, uint256 collectionId) public view returns (bool) {
+    function getWorkerMint(
+        uint256 agentId,
+        uint256 collectionId
+    ) public view returns (bool) {
         return _workers[agentId][collectionId].mint;
     }
 
-    function getWorkerLead(uint256 agentId, uint256 collectionId) public view returns (bool) {
+    function getWorkerLead(
+        uint256 agentId,
+        uint256 collectionId
+    ) public view returns (bool) {
         return _workers[agentId][collectionId].lead;
     }
 
-    function getWorkerRemix(uint256 agentId, uint256 collectionId) public view returns (bool) {
+    function getWorkerRemix(
+        uint256 agentId,
+        uint256 collectionId
+    ) public view returns (bool) {
         return _workers[agentId][collectionId].remix;
     }
 
-    function getWorkerPublishFrequency(uint256 agentId, uint256 collectionId) public view returns (uint256) {
+    function getWorkerPublishFrequency(
+        uint256 agentId,
+        uint256 collectionId
+    ) public view returns (uint256) {
         return _workers[agentId][collectionId].publishFrequency;
     }
 
-    function getWorkerMintFrequency(uint256 agentId, uint256 collectionId) public view returns (uint256) {
+    function getWorkerMintFrequency(
+        uint256 agentId,
+        uint256 collectionId
+    ) public view returns (uint256) {
         return _workers[agentId][collectionId].mintFrequency;
     }
 
-    function getWorkerLeadFrequency(uint256 agentId, uint256 collectionId) public view returns (uint256) {
+    function getWorkerLeadFrequency(
+        uint256 agentId,
+        uint256 collectionId
+    ) public view returns (uint256) {
         return _workers[agentId][collectionId].leadFrequency;
     }
 
-    function getWorkerRemixFrequency(uint256 agentId, uint256 collectionId) public view returns (uint256) {
+    function getWorkerRemixFrequency(
+        uint256 agentId,
+        uint256 collectionId
+    ) public view returns (uint256) {
         return _workers[agentId][collectionId].remixFrequency;
     }
 
-    function getWorkerInstructions(uint256 agentId, uint256 collectionId) public view returns (string memory) {
+    function getWorkerInstructions(
+        uint256 agentId,
+        uint256 collectionId
+    ) public view returns (string memory) {
         return _workers[agentId][collectionId].instructions;
     }
 
-    function getArtistCollectBalanceByToken(address artist, address token, uint256 agentId)
-        public
-        view
-        returns (uint256)
-    {
+    function getArtistCollectBalanceByToken(
+        address artist,
+        address token,
+        uint256 agentId
+    ) public view returns (uint256) {
         return _artistCollectBalanceByToken[agentId][token][artist];
     }
 
@@ -534,7 +738,9 @@ contract FolkAgents {
         return _devPayment[token];
     }
 
-    function setAccessControls(address payable _accessControls) external onlyAdmin {
+    function setAccessControls(
+        address payable _accessControls
+    ) external onlyAdmin {
         accessControls = FolkAccessControls(_accessControls);
     }
 
@@ -542,7 +748,9 @@ contract FolkAgents {
         agentManager = SkypodAgentManager(_agentManager);
     }
 
-    function setSkypodAccessControls(address payable _skypodAccessControls) external onlyAdmin {
+    function setSkypodAccessControls(
+        address payable _skypodAccessControls
+    ) external onlyAdmin {
         skypodAccessControls = SkypodAccessControls(_skypodAccessControls);
     }
 
@@ -550,15 +758,23 @@ contract FolkAgents {
         market = FolkMarket(_market);
     }
 
-    function setCollectionManager(address _collectionManager) external onlyAdmin {
+    function setCollectionManager(
+        address _collectionManager
+    ) external onlyAdmin {
         collectionManager = FolkCollectionManager(_collectionManager);
     }
 
-    function setAmounts(uint256 _ownerAmountPercent, uint256 _distributionAmountPercent, uint256 _devAmountPercent)
-        external
-        onlyAdmin
-    {
-        if (_ownerAmountPercent + _distributionAmountPercent + _devAmountPercent != 100) {
+    function setAmounts(
+        uint256 _ownerAmountPercent,
+        uint256 _distributionAmountPercent,
+        uint256 _devAmountPercent
+    ) external onlyAdmin {
+        if (
+            _ownerAmountPercent +
+                _distributionAmountPercent +
+                _devAmountPercent !=
+            100
+        ) {
             revert FolkErrors.BadUserInput();
         }
         ownerAmountPercent = _ownerAmountPercent;
@@ -566,8 +782,14 @@ contract FolkAgents {
         devAmountPercent = _devAmountPercent;
     }
 
-    function emergencyWithdraw(uint256 amount, uint256 gasAmount) external onlyAdmin {
-        (bool success,) = payable(msg.sender).call{value: amount, gas: gasAmount}("");
+    function emergencyWithdraw(
+        uint256 amount,
+        uint256 gasAmount
+    ) external onlyAdmin {
+        (bool success, ) = payable(msg.sender).call{
+            value: amount,
+            gas: gasAmount
+        }("");
         if (!success) {
             revert SkypodErrors.TransferFailed();
         }

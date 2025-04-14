@@ -32,7 +32,9 @@ contract FolkFulfillerManager {
     }
 
     modifier onlyAdminOrMarket() {
-        if (!accessControls.isAdmin(msg.sender) && msg.sender != address(market)) {
+        if (
+            !accessControls.isAdmin(msg.sender) && msg.sender != address(market)
+        ) {
             revert FolkErrors.NotAdmin();
         }
         _;
@@ -48,7 +50,9 @@ contract FolkFulfillerManager {
         _fulfillerCounter = 0;
     }
 
-    function createFulfillerProfile(FolkLibrary.FulfillerInput memory input) public onlyFulfiller {
+    function createFulfillerProfile(
+        FolkLibrary.FulfillerInput memory input
+    ) public onlyFulfiller {
         _fulfillerCounter++;
 
         _fulfillers[_fulfillerCounter].id = _fulfillerCounter;
@@ -72,7 +76,10 @@ contract FolkFulfillerManager {
         emit FulfillerDeleted(fulfillerId);
     }
 
-    function addOrder(uint256 fulfillerId, uint256 orderId) external onlyAdminOrMarket {
+    function addOrder(
+        uint256 fulfillerId,
+        uint256 orderId
+    ) external onlyAdminOrMarket {
         _fulfillers[fulfillerId].activeOrders.add(orderId);
         _fulfillers[fulfillerId].orderHistory.push(orderId);
 
@@ -91,19 +98,27 @@ contract FolkFulfillerManager {
         emit OrderFulfilled(fulfillerId, orderId);
     }
 
-    function getFulfillerActiveOrders(uint256 fulfillerId) public view returns (uint256[] memory) {
+    function getFulfillerActiveOrders(
+        uint256 fulfillerId
+    ) public view returns (uint256[] memory) {
         return _fulfillers[fulfillerId].activeOrders.values();
     }
 
-    function getFulfillerOrderHistory(uint256 fulfillerId) public view returns (uint256[] memory) {
+    function getFulfillerOrderHistory(
+        uint256 fulfillerId
+    ) public view returns (uint256[] memory) {
         return _fulfillers[fulfillerId].orderHistory;
     }
 
-    function getFulfillerWallet(uint256 fulfillerId) public view returns (address) {
+    function getFulfillerWallet(
+        uint256 fulfillerId
+    ) public view returns (address) {
         return _fulfillers[fulfillerId].wallet;
     }
 
-    function getFulfillerMetadata(uint256 fulfillerId) public view returns (string memory) {
+    function getFulfillerMetadata(
+        uint256 fulfillerId
+    ) public view returns (string memory) {
         return _fulfillers[fulfillerId].metadata;
     }
 
@@ -111,7 +126,9 @@ contract FolkFulfillerManager {
         return _fulfillerCounter;
     }
 
-    function setAccessControls(address payable _accessControls) external onlyAdmin {
+    function setAccessControls(
+        address payable _accessControls
+    ) external onlyAdmin {
         accessControls = FolkAccessControls(_accessControls);
     }
 

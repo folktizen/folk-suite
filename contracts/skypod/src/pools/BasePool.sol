@@ -21,10 +21,13 @@ abstract contract BasePool is IPool {
 
     mapping(address => uint256) private _userBalances;
     mapping(address => uint256) private _userRewards;
-    mapping(address => mapping(address => uint256)) private _additionalTokensUserBalances;
-    mapping(uint256 => mapping(address => uint256)) private _userBalancesByCycle;
+    mapping(address => mapping(address => uint256))
+        private _additionalTokensUserBalances;
+    mapping(uint256 => mapping(address => uint256))
+        private _userBalancesByCycle;
     mapping(uint256 => mapping(address => uint256)) private _userRewardsByCycle;
-    mapping(uint256 => mapping(address => mapping(address => uint256))) private _additionalTokensUserBalancesByCycle;
+    mapping(uint256 => mapping(address => mapping(address => uint256)))
+        private _additionalTokensUserBalancesByCycle;
     mapping(uint256 => mapping(address => bool)) private _userClaimedByCycle;
     mapping(address => mapping(uint256 => bool)) private _usersByCycle;
     mapping(uint256 => address[]) private _cycleUsers;
@@ -32,13 +35,28 @@ abstract contract BasePool is IPool {
     mapping(address => uint256) private _totalPoolBalanceByToken;
     mapping(address => uint256) private _historicalPoolBalanceByToken;
 
-    event Deposited(address indexed sender, uint256 amount, uint256 cycle, uint256 totalRewards);
-    event RewardClaimed(address indexed user, uint256 reward, uint256 balance, uint256 cycle);
+    event Deposited(
+        address indexed sender,
+        uint256 amount,
+        uint256 cycle,
+        uint256 totalRewards
+    );
+    event RewardClaimed(
+        address indexed user,
+        uint256 reward,
+        uint256 balance,
+        uint256 cycle
+    );
     event CycleCleaned(address token, uint256 cycle, uint256 amount);
     event CycleUserSet(address user, uint256 cycle);
     event CycleUsersSet(address[] users, uint256 cycle);
     event AdditionalTokensDeposited(address[] tokens, uint256[] amounts);
-    event AdditionalTokenRewardClaimed(address indexed user, address token, uint256 amount, uint256 cycle);
+    event AdditionalTokenRewardClaimed(
+        address indexed user,
+        address token,
+        uint256 amount,
+        uint256 cycle
+    );
 
     modifier onlyAdmin() {
         if (!accessControls.isAdmin(msg.sender)) {
@@ -85,11 +103,16 @@ abstract contract BasePool is IPool {
         _userRewards[msg.sender] = 0;
 
         for (uint8 i = 0; i < _activeTokens.length(); i++) {
-            uint256 _amount = _additionalTokensUserBalances[_activeTokens.at(i)][msg.sender];
+            uint256 _amount = _additionalTokensUserBalances[
+                _activeTokens.at(i)
+            ][msg.sender];
             if (_amount > 0) {
                 if (
                     !IERC20(_activeTokens.at(i)).transfer(
-                        msg.sender, _additionalTokensUserBalances[_activeTokens.at(i)][msg.sender]
+                        msg.sender,
+                        _additionalTokensUserBalances[_activeTokens.at(i)][
+                            msg.sender
+                        ]
                     )
                 ) {
                     revert SkypodErrors.RewardClaimFailed();
@@ -101,9 +124,16 @@ abstract contract BasePool is IPool {
                     _totalPoolBalanceByToken[_activeTokens.at(i)] = 0;
                 }
 
-                _additionalTokensUserBalances[_activeTokens.at(i)][msg.sender] = 0;
+                _additionalTokensUserBalances[_activeTokens.at(i)][
+                    msg.sender
+                ] = 0;
 
-                emit AdditionalTokenRewardClaimed(msg.sender, _activeTokens.at(i), _amount, _cycleCounter);
+                emit AdditionalTokenRewardClaimed(
+                    msg.sender,
+                    _activeTokens.at(i),
+                    _amount,
+                    _cycleCounter
+                );
             }
         }
 
@@ -136,7 +166,10 @@ abstract contract BasePool is IPool {
         emit Deposited(msg.sender, amount, _cycleCounter, _totalRewards);
     }
 
-    function depositAdditionalPoolTokens(address[] memory tokens, uint256[] memory amounts) public onlyAdmin {
+    function depositAdditionalPoolTokens(
+        address[] memory tokens,
+        uint256[] memory amounts
+    ) public onlyAdmin {
         if (tokens.length != amounts.length) {
             revert SkypodErrors.BadUserInput();
         }
@@ -155,9 +188,12 @@ abstract contract BasePool is IPool {
             for (uint256 j = 0; j < _cycleUsers[_cycleCounter].length; j++) {
                 address _user = _cycleUsers[_cycleCounter][j];
 
-                uint256 _userShare = (_userRewards[_user] * amounts[i]) / _totalRewardsByCycle[_cycleCounter];
+                uint256 _userShare = (_userRewards[_user] * amounts[i]) /
+                    _totalRewardsByCycle[_cycleCounter];
 
-                _additionalTokensUserBalancesByCycle[_cycleCounter][tokens[i]][_user] = _userShare;
+                _additionalTokensUserBalancesByCycle[_cycleCounter][tokens[i]][
+                    _user
+                ] = _userShare;
 
                 _additionalTokensUserBalances[tokens[i]][_user] = _userShare;
             }
@@ -190,11 +226,16 @@ abstract contract BasePool is IPool {
             for (uint128 i = 0; i < users.length; i++) {
                 address user = users[i];
                 if (!_userClaimedByCycle[cycle][user]) {
-                    _tokenAmount += _additionalTokensUserBalancesByCycle[cycle][_activeTokens.at(j)][user];
+                    _tokenAmount += _additionalTokensUserBalancesByCycle[cycle][
+                        _activeTokens.at(j)
+                    ][user];
                 }
             }
 
-            if (IERC20(_activeTokens.at(j)).balanceOf(address(this)) >= _tokenAmount) {
+            if (
+                IERC20(_activeTokens.at(j)).balanceOf(address(this)) >=
+                _tokenAmount
+            ) {
                 IERC20(_activeTokens.at(j)).transfer(devTreasury, _tokenAmount);
                 emit CycleCleaned(_activeTokens.at(j), cycle, _tokenAmount);
             } else {
@@ -216,7 +257,10 @@ abstract contract BasePool is IPool {
         }
     }
 
-    function setCycleUser(address user, uint256 reward) external override onlyVerifiedContract {
+    function setCycleUser(
+        address user,
+        uint256 reward
+    ) external override onlyVerifiedContract {
         uint256 _forCycle = _cycleCounter + 1;
 
         if (!_usersByCycle[user][_forCycle]) {
@@ -230,7 +274,10 @@ abstract contract BasePool is IPool {
         emit CycleUserSet(user, _forCycle);
     }
 
-    function setCycleUsers(address[] memory users, uint256[] memory rewards) external override onlyVerifiedContract {
+    function setCycleUsers(
+        address[] memory users,
+        uint256[] memory rewards
+    ) external override onlyVerifiedContract {
         uint256 _forCycle = _cycleCounter + 1;
 
         for (uint256 i = 0; i < users.length; i++) {
@@ -246,45 +293,57 @@ abstract contract BasePool is IPool {
         emit CycleUsersSet(users, _forCycle);
     }
 
-    function getUserCurrentCycleRewards(address user) external view override returns (uint256) {
+    function getUserCurrentCycleRewards(
+        address user
+    ) external view override returns (uint256) {
         return _userRewards[user];
     }
 
-    function getUserRewardsByCycle(address user, uint256 cycle) external view override returns (uint256) {
+    function getUserRewardsByCycle(
+        address user,
+        uint256 cycle
+    ) external view override returns (uint256) {
         return _userRewardsByCycle[cycle][user];
     }
 
-    function getUserCurrentCycleBalances(address user) external view override returns (uint256) {
+    function getUserCurrentCycleBalances(
+        address user
+    ) external view override returns (uint256) {
         return _userBalances[user];
     }
 
-    function getUserBalancesByCycle(address user, uint256 cycle) external view override returns (uint256) {
+    function getUserBalancesByCycle(
+        address user,
+        uint256 cycle
+    ) external view override returns (uint256) {
         return _userBalancesByCycle[cycle][user];
     }
 
-    function getAdditionalTokensUserBalancesByCycle(address user, address token, uint256 cycle)
-        external
-        view
-        override
-        returns (uint256)
-    {
+    function getAdditionalTokensUserBalancesByCycle(
+        address user,
+        address token,
+        uint256 cycle
+    ) external view override returns (uint256) {
         return _additionalTokensUserBalancesByCycle[cycle][token][user];
     }
 
-    function getAdditionalTokensUserCurrentCycleBalances(address user, address token)
-        external
-        view
-        override
-        returns (uint256)
-    {
+    function getAdditionalTokensUserCurrentCycleBalances(
+        address user,
+        address token
+    ) external view override returns (uint256) {
         return _additionalTokensUserBalances[token][user];
     }
 
-    function getUserClaimedByCycle(address user, uint256 cycle) external view override returns (bool) {
+    function getUserClaimedByCycle(
+        address user,
+        uint256 cycle
+    ) external view override returns (bool) {
         return _userClaimedByCycle[cycle][user];
     }
 
-    function getCycleUsers(uint256 cycle) external view override returns (address[] memory) {
+    function getCycleUsers(
+        uint256 cycle
+    ) external view override returns (address[] memory) {
         return _cycleUsers[cycle];
     }
 
@@ -296,35 +355,57 @@ abstract contract BasePool is IPool {
         return IERC20(novo).balanceOf(address(this));
     }
 
-    function getPoolHistoricalBalance() external view override returns (uint256) {
+    function getPoolHistoricalBalance()
+        external
+        view
+        override
+        returns (uint256)
+    {
         return _historicalPoolBalance;
     }
 
-    function getActiveTokens() external view override returns (address[] memory) {
+    function getActiveTokens()
+        external
+        view
+        override
+        returns (address[] memory)
+    {
         return _activeTokens.values();
     }
 
-    function getTotalRewardsByCycle(uint256 cycle) external view override returns (uint256) {
+    function getTotalRewardsByCycle(
+        uint256 cycle
+    ) external view override returns (uint256) {
         return _totalRewardsByCycle[cycle];
     }
 
-    function getHistoricalPoolBalanceByToken(address token) external view override returns (uint256) {
+    function getHistoricalPoolBalanceByToken(
+        address token
+    ) external view override returns (uint256) {
         return _historicalPoolBalanceByToken[token];
     }
 
-    function getPoolBalanceByToken(address token) external view override returns (uint256) {
+    function getPoolBalanceByToken(
+        address token
+    ) external view override returns (uint256) {
         return _totalPoolBalanceByToken[token];
     }
 
-    function setAccessControls(address payable _accessControls) public onlyAdmin {
+    function setAccessControls(
+        address payable _accessControls
+    ) public onlyAdmin {
         accessControls = SkypodAccessControls(_accessControls);
     }
 
-    function setUserManager(address payable _userManager) external override onlyAdmin {
+    function setUserManager(
+        address payable _userManager
+    ) external override onlyAdmin {
         userManager = SkypodUserManager(_userManager);
     }
 
-    function setPoolManager(address payable _poolManager) external override onlyAdmin {
+    function setPoolManager(
+        address payable _poolManager
+    ) external override onlyAdmin {
         poolManager = _poolManager;
     }
 
@@ -332,12 +413,20 @@ abstract contract BasePool is IPool {
         novo = _novo;
     }
 
-    function setDevTreasuryAddress(address _devTreasury) external override onlyAdmin {
+    function setDevTreasuryAddress(
+        address _devTreasury
+    ) external override onlyAdmin {
         devTreasury = _devTreasury;
     }
 
-    function emergencyWithdraw(uint256 amount, uint256 gasAmount) external onlyAdmin {
-        (bool success,) = payable(msg.sender).call{value: amount, gas: gasAmount}("");
+    function emergencyWithdraw(
+        uint256 amount,
+        uint256 gasAmount
+    ) external onlyAdmin {
+        (bool success, ) = payable(msg.sender).call{
+            value: amount,
+            gas: gasAmount
+        }("");
         if (!success) {
             revert SkypodErrors.TransferFailed();
         }

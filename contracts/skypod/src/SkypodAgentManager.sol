@@ -21,7 +21,12 @@ contract SkypodAgentManager {
     event AddOwner(address wallet, uint256 agentId);
     event RevokeAgentWallet(address wallet, uint256 agentId);
     event AddAgentWallet(address wallet, uint256 agentId);
-    event AgentScored(address scorer, uint256 agentId, uint256 score, bool positive);
+    event AgentScored(
+        address scorer,
+        uint256 agentId,
+        uint256 score,
+        bool positive
+    );
     event AgentSetActive(address wallet, uint256 agentId);
     event AgentSetInactive(address wallet, uint256 agentId);
 
@@ -33,7 +38,10 @@ contract SkypodAgentManager {
     }
 
     modifier onlyAgentOwnerOrCreator(uint256 agentId) {
-        if (!_agents[agentId].owners.contains(msg.sender) && _agents[agentId].creator != msg.sender) {
+        if (
+            !_agents[agentId].owners.contains(msg.sender) &&
+            _agents[agentId].creator != msg.sender
+        ) {
             revert SkypodErrors.NotAgentOwner();
         }
 
@@ -60,7 +68,11 @@ contract SkypodAgentManager {
         symbol = "SAM";
     }
 
-    function createAgent(address[] memory wallets, address[] memory owners, string memory metadata) external {
+    function createAgent(
+        address[] memory wallets,
+        address[] memory owners,
+        string memory metadata
+    ) external {
         _agentCounter++;
 
         _agents[_agentCounter].owners.add(msg.sender);
@@ -85,13 +97,18 @@ contract SkypodAgentManager {
         emit AgentCreated(wallets, msg.sender, _agentCounter);
     }
 
-    function editAgent(string memory metadata, uint256 agentId) external onlyAgentOwnerOrCreator(agentId) {
+    function editAgent(
+        string memory metadata,
+        uint256 agentId
+    ) external onlyAgentOwnerOrCreator(agentId) {
         _agents[agentId].metadata = metadata;
 
         emit AgentEdited(agentId);
     }
 
-    function deleteAgent(uint256 agentId) external onlyAgentOwnerOrCreator(agentId) {
+    function deleteAgent(
+        uint256 agentId
+    ) external onlyAgentOwnerOrCreator(agentId) {
         if (_agents[agentId].active > 0) {
             revert SkypodErrors.AgentStillActive();
         }
@@ -105,30 +122,46 @@ contract SkypodAgentManager {
         emit AgentDeleted(agentId);
     }
 
-    function revokeOwner(address wallet, uint256 agentId) public onlyAgentCreator(agentId) {
+    function revokeOwner(
+        address wallet,
+        uint256 agentId
+    ) public onlyAgentCreator(agentId) {
         _agents[agentId].owners.remove(wallet);
         emit RevokeOwner(wallet, agentId);
     }
 
-    function addOwner(address wallet, uint256 agentId) public onlyAgentCreator(agentId) {
+    function addOwner(
+        address wallet,
+        uint256 agentId
+    ) public onlyAgentCreator(agentId) {
         _agents[agentId].owners.add(wallet);
         emit AddOwner(wallet, agentId);
     }
 
-    function revokeAgentWallet(address wallet, uint256 agentId) public onlyAgentOwnerOrCreator(agentId) {
+    function revokeAgentWallet(
+        address wallet,
+        uint256 agentId
+    ) public onlyAgentOwnerOrCreator(agentId) {
         _agents[agentId].wallets.remove(wallet);
         accessControls.removeAgent(wallet);
 
         emit RevokeAgentWallet(wallet, agentId);
     }
 
-    function addAgentWallet(address wallet, uint256 agentId) public onlyAgentOwnerOrCreator(agentId) {
+    function addAgentWallet(
+        address wallet,
+        uint256 agentId
+    ) public onlyAgentOwnerOrCreator(agentId) {
         _agents[agentId].wallets.add(wallet);
         accessControls.addAgent(wallet);
         emit AddAgentWallet(wallet, agentId);
     }
 
-    function scoreAgent(uint256 agentId, uint256 score, bool positive) public onlyAgentOwnerOrCreator(agentId) {
+    function scoreAgent(
+        uint256 agentId,
+        uint256 score,
+        bool positive
+    ) public onlyAgentOwnerOrCreator(agentId) {
         if (score > 1) {
             revert SkypodErrors.InvalidScore();
         }
@@ -158,23 +191,33 @@ contract SkypodAgentManager {
         return _agentCounter;
     }
 
-    function getAgentWallets(uint256 agentId) public view returns (address[] memory) {
+    function getAgentWallets(
+        uint256 agentId
+    ) public view returns (address[] memory) {
         return _agents[agentId].wallets.values();
     }
 
-    function getAgentMetadata(uint256 agentId) public view returns (string memory) {
+    function getAgentMetadata(
+        uint256 agentId
+    ) public view returns (string memory) {
         return _agents[agentId].metadata;
     }
 
-    function getAgentScorePositive(uint256 agentId) public view returns (uint256) {
+    function getAgentScorePositive(
+        uint256 agentId
+    ) public view returns (uint256) {
         return _agents[agentId].scorePositive;
     }
 
-    function getAgentScoreNegative(uint256 agentId) public view returns (uint256) {
+    function getAgentScoreNegative(
+        uint256 agentId
+    ) public view returns (uint256) {
         return _agents[agentId].scoreNegative;
     }
 
-    function getAgentOwners(uint256 agentId) public view returns (address[] memory) {
+    function getAgentOwners(
+        uint256 agentId
+    ) public view returns (address[] memory) {
         return _agents[agentId].owners.values();
     }
 
@@ -186,15 +229,23 @@ contract SkypodAgentManager {
         return _agents[agentId].creator;
     }
 
-    function getIsAgentWallet(address wallet, uint256 agentId) public view returns (bool) {
+    function getIsAgentWallet(
+        address wallet,
+        uint256 agentId
+    ) public view returns (bool) {
         return _agents[agentId].wallets.contains(wallet);
     }
 
-    function getIsAgentOwner(address owner, uint256 agentId) public view returns (bool) {
+    function getIsAgentOwner(
+        address owner,
+        uint256 agentId
+    ) public view returns (bool) {
         return _agents[agentId].owners.contains(owner);
     }
 
-    function setAccessControls(address payable _accessControls) external onlyAdmin {
+    function setAccessControls(
+        address payable _accessControls
+    ) external onlyAdmin {
         accessControls = SkypodAccessControls(_accessControls);
     }
 }

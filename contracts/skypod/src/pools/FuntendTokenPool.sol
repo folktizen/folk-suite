@@ -12,5 +12,13 @@ abstract contract FuntendTokenPool is BasePool {
         address _novo,
         address _positionManager,
         address _tokenSnapshots
-    ) BasePool(_accessControls, _userManager, _poolManager, _devTreasury, _novo) {}
+    )
+        BasePool(
+            _accessControls,
+            _userManager,
+            _poolManager,
+            _devTreasury,
+            _novo
+        )
+    {}
 }

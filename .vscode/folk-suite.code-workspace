@@ -1,0 +1,40 @@
+{
+  "folders": [
+    {
+      "name": "⏏ ~/root",
+      "path": "../"
+    },
+    {
+      "name": "❖ @storage",
+      "path": "../storage"
+    },
+    {
+      "name": "◆ @contracts/folktizen",
+      "path": "../contracts/folktizen"
+    },
+    {
+      "name": "◆ @contracts/skypod",
+      "path": "../contracts/skypod"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "contracts/": true,
+      "subgraphs/": true,
+      "storage/": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/.yarn": true,
+      "**/.cache": true,
+      "**/lib": true,
+      "**/libs": true,
+      "**/cache": true,
+      "*-lock.yaml": true,
+      "*.lock": true
+    },
+    "editor.quickSuggestions": {
+      "strings": true
+    }
+  }
+}

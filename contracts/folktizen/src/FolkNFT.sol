@@ -18,7 +18,11 @@ contract FolkNFT is ERC721 {
         _;
     }
 
-    event NFTMinted(address indexed to, uint256 indexed tokenId, string tokenURI);
+    event NFTMinted(
+        address indexed to,
+        uint256 indexed tokenId,
+        string tokenURI
+    );
 
     modifier onlyMarket() {
         if (msg.sender != market) {
@@ -27,18 +31,19 @@ contract FolkNFT is ERC721 {
         _;
     }
 
-    constructor(string memory name, string memory symbol, address payable _accessControls)
-        payable
-        ERC721(name, symbol)
-    {
+    constructor(
+        string memory name,
+        string memory symbol,
+        address payable _accessControls
+    ) payable ERC721(name, symbol) {
         accessControls = FolkAccessControls(_accessControls);
     }
 
-    function mint(uint256 amount, address to, string memory newTokenURI)
-        external
-        onlyMarket
-        returns (uint256[] memory)
-    {
+    function mint(
+        uint256 amount,
+        address to,
+        string memory newTokenURI
+    ) external onlyMarket returns (uint256[] memory) {
         if (to == address(0)) {
             revert FolkErrors.ZeroAddress();
         }
@@ -63,7 +68,9 @@ contract FolkNFT is ERC721 {
         return mintedTokenIds;
     }
 
-    function tokenURI(uint256 tokenId) public view override returns (string memory) {
+    function tokenURI(
+        uint256 tokenId
+    ) public view override returns (string memory) {
         return _tokenURIs[tokenId];
     }
 
@@ -75,7 +82,9 @@ contract FolkNFT is ERC721 {
         market = _market;
     }
 
-    function setAccessControls(address payable _accessControls) external onlyAdmin {
+    function setAccessControls(
+        address payable _accessControls
+    ) external onlyAdmin {
         accessControls = FolkAccessControls(_accessControls);
     }
 }
