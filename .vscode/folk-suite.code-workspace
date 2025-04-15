@@ -30,6 +30,8 @@
       "**/lib": true,
       "**/libs": true,
       "**/cache": true,
+      "**/out": true,
+      "**/broadcast": true,
       "*-lock.yaml": true,
       "*.lock": true
     },

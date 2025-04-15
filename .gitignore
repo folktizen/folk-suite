@@ -5,7 +5,8 @@
 
 # Ignores development broadcast logs
 /contracts/**/!/broadcast
-/contracts/**/broadcast/*/31337/
+/contracts/**/broadcast/*/137/
+/contracts/**/broadcast/*/80002/
 /contracts/**/broadcast/**/dry-run/
 /contracts/**/install.log
 
