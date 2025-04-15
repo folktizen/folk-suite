@@ -10,9 +10,6 @@
 [submodule "libs/forge-std"]
 	path = libs/forge-std
 	url = https://github.com/foundry-rs/forge-std
-[submodule "libs/zksync"]
-	path = libs/zksync
-	url = https://github.com/matter-labs/zksync
 [submodule "libs/v2-periphery"]
 	path = libs/v2-periphery
 	url = https://github.com/uniswap/v2-periphery
