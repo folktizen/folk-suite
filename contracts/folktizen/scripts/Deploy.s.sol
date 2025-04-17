@@ -14,8 +14,7 @@ import "../src/AgentFeedRule.sol";
 
 contract Deploy is Script {
     function run() external {
-        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
-        vm.startBroadcast(deployerPrivateKey);
+        vm.startBroadcast();
 
         SkypodAccessControls skypodAC = new SkypodAccessControls();
         console2.log("SkypodAccessControls deployed:", address(skypodAC));
@@ -78,7 +77,7 @@ contract Deploy is Script {
 
         vm.stopBroadcast();
 
-        console2.log("\n--- DEPLOYED FOLK CONTRACTS ---");
+        console2.log("\n--- DEPLOYED FOLK CONTRACTS ---\n");
         console2.log(
             string.concat(
                 "{\n",
@@ -102,12 +101,12 @@ contract Deploy is Script {
                 '",\n',
                 '  "agentFeedRule": "',
                 vm.toString(address(agentFeedRule)),
-                '",\n',
+                '"\n',
                 "}"
             )
         );
 
-        console2.log("\n--- DEPLOYED SKYPOD CONTRACTS ---");
+        console2.log("\n--- DEPLOYED SKYPOD CONTRACTS ---\n");
         console2.log(
             string.concat(
                 "{\n",
