@@ -10,10 +10,12 @@ import "../src/FolkNFT.sol";
 import "../src/FolkCollectionManager.sol";
 import "../src/FolkAgents.sol";
 import "../src/FolkMarket.sol";
+import "../src/AgentFeedRule.sol";
 
 contract Deploy is Script {
     function run() external {
-        vm.startBroadcast();
+        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        vm.startBroadcast(deployerPrivateKey);
 
         SkypodAccessControls skypodAC = new SkypodAccessControls();
         console2.log("SkypodAccessControls deployed:", address(skypodAC));
@@ -69,6 +71,54 @@ contract Deploy is Script {
         );
         console2.log("FolkMarket deployed:", address(folkMarket));
 
+        AgentFeedRule agentFeedRule = new AgentFeedRule(
+            payable(address(skypodAC))
+        );
+        console2.log("AgentFeedRule deployed:", address(agentFeedRule));
+
         vm.stopBroadcast();
+
+        console2.log("\n--- DEPLOYED FOLK CONTRACTS ---");
+        console2.log(
+            string.concat(
+                "{\n",
+                '  "accessControls": "',
+                vm.toString(address(folkAC)),
+                '",\n',
+                '  "fulfillerManager": "',
+                vm.toString(address(folkFulfiller)),
+                '",\n',
+                '  "nft": "',
+                vm.toString(address(folkNFT)),
+                '",\n',
+                '  "collectionManager": "',
+                vm.toString(address(folkCollection)),
+                '",\n',
+                '  "agents": "',
+                vm.toString(address(folkAgents)),
+                '",\n',
+                '  "market": "',
+                vm.toString(address(folkMarket)),
+                '",\n',
+                '  "agentFeedRule": "',
+                vm.toString(address(agentFeedRule)),
+                '",\n',
+                "}"
+            )
+        );
+
+        console2.log("\n--- DEPLOYED SKYPOD CONTRACTS ---");
+        console2.log(
+            string.concat(
+                "{\n",
+                '  "accessControls": "',
+                vm.toString(address(skypodAC)),
+                '",\n',
+                '  "agentManager": "',
+                vm.toString(address(skypodAgents)),
+                '"\n',
+                "}"
+            )
+        );
     }
 }

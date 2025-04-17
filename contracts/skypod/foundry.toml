@@ -10,4 +10,5 @@ via-ir = true
 gas_reports = ["*"]
 
 [etherscan]
-polygon-amoy = { key = "${ETHERSCAN_API_KEY}" }
+polygon = { key = "${POLYGONSCAN_TOKEN}", url = "https://api.polygonscan.com/api" }
+polygon-amoy = { key = "${POLYGONSCAN_TOKEN}", url = "https://api-amoy.polygonscan.com/api" }

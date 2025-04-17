@@ -6,4 +6,7 @@
     "editor.defaultFormatter": "JuanBlanco.solidity"
   },
   "solidity.formatter": "forge",
+  "files.exclude": {
+    "src/skypod": true
+  },
 }
