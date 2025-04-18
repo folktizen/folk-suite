@@ -1,0 +1,28 @@
+{
+  "matic": {
+    "FolkCollectionManager": {
+      "address": "0x3a2b122052f2F7EAEbaa80c3058Fa1376cd56b20",
+      "startBlock": 70424047
+    },
+    "FolkFulfillerManager": {
+      "address": "0xb0e3987bE1D8025A929DA467b3FC4A8a7f859b5b",
+      "startBlock": 70424047
+    },
+    "FolkMarket": {
+      "address": "0xDecB82e57E9073c18F201d577E35B6a4E0083393",
+      "startBlock": 70424047
+    },
+    "FolkAgents": {
+      "address": "0xDaB0b740b8A9E1b4D1F93AEB94900DE9835549DD",
+      "startBlock": 70424047
+    },
+    "FolkAccessControls": {
+      "address": "0xF2c8Bc13DeED6b66e07f860cDBe9A1fE7474C8f6",
+      "startBlock": 70424047
+    },
+    "SkypodAgentManager": {
+      "address": "0x20CDCA2EBd69131fFAD51d81333317dCb725b46C",
+      "startBlock": 70424047
+    }
+  }
+}

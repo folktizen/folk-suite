@@ -15,7 +15,11 @@
     {
       "name": "◆ @contracts/skypod",
       "path": "../contracts/skypod"
-    }
+    },
+    {
+      "name": "◇ @subgraphs/folktizen",
+      "path": "../subgraphs/folktizen"
+    },
   ],
   "settings": {
     "files.exclude": {
