@@ -70,19 +70,19 @@ Consider introducing checks for `msg.sender` to ensure the recipient of the mone
 <details><summary>3 Found Instances</summary>
 
 
-- Found in src/FolkAccessControls.sol [Line: 181](src/FolkAccessControls.sol#L181)
+- Found in src/FolkAccessControls.sol [Line: 192](src/FolkAccessControls.sol#L192)
 
 	```solidity
 	    function faucet(address payable to, uint256 amount, uint256 gas) external {
 	```
 
-- Found in src/FolkAccessControls.sol [Line: 205](src/FolkAccessControls.sol#L205)
+- Found in src/FolkAccessControls.sol [Line: 216](src/FolkAccessControls.sol#L216)
 
 	```solidity
 	    function emergencyWithdraw(
 	```
 
-- Found in src/FolkAgents.sol [Line: 785](src/FolkAgents.sol#L785)
+- Found in src/FolkAgents.sol [Line: 796](src/FolkAgents.sol#L796)
 
 	```solidity
 	    function emergencyWithdraw(
@@ -99,19 +99,19 @@ It appears that the contract includes a payable function to accept Ether but lac
 <details><summary>3 Found Instances</summary>
 
 
-- Found in src/FolkFulfillerManager.sol [Line: 11](src/FolkFulfillerManager.sol#L11)
+- Found in src/FolkFulfillerManager.sol [Line: 22](src/FolkFulfillerManager.sol#L22)
 
 	```solidity
 	contract FolkFulfillerManager {
 	```
 
-- Found in src/FolkMarket.sol [Line: 14](src/FolkMarket.sol#L14)
+- Found in src/FolkMarket.sol [Line: 25](src/FolkMarket.sol#L25)
 
 	```solidity
 	contract FolkMarket {
 	```
 
-- Found in src/FolkNFT.sol [Line: 8](src/FolkNFT.sol#L8)
+- Found in src/FolkNFT.sol [Line: 19](src/FolkNFT.sol#L19)
 
 	```solidity
 	contract FolkNFT is ERC721 {
@@ -128,21 +128,21 @@ Changing state after an external call can lead to re-entrancy attacks.Use the ch
 <details><summary>18 Found Instances</summary>
 
 
-- Found in src/FolkAccessControls.sol [Line: 97](src/FolkAccessControls.sol#L97)
+- Found in src/FolkAccessControls.sol [Line: 108](src/FolkAccessControls.sol#L108)
 
 	State is changed at: `_thresholds[token] = threshold`, `_cycleRentLead[token] = rentLead`, `_cycleRentRemix[token] = rentRemix`, `_cycleRentPublish[token] = rentPublish`, `_cycleRentMint[token] = rentMint`, `_vig[token] = vig`, `_base[token] = base`
 	```solidity
 	        if (!skypodAccessControls.isAcceptedToken(token)) {
 	```
 
-- Found in src/FolkAccessControls.sol [Line: 122](src/FolkAccessControls.sol#L122)
+- Found in src/FolkAccessControls.sol [Line: 133](src/FolkAccessControls.sol#L133)
 
 	State is changed at: `delete _thresholds[token]`, `delete _cycleRentLead[token]`, `delete _cycleRentMint[token]`, `delete _cycleRentPublish[token]`, `delete _cycleRentRemix[token]`, `delete _vig[token]`, `delete _base[token]`
 	```solidity
 	        if (!skypodAccessControls.isAcceptedToken(token)) {
 	```
 
-- Found in src/FolkAgents.sol [Line: 204](src/FolkAgents.sol#L204)
+- Found in src/FolkAgents.sol [Line: 215](src/FolkAgents.sol#L215)
 
 	State is changed at: `delete _workers[agentId][collectionId]`, `_services[_tokens[i]] += (_agentRentBalances[agentId][
                     _tokens[i]
@@ -152,14 +152,14 @@ Changing state after an external call can lead to re-entrancy attacks.Use the ch
 	        address[] memory _tokens = skypodAccessControls.getAcceptedTokens();
 	```
 
-- Found in src/FolkAgents.sol [Line: 266](src/FolkAgents.sol#L266)
+- Found in src/FolkAgents.sol [Line: 277](src/FolkAgents.sol#L277)
 
 	State is changed at: `_artistCollectBalanceByToken[agentId][token][forArtist] -= amount`
 	```solidity
 	            if (!IERC20(token).transfer(address(to), amount)) {
 	```
 
-- Found in src/FolkAgents.sol [Line: 346](src/FolkAgents.sol#L346)
+- Found in src/FolkAgents.sol [Line: 357](src/FolkAgents.sol#L357)
 
 	State is changed at: `_agentRentBalances[agentId][tokens[i]][
                 collectionIds[i]
@@ -168,7 +168,7 @@ Changing state after an external call can lead to re-entrancy attacks.Use the ch
 	        if (!skypodAccessControls.isAgent(msg.sender)) {
 	```
 
-- Found in src/FolkAgents.sol [Line: 362](src/FolkAgents.sol#L362)
+- Found in src/FolkAgents.sol [Line: 373](src/FolkAgents.sol#L373)
 
 	State is changed at: `_agentRentBalances[agentId][tokens[i]][
                 collectionIds[i]
@@ -177,14 +177,14 @@ Changing state after an external call can lead to re-entrancy attacks.Use the ch
 	            if (!collectionManager.getCollectionIsActive(collectionIds[i])) {
 	```
 
-- Found in src/FolkAgents.sol [Line: 386](src/FolkAgents.sol#L386)
+- Found in src/FolkAgents.sol [Line: 397](src/FolkAgents.sol#L397)
 
 	State is changed at: `_services[tokens[i]] += _amounts[i]`, `_allTimeServices[tokens[i]] += _amounts[i]`
 	```solidity
 	        address[] memory _owners = agentManager.getAgentOwners(agentId);
 	```
 
-- Found in src/FolkAgents.sol [Line: 493](src/FolkAgents.sol#L493)
+- Found in src/FolkAgents.sol [Line: 504](src/FolkAgents.sol#L504)
 
 	State is changed at: `_agentRentBalances[agentId][token][collectionId] += amount`, `_agentHistoricalRentBalances[agentId][token][
                 collectionId
@@ -193,7 +193,7 @@ Changing state after an external call can lead to re-entrancy attacks.Use the ch
 	            collectionManager.getCollectionAmountSold(collectionId) >=
 	```
 
-- Found in src/FolkAgents.sol [Line: 498](src/FolkAgents.sol#L498)
+- Found in src/FolkAgents.sol [Line: 509](src/FolkAgents.sol#L509)
 
 	State is changed at: `_agentRentBalances[agentId][token][collectionId] += amount`, `_agentHistoricalRentBalances[agentId][token][
                 collectionId
@@ -202,7 +202,7 @@ Changing state after an external call can lead to re-entrancy attacks.Use the ch
 	        uint256[] memory _ids = collectionManager.getCollectionAgentIds(
 	```
 
-- Found in src/FolkAgents.sol [Line: 519](src/FolkAgents.sol#L519)
+- Found in src/FolkAgents.sol [Line: 530](src/FolkAgents.sol#L530)
 
 	State is changed at: `_agentRentBalances[agentId][token][collectionId] += amount`, `_agentHistoricalRentBalances[agentId][token][
                 collectionId
@@ -211,7 +211,7 @@ Changing state after an external call can lead to re-entrancy attacks.Use the ch
 	            !collectionManager.getCollectionERC20TokensSet(token, collectionId)
 	```
 
-- Found in src/FolkAgents.sol [Line: 524](src/FolkAgents.sol#L524)
+- Found in src/FolkAgents.sol [Line: 535](src/FolkAgents.sol#L535)
 
 	State is changed at: `_agentRentBalances[agentId][token][collectionId] += amount`, `_agentHistoricalRentBalances[agentId][token][
                 collectionId
@@ -220,35 +220,35 @@ Changing state after an external call can lead to re-entrancy attacks.Use the ch
 	        if (!IERC20(token).transferFrom(msg.sender, address(this), amount)) {
 	```
 
-- Found in src/FolkAgents.sol [Line: 562](src/FolkAgents.sol#L562)
+- Found in src/FolkAgents.sol [Line: 573](src/FolkAgents.sol#L573)
 
 	State is changed at: `_services[token] = 0`
 	```solidity
 	        if (IERC20(token).balanceOf(address(this)) > 0) {
 	```
 
-- Found in src/FolkAgents.sol [Line: 563](src/FolkAgents.sol#L563)
+- Found in src/FolkAgents.sol [Line: 574](src/FolkAgents.sol#L574)
 
 	State is changed at: `_services[token] = 0`
 	```solidity
 	            if (_services[token] < IERC20(token).balanceOf(address(this))) {
 	```
 
-- Found in src/FolkAgents.sol [Line: 564](src/FolkAgents.sol#L564)
+- Found in src/FolkAgents.sol [Line: 575](src/FolkAgents.sol#L575)
 
 	State is changed at: `_services[token] = 0`
 	```solidity
 	                _amount = IERC20(token).balanceOf(address(this));
 	```
 
-- Found in src/FolkAgents.sol [Line: 567](src/FolkAgents.sol#L567)
+- Found in src/FolkAgents.sol [Line: 578](src/FolkAgents.sol#L578)
 
 	State is changed at: `_services[token] = 0`
 	```solidity
 	            IERC20(token).transfer(msg.sender, _amount);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 115](src/FolkCollectionManager.sol#L115)
+- Found in src/FolkCollectionManager.sol [Line: 126](src/FolkCollectionManager.sol#L126)
 
 	State is changed at: `_collectionCounter++`, `_collections[_collectionCounter].id = _collectionCounter`, `_collections[_collectionCounter].dropId = _dropValue`, `_collections[_collectionCounter].metadata = collectionInput.metadata`, `_collections[_collectionCounter].artist = msg.sender`, `_collections[_collectionCounter].amount = collectionInput.amount`, `_collections[_collectionCounter].collectionType = collectionInput
             .collectionType`, `_collections[_collectionCounter].remixId = collectionInput.remixId`, `_collections[_collectionCounter].active = false`, `_collections[_collectionCounter].remixable = collectionInput.remixable`, `_dropCounter++`, `_drops[_dropValue].id = _dropValue`, `_drops[_dropValue].artist = msg.sender`, `_drops[_dropValue].metadata = dropMetadata`, `_collections[_collectionCounter].fulfillerId = collectionInput
@@ -260,7 +260,7 @@ Changing state after an external call can lead to re-entrancy attacks.Use the ch
 	                !skypodAccessControls.isAcceptedToken(collectionInput.tokens[i])
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 156](src/FolkCollectionManager.sol#L156)
+- Found in src/FolkCollectionManager.sol [Line: 167](src/FolkCollectionManager.sol#L167)
 
 	State is changed at: `_collections[_collectionCounter].agent = true`, `_collectionPrices[_collectionCounter][
                 collectionInput.tokens[i]
@@ -270,7 +270,7 @@ Changing state after an external call can lead to re-entrancy attacks.Use the ch
 	        if (skypodAccessControls.isAgent(msg.sender)) {
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 166](src/FolkCollectionManager.sol#L166)
+- Found in src/FolkCollectionManager.sol [Line: 177](src/FolkCollectionManager.sol#L177)
 
 	State is changed at: `_collectionPrices[_collectionCounter][
                 collectionInput.tokens[i]
@@ -292,67 +292,67 @@ ERC20 functions may not behave as expected. For example: return values are not a
 <details><summary>11 Found Instances</summary>
 
 
-- Found in src/FolkAgents.sol [Line: 266](src/FolkAgents.sol#L266)
+- Found in src/FolkAgents.sol [Line: 277](src/FolkAgents.sol#L277)
 
 	```solidity
 	            if (!IERC20(token).transfer(address(to), amount)) {
 	```
 
-- Found in src/FolkAgents.sol [Line: 451](src/FolkAgents.sol#L451)
+- Found in src/FolkAgents.sol [Line: 462](src/FolkAgents.sol#L462)
 
 	```solidity
 	                IERC20(token).transfer(_collectors[j], payment);
 	```
 
-- Found in src/FolkAgents.sol [Line: 467](src/FolkAgents.sol#L467)
+- Found in src/FolkAgents.sol [Line: 478](src/FolkAgents.sol#L478)
 
 	```solidity
 	            IERC20(token).transfer(owners[i], _ownerAmount / owners.length);
 	```
 
-- Found in src/FolkAgents.sol [Line: 524](src/FolkAgents.sol#L524)
+- Found in src/FolkAgents.sol [Line: 535](src/FolkAgents.sol#L535)
 
 	```solidity
 	        if (!IERC20(token).transferFrom(msg.sender, address(this), amount)) {
 	```
 
-- Found in src/FolkAgents.sol [Line: 567](src/FolkAgents.sol#L567)
+- Found in src/FolkAgents.sol [Line: 578](src/FolkAgents.sol#L578)
 
 	```solidity
 	            IERC20(token).transfer(msg.sender, _amount);
 	```
 
-- Found in src/FolkMarket.sol [Line: 130](src/FolkMarket.sol#L130)
+- Found in src/FolkMarket.sol [Line: 141](src/FolkMarket.sol#L141)
 
 	```solidity
 	                !IERC20(paymentToken).transferFrom(
 	```
 
-- Found in src/FolkMarket.sol [Line: 149](src/FolkMarket.sol#L149)
+- Found in src/FolkMarket.sol [Line: 160](src/FolkMarket.sol#L160)
 
 	```solidity
 	                !IERC20(paymentToken).transferFrom(
 	```
 
-- Found in src/FolkMarket.sol [Line: 173](src/FolkMarket.sol#L173)
+- Found in src/FolkMarket.sol [Line: 184](src/FolkMarket.sol#L184)
 
 	```solidity
 	                    !IERC20(paymentToken).transferFrom(
 	```
 
-- Found in src/FolkMarket.sol [Line: 190](src/FolkMarket.sol#L190)
+- Found in src/FolkMarket.sol [Line: 201](src/FolkMarket.sol#L201)
 
 	```solidity
 	                    !IERC20(paymentToken).transferFrom(
 	```
 
-- Found in src/FolkMarket.sol [Line: 203](src/FolkMarket.sol#L203)
+- Found in src/FolkMarket.sol [Line: 214](src/FolkMarket.sol#L214)
 
 	```solidity
 	                !IERC20(paymentToken).transferFrom(
 	```
 
-- Found in src/FolkMarket.sol [Line: 306](src/FolkMarket.sol#L306)
+- Found in src/FolkMarket.sol [Line: 317](src/FolkMarket.sol#L317)
 
 	```solidity
 	                !IERC20(paymentToken).transfer(
@@ -369,247 +369,247 @@ Check for `address(0)` when assigning values to address state variables.
 <details><summary>41 Found Instances</summary>
 
 
-- Found in src/AgentFeedRule.sol [Line: 98](src/AgentFeedRule.sol#L98)
+- Found in src/AgentFeedRule.sol [Line: 109](src/AgentFeedRule.sol#L109)
 
 	```solidity
 	        skypodAccessControls = SkypodAccessControls(accessControls);
 	```
 
-- Found in src/AgentFeedRule.sol [Line: 143](src/AgentFeedRule.sol#L143)
+- Found in src/AgentFeedRule.sol [Line: 154](src/AgentFeedRule.sol#L154)
 
 	```solidity
 	        skypodAccessControls = SkypodAccessControls(accessControls);
 	```
 
-- Found in src/FolkAccessControls.sol [Line: 46](src/FolkAccessControls.sol#L46)
+- Found in src/FolkAccessControls.sol [Line: 57](src/FolkAccessControls.sol#L57)
 
 	```solidity
 	        skypodAccessControls = SkypodAccessControls(_skypodAccessControls);
 	```
 
-- Found in src/FolkAccessControls.sol [Line: 202](src/FolkAccessControls.sol#L202)
+- Found in src/FolkAccessControls.sol [Line: 213](src/FolkAccessControls.sol#L213)
 
 	```solidity
 	        skypodAccessControls = SkypodAccessControls(_skypodAccessControls);
 	```
 
-- Found in src/FolkAgents.sol [Line: 166](src/FolkAgents.sol#L166)
+- Found in src/FolkAgents.sol [Line: 177](src/FolkAgents.sol#L177)
 
 	```solidity
 	        accessControls = FolkAccessControls(_accessControls);
 	```
 
-- Found in src/FolkAgents.sol [Line: 167](src/FolkAgents.sol#L167)
+- Found in src/FolkAgents.sol [Line: 178](src/FolkAgents.sol#L178)
 
 	```solidity
 	        collectionManager = FolkCollectionManager(_collectionManager);
 	```
 
-- Found in src/FolkAgents.sol [Line: 168](src/FolkAgents.sol#L168)
+- Found in src/FolkAgents.sol [Line: 179](src/FolkAgents.sol#L179)
 
 	```solidity
 	        skypodAccessControls = SkypodAccessControls(_skypodAccessControls);
 	```
 
-- Found in src/FolkAgents.sol [Line: 169](src/FolkAgents.sol#L169)
+- Found in src/FolkAgents.sol [Line: 180](src/FolkAgents.sol#L180)
 
 	```solidity
 	        agentManager = SkypodAgentManager(_agentManager);
 	```
 
-- Found in src/FolkAgents.sol [Line: 744](src/FolkAgents.sol#L744)
+- Found in src/FolkAgents.sol [Line: 755](src/FolkAgents.sol#L755)
 
 	```solidity
 	        accessControls = FolkAccessControls(_accessControls);
 	```
 
-- Found in src/FolkAgents.sol [Line: 748](src/FolkAgents.sol#L748)
+- Found in src/FolkAgents.sol [Line: 759](src/FolkAgents.sol#L759)
 
 	```solidity
 	        agentManager = SkypodAgentManager(_agentManager);
 	```
 
-- Found in src/FolkAgents.sol [Line: 754](src/FolkAgents.sol#L754)
+- Found in src/FolkAgents.sol [Line: 765](src/FolkAgents.sol#L765)
 
 	```solidity
 	        skypodAccessControls = SkypodAccessControls(_skypodAccessControls);
 	```
 
-- Found in src/FolkAgents.sol [Line: 758](src/FolkAgents.sol#L758)
+- Found in src/FolkAgents.sol [Line: 769](src/FolkAgents.sol#L769)
 
 	```solidity
 	        market = FolkMarket(_market);
 	```
 
-- Found in src/FolkAgents.sol [Line: 764](src/FolkAgents.sol#L764)
+- Found in src/FolkAgents.sol [Line: 775](src/FolkAgents.sol#L775)
 
 	```solidity
 	        collectionManager = FolkCollectionManager(_collectionManager);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 79](src/FolkCollectionManager.sol#L79)
+- Found in src/FolkCollectionManager.sol [Line: 90](src/FolkCollectionManager.sol#L90)
 
 	```solidity
 	        accessControls = FolkAccessControls(_accessControls);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 80](src/FolkCollectionManager.sol#L80)
+- Found in src/FolkCollectionManager.sol [Line: 91](src/FolkCollectionManager.sol#L91)
 
 	```solidity
 	        skypodAccessControls = SkypodAccessControls(_skypodAccessControls);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 81](src/FolkCollectionManager.sol#L81)
+- Found in src/FolkCollectionManager.sol [Line: 92](src/FolkCollectionManager.sol#L92)
 
 	```solidity
 	        skypodAgentManager = SkypodAgentManager(_skypodAgentManager);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 594](src/FolkCollectionManager.sol#L594)
+- Found in src/FolkCollectionManager.sol [Line: 605](src/FolkCollectionManager.sol#L605)
 
 	```solidity
 	        market = _market;
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 600](src/FolkCollectionManager.sol#L600)
+- Found in src/FolkCollectionManager.sol [Line: 611](src/FolkCollectionManager.sol#L611)
 
 	```solidity
 	        accessControls = FolkAccessControls(_accessControls);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 606](src/FolkCollectionManager.sol#L606)
+- Found in src/FolkCollectionManager.sol [Line: 617](src/FolkCollectionManager.sol#L617)
 
 	```solidity
 	        skypodAccessControls = SkypodAccessControls(_skypodAccessControls);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 612](src/FolkCollectionManager.sol#L612)
+- Found in src/FolkCollectionManager.sol [Line: 623](src/FolkCollectionManager.sol#L623)
 
 	```solidity
 	        skypodAgentManager = SkypodAgentManager(_skypodAgentManager);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 616](src/FolkCollectionManager.sol#L616)
+- Found in src/FolkCollectionManager.sol [Line: 627](src/FolkCollectionManager.sol#L627)
 
 	```solidity
 	        agents = FolkAgents(_agents);
 	```
 
-- Found in src/FolkFulfillerManager.sol [Line: 49](src/FolkFulfillerManager.sol#L49)
+- Found in src/FolkFulfillerManager.sol [Line: 60](src/FolkFulfillerManager.sol#L60)
 
 	```solidity
 	        accessControls = FolkAccessControls(_accessControls);
 	```
 
-- Found in src/FolkFulfillerManager.sol [Line: 132](src/FolkFulfillerManager.sol#L132)
+- Found in src/FolkFulfillerManager.sol [Line: 143](src/FolkFulfillerManager.sol#L143)
 
 	```solidity
 	        accessControls = FolkAccessControls(_accessControls);
 	```
 
-- Found in src/FolkFulfillerManager.sol [Line: 136](src/FolkFulfillerManager.sol#L136)
+- Found in src/FolkFulfillerManager.sol [Line: 147](src/FolkFulfillerManager.sol#L147)
 
 	```solidity
 	        market = FolkMarket(_market);
 	```
 
-- Found in src/FolkMarket.sol [Line: 80](src/FolkMarket.sol#L80)
+- Found in src/FolkMarket.sol [Line: 91](src/FolkMarket.sol#L91)
 
 	```solidity
 	        nft = FolkNFT(_nft);
 	```
 
-- Found in src/FolkMarket.sol [Line: 81](src/FolkMarket.sol#L81)
+- Found in src/FolkMarket.sol [Line: 92](src/FolkMarket.sol#L92)
 
 	```solidity
 	        collectionManager = FolkCollectionManager(_collectionManager);
 	```
 
-- Found in src/FolkMarket.sol [Line: 82](src/FolkMarket.sol#L82)
+- Found in src/FolkMarket.sol [Line: 93](src/FolkMarket.sol#L93)
 
 	```solidity
 	        accessControls = FolkAccessControls(_accessControls);
 	```
 
-- Found in src/FolkMarket.sol [Line: 83](src/FolkMarket.sol#L83)
+- Found in src/FolkMarket.sol [Line: 94](src/FolkMarket.sol#L94)
 
 	```solidity
 	        agents = FolkAgents(_agents);
 	```
 
-- Found in src/FolkMarket.sol [Line: 84](src/FolkMarket.sol#L84)
+- Found in src/FolkMarket.sol [Line: 95](src/FolkMarket.sol#L95)
 
 	```solidity
 	        fulfillerManager = FolkFulfillerManager(_fulfillerManager);
 	```
 
-- Found in src/FolkMarket.sol [Line: 85](src/FolkMarket.sol#L85)
+- Found in src/FolkMarket.sol [Line: 96](src/FolkMarket.sol#L96)
 
 	```solidity
 	        skypodAccessControls = SkypodAccessControls(_skypodAccessControls);
 	```
 
-- Found in src/FolkMarket.sol [Line: 86](src/FolkMarket.sol#L86)
+- Found in src/FolkMarket.sol [Line: 97](src/FolkMarket.sol#L97)
 
 	```solidity
 	        agentManager = SkypodAgentManager(_agentManager);
 	```
 
-- Found in src/FolkMarket.sol [Line: 611](src/FolkMarket.sol#L611)
+- Found in src/FolkMarket.sol [Line: 622](src/FolkMarket.sol#L622)
 
 	```solidity
 	        collectionManager = FolkCollectionManager(_collectionManager);
 	```
 
-- Found in src/FolkMarket.sol [Line: 615](src/FolkMarket.sol#L615)
+- Found in src/FolkMarket.sol [Line: 626](src/FolkMarket.sol#L626)
 
 	```solidity
 	        fulfillerManager = FolkFulfillerManager(_fulfillerManager);
 	```
 
-- Found in src/FolkMarket.sol [Line: 619](src/FolkMarket.sol#L619)
+- Found in src/FolkMarket.sol [Line: 630](src/FolkMarket.sol#L630)
 
 	```solidity
 	        nft = FolkNFT(_nft);
 	```
 
-- Found in src/FolkMarket.sol [Line: 625](src/FolkMarket.sol#L625)
+- Found in src/FolkMarket.sol [Line: 636](src/FolkMarket.sol#L636)
 
 	```solidity
 	        accessControls = FolkAccessControls(_accessControls);
 	```
 
-- Found in src/FolkMarket.sol [Line: 629](src/FolkMarket.sol#L629)
+- Found in src/FolkMarket.sol [Line: 640](src/FolkMarket.sol#L640)
 
 	```solidity
 	        agentManager = SkypodAgentManager(_agentManager);
 	```
 
-- Found in src/FolkMarket.sol [Line: 635](src/FolkMarket.sol#L635)
+- Found in src/FolkMarket.sol [Line: 646](src/FolkMarket.sol#L646)
 
 	```solidity
 	        skypodAccessControls = SkypodAccessControls(_skypodAccessControls);
 	```
 
-- Found in src/FolkMarket.sol [Line: 639](src/FolkMarket.sol#L639)
+- Found in src/FolkMarket.sol [Line: 650](src/FolkMarket.sol#L650)
 
 	```solidity
 	        agents = FolkAgents(_agents);
 	```
 
-- Found in src/FolkNFT.sol [Line: 39](src/FolkNFT.sol#L39)
+- Found in src/FolkNFT.sol [Line: 50](src/FolkNFT.sol#L50)
 
 	```solidity
 	        accessControls = FolkAccessControls(_accessControls);
 	```
 
-- Found in src/FolkNFT.sol [Line: 82](src/FolkNFT.sol#L82)
+- Found in src/FolkNFT.sol [Line: 93](src/FolkNFT.sol#L93)
 
 	```solidity
 	        market = _market;
 	```
 
-- Found in src/FolkNFT.sol [Line: 88](src/FolkNFT.sol#L88)
+- Found in src/FolkNFT.sol [Line: 99](src/FolkNFT.sol#L99)
 
 	```solidity
 	        accessControls = FolkAccessControls(_accessControls);
@@ -626,493 +626,493 @@ If a function is marked public but is not used internally, consider marking it a
 <details><summary>82 Found Instances</summary>
 
 
-- Found in src/FolkAccessControls.sol [Line: 137](src/FolkAccessControls.sol#L137)
+- Found in src/FolkAccessControls.sol [Line: 148](src/FolkAccessControls.sol#L148)
 
 	```solidity
 	    function isAdmin(address _address) public view returns (bool) {
 	```
 
-- Found in src/FolkAccessControls.sol [Line: 141](src/FolkAccessControls.sol#L141)
+- Found in src/FolkAccessControls.sol [Line: 152](src/FolkAccessControls.sol#L152)
 
 	```solidity
 	    function isFulfiller(address _address) public view returns (bool) {
 	```
 
-- Found in src/FolkAccessControls.sol [Line: 145](src/FolkAccessControls.sol#L145)
+- Found in src/FolkAccessControls.sol [Line: 156](src/FolkAccessControls.sol#L156)
 
 	```solidity
 	    function getTokenThreshold(address token) public view returns (uint256) {
 	```
 
-- Found in src/FolkAccessControls.sol [Line: 149](src/FolkAccessControls.sol#L149)
+- Found in src/FolkAccessControls.sol [Line: 160](src/FolkAccessControls.sol#L160)
 
 	```solidity
 	    function getTokenCycleRentLead(
 	```
 
-- Found in src/FolkAccessControls.sol [Line: 155](src/FolkAccessControls.sol#L155)
+- Found in src/FolkAccessControls.sol [Line: 166](src/FolkAccessControls.sol#L166)
 
 	```solidity
 	    function getTokenCycleRentPublish(
 	```
 
-- Found in src/FolkAccessControls.sol [Line: 161](src/FolkAccessControls.sol#L161)
+- Found in src/FolkAccessControls.sol [Line: 172](src/FolkAccessControls.sol#L172)
 
 	```solidity
 	    function getTokenCycleRentMint(
 	```
 
-- Found in src/FolkAccessControls.sol [Line: 167](src/FolkAccessControls.sol#L167)
+- Found in src/FolkAccessControls.sol [Line: 178](src/FolkAccessControls.sol#L178)
 
 	```solidity
 	    function getTokenCycleRentRemix(
 	```
 
-- Found in src/FolkAccessControls.sol [Line: 173](src/FolkAccessControls.sol#L173)
+- Found in src/FolkAccessControls.sol [Line: 184](src/FolkAccessControls.sol#L184)
 
 	```solidity
 	    function getTokenVig(address token) public view returns (uint256) {
 	```
 
-- Found in src/FolkAccessControls.sol [Line: 177](src/FolkAccessControls.sol#L177)
+- Found in src/FolkAccessControls.sol [Line: 188](src/FolkAccessControls.sol#L188)
 
 	```solidity
 	    function getTokenBase(address token) public view returns (uint256) {
 	```
 
-- Found in src/FolkAccessControls.sol [Line: 195](src/FolkAccessControls.sol#L195)
+- Found in src/FolkAccessControls.sol [Line: 206](src/FolkAccessControls.sol#L206)
 
 	```solidity
 	    function getNativePolBalance(address user) public view returns (uint256) {
 	```
 
-- Found in src/FolkAccessControls.sol [Line: 199](src/FolkAccessControls.sol#L199)
+- Found in src/FolkAccessControls.sol [Line: 210](src/FolkAccessControls.sol#L210)
 
 	```solidity
 	    function setSkypodAccessControls(
 	```
 
-- Found in src/FolkAgents.sol [Line: 486](src/FolkAgents.sol#L486)
+- Found in src/FolkAgents.sol [Line: 497](src/FolkAgents.sol#L497)
 
 	```solidity
 	    function rechargeAgentRentBalance(
 	```
 
-- Found in src/FolkAgents.sol [Line: 560](src/FolkAgents.sol#L560)
+- Found in src/FolkAgents.sol [Line: 571](src/FolkAgents.sol#L571)
 
 	```solidity
 	    function withdrawServices(address token) public onlyAdmin {
 	```
 
-- Found in src/FolkAgents.sol [Line: 574](src/FolkAgents.sol#L574)
+- Found in src/FolkAgents.sol [Line: 585](src/FolkAgents.sol#L585)
 
 	```solidity
 	    function getAgentRentBalance(
 	```
 
-- Found in src/FolkAgents.sol [Line: 582](src/FolkAgents.sol#L582)
+- Found in src/FolkAgents.sol [Line: 593](src/FolkAgents.sol#L593)
 
 	```solidity
 	    function getAgentHistoricalRentBalance(
 	```
 
-- Found in src/FolkAgents.sol [Line: 590](src/FolkAgents.sol#L590)
+- Found in src/FolkAgents.sol [Line: 601](src/FolkAgents.sol#L601)
 
 	```solidity
 	    function getAgentHistoricalBonusBalance(
 	```
 
-- Found in src/FolkAgents.sol [Line: 598](src/FolkAgents.sol#L598)
+- Found in src/FolkAgents.sol [Line: 609](src/FolkAgents.sol#L609)
 
 	```solidity
 	    function getAgentBonusBalance(
 	```
 
-- Found in src/FolkAgents.sol [Line: 606](src/FolkAgents.sol#L606)
+- Found in src/FolkAgents.sol [Line: 617](src/FolkAgents.sol#L617)
 
 	```solidity
 	    function getAllTimeServices(address token) public view returns (uint256) {
 	```
 
-- Found in src/FolkAgents.sol [Line: 610](src/FolkAgents.sol#L610)
+- Found in src/FolkAgents.sol [Line: 621](src/FolkAgents.sol#L621)
 
 	```solidity
 	    function getServicesPaidByToken(
 	```
 
-- Found in src/FolkAgents.sol [Line: 616](src/FolkAgents.sol#L616)
+- Found in src/FolkAgents.sol [Line: 627](src/FolkAgents.sol#L627)
 
 	```solidity
 	    function getAgentCollectionIdsHistory(
 	```
 
-- Found in src/FolkAgents.sol [Line: 622](src/FolkAgents.sol#L622)
+- Found in src/FolkAgents.sol [Line: 633](src/FolkAgents.sol#L633)
 
 	```solidity
 	    function getAgentActiveCollectionIds(
 	```
 
-- Found in src/FolkAgents.sol [Line: 628](src/FolkAgents.sol#L628)
+- Found in src/FolkAgents.sol [Line: 639](src/FolkAgents.sol#L639)
 
 	```solidity
 	    function getIsActiveCollectionId(
 	```
 
-- Found in src/FolkAgents.sol [Line: 638](src/FolkAgents.sol#L638)
+- Found in src/FolkAgents.sol [Line: 649](src/FolkAgents.sol#L649)
 
 	```solidity
 	    function getCollectorPaymentByToken(
 	```
 
-- Found in src/FolkAgents.sol [Line: 646](src/FolkAgents.sol#L646)
+- Found in src/FolkAgents.sol [Line: 657](src/FolkAgents.sol#L657)
 
 	```solidity
 	    function getAgentOwnerPaymentByToken(
 	```
 
-- Found in src/FolkAgents.sol [Line: 654](src/FolkAgents.sol#L654)
+- Found in src/FolkAgents.sol [Line: 665](src/FolkAgents.sol#L665)
 
 	```solidity
 	    function getCurrentRewardsByToken(
 	```
 
-- Found in src/FolkAgents.sol [Line: 660](src/FolkAgents.sol#L660)
+- Found in src/FolkAgents.sol [Line: 671](src/FolkAgents.sol#L671)
 
 	```solidity
 	    function getRewardsHistoryByToken(
 	```
 
-- Found in src/FolkAgents.sol [Line: 666](src/FolkAgents.sol#L666)
+- Found in src/FolkAgents.sol [Line: 677](src/FolkAgents.sol#L677)
 
 	```solidity
 	    function getWorkerPublish(
 	```
 
-- Found in src/FolkAgents.sol [Line: 673](src/FolkAgents.sol#L673)
+- Found in src/FolkAgents.sol [Line: 684](src/FolkAgents.sol#L684)
 
 	```solidity
 	    function getWorkerMint(
 	```
 
-- Found in src/FolkAgents.sol [Line: 680](src/FolkAgents.sol#L680)
+- Found in src/FolkAgents.sol [Line: 691](src/FolkAgents.sol#L691)
 
 	```solidity
 	    function getWorkerLead(
 	```
 
-- Found in src/FolkAgents.sol [Line: 687](src/FolkAgents.sol#L687)
+- Found in src/FolkAgents.sol [Line: 698](src/FolkAgents.sol#L698)
 
 	```solidity
 	    function getWorkerRemix(
 	```
 
-- Found in src/FolkAgents.sol [Line: 694](src/FolkAgents.sol#L694)
+- Found in src/FolkAgents.sol [Line: 705](src/FolkAgents.sol#L705)
 
 	```solidity
 	    function getWorkerPublishFrequency(
 	```
 
-- Found in src/FolkAgents.sol [Line: 701](src/FolkAgents.sol#L701)
+- Found in src/FolkAgents.sol [Line: 712](src/FolkAgents.sol#L712)
 
 	```solidity
 	    function getWorkerMintFrequency(
 	```
 
-- Found in src/FolkAgents.sol [Line: 708](src/FolkAgents.sol#L708)
+- Found in src/FolkAgents.sol [Line: 719](src/FolkAgents.sol#L719)
 
 	```solidity
 	    function getWorkerLeadFrequency(
 	```
 
-- Found in src/FolkAgents.sol [Line: 715](src/FolkAgents.sol#L715)
+- Found in src/FolkAgents.sol [Line: 726](src/FolkAgents.sol#L726)
 
 	```solidity
 	    function getWorkerRemixFrequency(
 	```
 
-- Found in src/FolkAgents.sol [Line: 722](src/FolkAgents.sol#L722)
+- Found in src/FolkAgents.sol [Line: 733](src/FolkAgents.sol#L733)
 
 	```solidity
 	    function getWorkerInstructions(
 	```
 
-- Found in src/FolkAgents.sol [Line: 729](src/FolkAgents.sol#L729)
+- Found in src/FolkAgents.sol [Line: 740](src/FolkAgents.sol#L740)
 
 	```solidity
 	    function getArtistCollectBalanceByToken(
 	```
 
-- Found in src/FolkAgents.sol [Line: 737](src/FolkAgents.sol#L737)
+- Found in src/FolkAgents.sol [Line: 748](src/FolkAgents.sol#L748)
 
 	```solidity
 	    function getDevPaymentByToken(address token) public view returns (uint256) {
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 209](src/FolkCollectionManager.sol#L209)
+- Found in src/FolkCollectionManager.sol [Line: 220](src/FolkCollectionManager.sol#L220)
 
 	```solidity
 	    function updateCollectionWorkerAndDetails(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 457](src/FolkCollectionManager.sol#L457)
+- Found in src/FolkCollectionManager.sol [Line: 468](src/FolkCollectionManager.sol#L468)
 
 	```solidity
 	    function getCollectionCount() public view returns (uint256) {
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 461](src/FolkCollectionManager.sol#L461)
+- Found in src/FolkCollectionManager.sol [Line: 472](src/FolkCollectionManager.sol#L472)
 
 	```solidity
 	    function getDropCount() public view returns (uint256) {
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 465](src/FolkCollectionManager.sol#L465)
+- Found in src/FolkCollectionManager.sol [Line: 476](src/FolkCollectionManager.sol#L476)
 
 	```solidity
 	    function getDropCollectionIds(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 471](src/FolkCollectionManager.sol#L471)
+- Found in src/FolkCollectionManager.sol [Line: 482](src/FolkCollectionManager.sol#L482)
 
 	```solidity
 	    function getDropMetadata(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 477](src/FolkCollectionManager.sol#L477)
+- Found in src/FolkCollectionManager.sol [Line: 488](src/FolkCollectionManager.sol#L488)
 
 	```solidity
 	    function getDropIdsByArtist(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 483](src/FolkCollectionManager.sol#L483)
+- Found in src/FolkCollectionManager.sol [Line: 494](src/FolkCollectionManager.sol#L494)
 
 	```solidity
 	    function getCollectionERC20Tokens(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 489](src/FolkCollectionManager.sol#L489)
+- Found in src/FolkCollectionManager.sol [Line: 500](src/FolkCollectionManager.sol#L500)
 
 	```solidity
 	    function getCollectionERC20TokensSet(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 496](src/FolkCollectionManager.sol#L496)
+- Found in src/FolkCollectionManager.sol [Line: 507](src/FolkCollectionManager.sol#L507)
 
 	```solidity
 	    function getCollectionTokenPrice(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 503](src/FolkCollectionManager.sol#L503)
+- Found in src/FolkCollectionManager.sol [Line: 514](src/FolkCollectionManager.sol#L514)
 
 	```solidity
 	    function getCollectionTokenIds(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 509](src/FolkCollectionManager.sol#L509)
+- Found in src/FolkCollectionManager.sol [Line: 520](src/FolkCollectionManager.sol#L520)
 
 	```solidity
 	    function getCollectionAgentIds(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 515](src/FolkCollectionManager.sol#L515)
+- Found in src/FolkCollectionManager.sol [Line: 526](src/FolkCollectionManager.sol#L526)
 
 	```solidity
 	    function getCollectionMetadata(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 521](src/FolkCollectionManager.sol#L521)
+- Found in src/FolkCollectionManager.sol [Line: 532](src/FolkCollectionManager.sol#L532)
 
 	```solidity
 	    function getCollectionArtist(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 527](src/FolkCollectionManager.sol#L527)
+- Found in src/FolkCollectionManager.sol [Line: 538](src/FolkCollectionManager.sol#L538)
 
 	```solidity
 	    function getCollectionForArtist(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 533](src/FolkCollectionManager.sol#L533)
+- Found in src/FolkCollectionManager.sol [Line: 544](src/FolkCollectionManager.sol#L544)
 
 	```solidity
 	    function getCollectionDropId(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 539](src/FolkCollectionManager.sol#L539)
+- Found in src/FolkCollectionManager.sol [Line: 550](src/FolkCollectionManager.sol#L550)
 
 	```solidity
 	    function getCollectionType(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 545](src/FolkCollectionManager.sol#L545)
+- Found in src/FolkCollectionManager.sol [Line: 556](src/FolkCollectionManager.sol#L556)
 
 	```solidity
 	    function getCollectionAmount(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 551](src/FolkCollectionManager.sol#L551)
+- Found in src/FolkCollectionManager.sol [Line: 562](src/FolkCollectionManager.sol#L562)
 
 	```solidity
 	    function getCollectionFulfillerId(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 557](src/FolkCollectionManager.sol#L557)
+- Found in src/FolkCollectionManager.sol [Line: 568](src/FolkCollectionManager.sol#L568)
 
 	```solidity
 	    function getCollectionAmountSold(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 563](src/FolkCollectionManager.sol#L563)
+- Found in src/FolkCollectionManager.sol [Line: 574](src/FolkCollectionManager.sol#L574)
 
 	```solidity
 	    function getCollectionRemixId(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 569](src/FolkCollectionManager.sol#L569)
+- Found in src/FolkCollectionManager.sol [Line: 580](src/FolkCollectionManager.sol#L580)
 
 	```solidity
 	    function getCollectionIsActive(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 575](src/FolkCollectionManager.sol#L575)
+- Found in src/FolkCollectionManager.sol [Line: 586](src/FolkCollectionManager.sol#L586)
 
 	```solidity
 	    function getCollectionIsRemixable(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 581](src/FolkCollectionManager.sol#L581)
+- Found in src/FolkCollectionManager.sol [Line: 592](src/FolkCollectionManager.sol#L592)
 
 	```solidity
 	    function getCollectionIsByAgent(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 587](src/FolkCollectionManager.sol#L587)
+- Found in src/FolkCollectionManager.sol [Line: 598](src/FolkCollectionManager.sol#L598)
 
 	```solidity
 	    function getArtistActiveCollections(
 	```
 
-- Found in src/FolkFulfillerManager.sol [Line: 53](src/FolkFulfillerManager.sol#L53)
+- Found in src/FolkFulfillerManager.sol [Line: 64](src/FolkFulfillerManager.sol#L64)
 
 	```solidity
 	    function createFulfillerProfile(
 	```
 
-- Found in src/FolkFulfillerManager.sol [Line: 65](src/FolkFulfillerManager.sol#L65)
+- Found in src/FolkFulfillerManager.sol [Line: 76](src/FolkFulfillerManager.sol#L76)
 
 	```solidity
 	    function deleteFulfillerProfile(uint256 fulfillerId) public onlyFulfiller {
 	```
 
-- Found in src/FolkFulfillerManager.sol [Line: 89](src/FolkFulfillerManager.sol#L89)
+- Found in src/FolkFulfillerManager.sol [Line: 100](src/FolkFulfillerManager.sol#L100)
 
 	```solidity
 	    function fulfillOrder(uint256 fulfillerId, uint256 orderId) public {
 	```
 
-- Found in src/FolkFulfillerManager.sol [Line: 101](src/FolkFulfillerManager.sol#L101)
+- Found in src/FolkFulfillerManager.sol [Line: 112](src/FolkFulfillerManager.sol#L112)
 
 	```solidity
 	    function getFulfillerActiveOrders(
 	```
 
-- Found in src/FolkFulfillerManager.sol [Line: 107](src/FolkFulfillerManager.sol#L107)
+- Found in src/FolkFulfillerManager.sol [Line: 118](src/FolkFulfillerManager.sol#L118)
 
 	```solidity
 	    function getFulfillerOrderHistory(
 	```
 
-- Found in src/FolkFulfillerManager.sol [Line: 113](src/FolkFulfillerManager.sol#L113)
+- Found in src/FolkFulfillerManager.sol [Line: 124](src/FolkFulfillerManager.sol#L124)
 
 	```solidity
 	    function getFulfillerWallet(
 	```
 
-- Found in src/FolkFulfillerManager.sol [Line: 119](src/FolkFulfillerManager.sol#L119)
+- Found in src/FolkFulfillerManager.sol [Line: 130](src/FolkFulfillerManager.sol#L130)
 
 	```solidity
 	    function getFulfillerMetadata(
 	```
 
-- Found in src/FolkFulfillerManager.sol [Line: 125](src/FolkFulfillerManager.sol#L125)
+- Found in src/FolkFulfillerManager.sol [Line: 136](src/FolkFulfillerManager.sol#L136)
 
 	```solidity
 	    function getFulfillerCounter() public view returns (uint256) {
 	```
 
-- Found in src/FolkMarket.sol [Line: 234](src/FolkMarket.sol#L234)
+- Found in src/FolkMarket.sol [Line: 245](src/FolkMarket.sol#L245)
 
 	```solidity
 	    function agentBuy(
 	```
 
-- Found in src/FolkMarket.sol [Line: 475](src/FolkMarket.sol#L475)
+- Found in src/FolkMarket.sol [Line: 486](src/FolkMarket.sol#L486)
 
 	```solidity
 	    function updateFulfillmentDetails(
 	```
 
-- Found in src/FolkMarket.sol [Line: 642](src/FolkMarket.sol#L642)
+- Found in src/FolkMarket.sol [Line: 653](src/FolkMarket.sol#L653)
 
 	```solidity
 	    function getBuyerToOrderIds(
 	```
 
-- Found in src/FolkMarket.sol [Line: 648](src/FolkMarket.sol#L648)
+- Found in src/FolkMarket.sol [Line: 659](src/FolkMarket.sol#L659)
 
 	```solidity
 	    function getOrderIsFulfilled(uint256 orderId) public view returns (bool) {
 	```
 
-- Found in src/FolkMarket.sol [Line: 652](src/FolkMarket.sol#L652)
+- Found in src/FolkMarket.sol [Line: 663](src/FolkMarket.sol#L663)
 
 	```solidity
 	    function getOrderFulfillmentDetails(
 	```
 
-- Found in src/FolkMarket.sol [Line: 658](src/FolkMarket.sol#L658)
+- Found in src/FolkMarket.sol [Line: 669](src/FolkMarket.sol#L669)
 
 	```solidity
 	    function getOrderAmount(uint256 orderId) public view returns (uint256) {
 	```
 
-- Found in src/FolkMarket.sol [Line: 662](src/FolkMarket.sol#L662)
+- Found in src/FolkMarket.sol [Line: 673](src/FolkMarket.sol#L673)
 
 	```solidity
 	    function getOrderToken(uint256 orderId) public view returns (address) {
 	```
 
-- Found in src/FolkMarket.sol [Line: 666](src/FolkMarket.sol#L666)
+- Found in src/FolkMarket.sol [Line: 677](src/FolkMarket.sol#L677)
 
 	```solidity
 	    function getOrderCollectionId(
 	```
 
-- Found in src/FolkMarket.sol [Line: 672](src/FolkMarket.sol#L672)
+- Found in src/FolkMarket.sol [Line: 683](src/FolkMarket.sol#L683)
 
 	```solidity
 	    function getOrderMintedTokens(
 	```
 
-- Found in src/FolkMarket.sol [Line: 678](src/FolkMarket.sol#L678)
+- Found in src/FolkMarket.sol [Line: 689](src/FolkMarket.sol#L689)
 
 	```solidity
 	    function getOrderTotalPrice(uint256 orderId) public view returns (uint256) {
 	```
 
-- Found in src/FolkMarket.sol [Line: 682](src/FolkMarket.sol#L682)
+- Found in src/FolkMarket.sol [Line: 693](src/FolkMarket.sol#L693)
 
 	```solidity
 	    function getOrderCounter() public view returns (uint256) {
 	```
 
-- Found in src/FolkMarket.sol [Line: 686](src/FolkMarket.sol#L686)
+- Found in src/FolkMarket.sol [Line: 697](src/FolkMarket.sol#L697)
 
 	```solidity
 	    function getAllCollectorsByCollectionId(
 	```
 
-- Found in src/FolkNFT.sol [Line: 77](src/FolkNFT.sol#L77)
+- Found in src/FolkNFT.sol [Line: 88](src/FolkNFT.sol#L88)
 
 	```solidity
 	    function getTokenCounter() public view returns (uint256) {
@@ -1129,109 +1129,109 @@ Define and use `constant` variables instead of using literals. If the same const
 <details><summary>24 Found Instances</summary>
 
 
-- Found in src/FolkAgents.sol [Line: 434](src/FolkAgents.sol#L434)
+- Found in src/FolkAgents.sol [Line: 445](src/FolkAgents.sol#L445)
 
 	```solidity
 	        uint256 _ownerAmount = (bonus * ownerAmountPercent) / 100;
 	```
 
-- Found in src/FolkAgents.sol [Line: 435](src/FolkAgents.sol#L435)
+- Found in src/FolkAgents.sol [Line: 446](src/FolkAgents.sol#L446)
 
 	```solidity
 	        uint256 _devAmount = (bonus * devAmountPercent) / 100;
 	```
 
-- Found in src/FolkAgents.sol [Line: 436](src/FolkAgents.sol#L436)
+- Found in src/FolkAgents.sol [Line: 447](src/FolkAgents.sol#L447)
 
 	```solidity
 	        uint256 _distributionAmount = (bonus * distributionAmountPercent) / 100;
 	```
 
-- Found in src/FolkAgents.sol [Line: 443](src/FolkAgents.sol#L443)
+- Found in src/FolkAgents.sol [Line: 454](src/FolkAgents.sol#L454)
 
 	```solidity
 	            totalWeight += 1e18 / j;
 	```
 
-- Found in src/FolkAgents.sol [Line: 448](src/FolkAgents.sol#L448)
+- Found in src/FolkAgents.sol [Line: 459](src/FolkAgents.sol#L459)
 
 	```solidity
 	                uint256 weight = 1e18 / (j + 1);
 	```
 
-- Found in src/FolkAgents.sol [Line: 776](src/FolkAgents.sol#L776)
+- Found in src/FolkAgents.sol [Line: 787](src/FolkAgents.sol#L787)
 
 	```solidity
 	            100
 	```
 
-- Found in src/FolkMarket.sol [Line: 377](src/FolkMarket.sol#L377)
+- Found in src/FolkMarket.sol [Line: 388](src/FolkMarket.sol#L388)
 
 	```solidity
 	                    _agentShare = (totalPrice * 50) / 100;
 	```
 
-- Found in src/FolkMarket.sol [Line: 378](src/FolkMarket.sol#L378)
+- Found in src/FolkMarket.sol [Line: 389](src/FolkMarket.sol#L389)
 
 	```solidity
 	                    _remixShare = (totalPrice * 50) / 100;
 	```
 
-- Found in src/FolkMarket.sol [Line: 387](src/FolkMarket.sol#L387)
+- Found in src/FolkMarket.sol [Line: 398](src/FolkMarket.sol#L398)
 
 	```solidity
 	                    _artistShare = (totalPrice * 70) / 100;
 	```
 
-- Found in src/FolkMarket.sol [Line: 388](src/FolkMarket.sol#L388)
+- Found in src/FolkMarket.sol [Line: 399](src/FolkMarket.sol#L399)
 
 	```solidity
 	                    _agentShare = (totalPrice * 10) / 100;
 	```
 
-- Found in src/FolkMarket.sol [Line: 389](src/FolkMarket.sol#L389)
+- Found in src/FolkMarket.sol [Line: 400](src/FolkMarket.sol#L400)
 
 	```solidity
 	                    _remixShare = (totalPrice * 20) / 100;
 	```
 
-- Found in src/FolkMarket.sol [Line: 391](src/FolkMarket.sol#L391)
+- Found in src/FolkMarket.sol [Line: 402](src/FolkMarket.sol#L402)
 
 	```solidity
 	                    _artistShare = (totalPrice * 70) / 100;
 	```
 
-- Found in src/FolkMarket.sol [Line: 393](src/FolkMarket.sol#L393)
+- Found in src/FolkMarket.sol [Line: 404](src/FolkMarket.sol#L404)
 
 	```solidity
 	                    _remixShare = (totalPrice * 30) / 100;
 	```
 
-- Found in src/FolkMarket.sol [Line: 420](src/FolkMarket.sol#L420)
+- Found in src/FolkMarket.sol [Line: 431](src/FolkMarket.sol#L431)
 
 	```solidity
 	                        (_additionalUnits * _individualPrice * 10) /
 	```
 
-- Found in src/FolkMarket.sol [Line: 421](src/FolkMarket.sol#L421)
+- Found in src/FolkMarket.sol [Line: 432](src/FolkMarket.sol#L432)
 
 	```solidity
 	                        100;
 	```
 
-- Found in src/FolkMarket.sol [Line: 432](src/FolkMarket.sol#L432)
+- Found in src/FolkMarket.sol [Line: 443](src/FolkMarket.sol#L443)
 
 	```solidity
 	                        100 +
 	```
 
-- Found in src/FolkMarket.sol [Line: 441](src/FolkMarket.sol#L441)
+- Found in src/FolkMarket.sol [Line: 452](src/FolkMarket.sol#L452)
 
 	```solidity
 	                    _agentShare = (totalPrice * 10) / 100;
 	```
 
-- Found in src/FolkMarket.sol [Line: 507](src/FolkMarket.sol#L507)
+- Found in src/FolkMarket.sol [Line: 518](src/FolkMarket.sol#L518)
 
 	```solidity
 	                _fulfillerShare = (totalPrice * _vig) / 100 + _base;
@@ -1248,49 +1248,49 @@ Consider removing the modifier or inlining the logic into the calling function.
 <details><summary>8 Found Instances</summary>
 
 
-- Found in src/AgentFeedRule.sol [Line: 90](src/AgentFeedRule.sol#L90)
+- Found in src/AgentFeedRule.sol [Line: 101](src/AgentFeedRule.sol#L101)
 
 	```solidity
 	    modifier onlyAdmin() {
 	```
 
-- Found in src/FolkAgents.sol [Line: 121](src/FolkAgents.sol#L121)
+- Found in src/FolkAgents.sol [Line: 132](src/FolkAgents.sol#L132)
 
 	```solidity
 	    modifier onlyAgentOwnerOrCreator(uint256 agentId) {
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 60](src/FolkCollectionManager.sol#L60)
+- Found in src/FolkCollectionManager.sol [Line: 71](src/FolkCollectionManager.sol#L71)
 
 	```solidity
 	    modifier onlyMarket() {
 	```
 
-- Found in src/FolkFulfillerManager.sol [Line: 34](src/FolkFulfillerManager.sol#L34)
+- Found in src/FolkFulfillerManager.sol [Line: 45](src/FolkFulfillerManager.sol#L45)
 
 	```solidity
 	    modifier onlyAdminOrMarket() {
 	```
 
-- Found in src/FolkMarket.sol [Line: 50](src/FolkMarket.sol#L50)
+- Found in src/FolkMarket.sol [Line: 61](src/FolkMarket.sol#L61)
 
 	```solidity
 	    modifier onlyAgent() {
 	```
 
-- Found in src/FolkMarket.sol [Line: 57](src/FolkMarket.sol#L57)
+- Found in src/FolkMarket.sol [Line: 68](src/FolkMarket.sol#L68)
 
 	```solidity
 	    modifier onlyFulfillerManager() {
 	```
 
-- Found in src/FolkMarket.sol [Line: 64](src/FolkMarket.sol#L64)
+- Found in src/FolkMarket.sol [Line: 75](src/FolkMarket.sol#L75)
 
 	```solidity
 	    modifier onlyCollector(uint256 orderId) {
 	```
 
-- Found in src/FolkNFT.sol [Line: 27](src/FolkNFT.sol#L27)
+- Found in src/FolkNFT.sol [Line: 38](src/FolkNFT.sol#L38)
 
 	```solidity
 	    modifier onlyMarket() {
@@ -1307,25 +1307,25 @@ Consider removing empty blocks.
 <details><summary>4 Found Instances</summary>
 
 
-- Found in src/AgentFeedRule.sol [Line: 101](src/AgentFeedRule.sol#L101)
+- Found in src/AgentFeedRule.sol [Line: 112](src/AgentFeedRule.sol#L112)
 
 	```solidity
 	    function configure(
 	```
 
-- Found in src/AgentFeedRule.sol [Line: 118](src/AgentFeedRule.sol#L118)
+- Found in src/AgentFeedRule.sol [Line: 129](src/AgentFeedRule.sol#L129)
 
 	```solidity
 	    function processEditPost(
 	```
 
-- Found in src/AgentFeedRule.sol [Line: 126](src/AgentFeedRule.sol#L126)
+- Found in src/AgentFeedRule.sol [Line: 137](src/AgentFeedRule.sol#L137)
 
 	```solidity
 	    function processDeletePost(
 	```
 
-- Found in src/AgentFeedRule.sol [Line: 133](src/AgentFeedRule.sol#L133)
+- Found in src/AgentFeedRule.sol [Line: 144](src/AgentFeedRule.sol#L144)
 
 	```solidity
 	    function processPostRuleChanges(
@@ -1342,7 +1342,7 @@ Large literal values multiples of 10000 can be replaced with scientific notation
 <details><summary>1 Found Instances</summary>
 
 
-- Found in src/TestERC20.sol [Line: 8](src/TestERC20.sol#L8)
+- Found in src/TestERC20.sol [Line: 19](src/TestERC20.sol#L19)
 
 	```solidity
 	        _mint(msg.sender, 10000 ether);
@@ -1359,37 +1359,37 @@ Consider using or removing the unused error.
 <details><summary>6 Found Instances</summary>
 
 
-- Found in src/FolkErrors.sol [Line: 6](src/FolkErrors.sol#L6)
+- Found in src/FolkErrors.sol [Line: 17](src/FolkErrors.sol#L17)
 
 	```solidity
 	    error AlreadyAdmin();
 	```
 
-- Found in src/FolkErrors.sol [Line: 10](src/FolkErrors.sol#L10)
+- Found in src/FolkErrors.sol [Line: 21](src/FolkErrors.sol#L21)
 
 	```solidity
 	    error TokenAlreadyExists();
 	```
 
-- Found in src/FolkErrors.sol [Line: 22](src/FolkErrors.sol#L22)
+- Found in src/FolkErrors.sol [Line: 33](src/FolkErrors.sol#L33)
 
 	```solidity
 	    error OnlyMarketOrAgentContract();
 	```
 
-- Found in src/FolkErrors.sol [Line: 29](src/FolkErrors.sol#L29)
+- Found in src/FolkErrors.sol [Line: 40](src/FolkErrors.sol#L40)
 
 	```solidity
 	    error OnlyPoolManagerContract();
 	```
 
-- Found in src/FolkErrors.sol [Line: 36](src/FolkErrors.sol#L36)
+- Found in src/FolkErrors.sol [Line: 47](src/FolkErrors.sol#L47)
 
 	```solidity
 	    error OnlyAgentsContract();
 	```
 
-- Found in src/FolkErrors.sol [Line: 44](src/FolkErrors.sol#L44)
+- Found in src/FolkErrors.sol [Line: 55](src/FolkErrors.sol#L55)
 
 	```solidity
 	    error InvalidWallet();
@@ -1406,55 +1406,55 @@ Avoid `require` / `revert` statements in a loop because a single bad item can ca
 <details><summary>9 Found Instances</summary>
 
 
-- Found in src/FolkAgents.sol [Line: 352](src/FolkAgents.sol#L352)
+- Found in src/FolkAgents.sol [Line: 363](src/FolkAgents.sol#L363)
 
 	```solidity
 	        for (uint8 i = 0; i < collectionIds.length; i++) {
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 104](src/FolkCollectionManager.sol#L104)
+- Found in src/FolkCollectionManager.sol [Line: 115](src/FolkCollectionManager.sol#L115)
 
 	```solidity
 	        for (uint8 i = 0; i < collectionInput.tokens.length; i++) {
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 113](src/FolkCollectionManager.sol#L113)
+- Found in src/FolkCollectionManager.sol [Line: 124](src/FolkCollectionManager.sol#L124)
 
 	```solidity
 	        for (uint8 i = 0; i < collectionInput.tokens.length; i++) {
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 165](src/FolkCollectionManager.sol#L165)
+- Found in src/FolkCollectionManager.sol [Line: 176](src/FolkCollectionManager.sol#L176)
 
 	```solidity
 	        for (uint8 i = 0; i < collectionInput.agentIds.length; i++) {
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 225](src/FolkCollectionManager.sol#L225)
+- Found in src/FolkCollectionManager.sol [Line: 236](src/FolkCollectionManager.sol#L236)
 
 	```solidity
 	        for (uint8 i = 0; i < agentIds.length; i++) {
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 231](src/FolkCollectionManager.sol#L231)
+- Found in src/FolkCollectionManager.sol [Line: 242](src/FolkCollectionManager.sol#L242)
 
 	```solidity
 	        for (uint8 i = 0; i < workers.length; i++) {
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 412](src/FolkCollectionManager.sol#L412)
+- Found in src/FolkCollectionManager.sol [Line: 423](src/FolkCollectionManager.sol#L423)
 
 	```solidity
 	        ) {
 	```
 
-- Found in src/FolkMarket.sol [Line: 539](src/FolkMarket.sol#L539)
+- Found in src/FolkMarket.sol [Line: 550](src/FolkMarket.sol#L550)
 
 	```solidity
 	        for (uint8 i = 0; i < _agentIds.length; i++) {
 	```
 
-- Found in src/FolkNFT.sol [Line: 57](src/FolkNFT.sol#L57)
+- Found in src/FolkNFT.sol [Line: 68](src/FolkNFT.sol#L68)
 
 	```solidity
 	        for (uint8 i = 0; i < amount; i++) {
@@ -1471,97 +1471,97 @@ Invoking `SSTORE` operations in loops may waste gas. Use a local variable to hol
 <details><summary>16 Found Instances</summary>
 
 
-- Found in src/FolkAgents.sol [Line: 206](src/FolkAgents.sol#L206)
+- Found in src/FolkAgents.sol [Line: 217](src/FolkAgents.sol#L217)
 
 	```solidity
 	        for (uint8 i = 0; i < _tokens.length; i++) {
 	```
 
-- Found in src/FolkAgents.sol [Line: 228](src/FolkAgents.sol#L228)
+- Found in src/FolkAgents.sol [Line: 239](src/FolkAgents.sol#L239)
 
 	```solidity
 	        for (uint8 i = 0; i < tokens.length; i++) {
 	```
 
-- Found in src/FolkAgents.sol [Line: 352](src/FolkAgents.sol#L352)
+- Found in src/FolkAgents.sol [Line: 363](src/FolkAgents.sol#L363)
 
 	```solidity
 	        for (uint8 i = 0; i < collectionIds.length; i++) {
 	```
 
-- Found in src/FolkAgents.sol [Line: 388](src/FolkAgents.sol#L388)
+- Found in src/FolkAgents.sol [Line: 399](src/FolkAgents.sol#L399)
 
 	```solidity
 	        for (uint8 i = 0; i < collectionIds.length; i++) {
 	```
 
-- Found in src/FolkAgents.sol [Line: 446](src/FolkAgents.sol#L446)
+- Found in src/FolkAgents.sol [Line: 457](src/FolkAgents.sol#L457)
 
 	```solidity
 	        for (uint256 j = 0; j < _collectors.length; j++) {
 	```
 
-- Found in src/FolkAgents.sol [Line: 466](src/FolkAgents.sol#L466)
+- Found in src/FolkAgents.sol [Line: 477](src/FolkAgents.sol#L477)
 
 	```solidity
 	        for (uint8 i = 0; i < owners.length; i++) {
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 165](src/FolkCollectionManager.sol#L165)
+- Found in src/FolkCollectionManager.sol [Line: 176](src/FolkCollectionManager.sol#L176)
 
 	```solidity
 	        for (uint8 i = 0; i < collectionInput.agentIds.length; i++) {
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 173](src/FolkCollectionManager.sol#L173)
+- Found in src/FolkCollectionManager.sol [Line: 184](src/FolkCollectionManager.sol#L184)
 
 	```solidity
 	        for (uint8 i = 0; i < collectionInput.agentIds.length; i++) {
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 179](src/FolkCollectionManager.sol#L179)
+- Found in src/FolkCollectionManager.sol [Line: 190](src/FolkCollectionManager.sol#L190)
 
 	```solidity
 	        for (uint8 i = 0; i < collectionInput.prices.length; i++) {
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 231](src/FolkCollectionManager.sol#L231)
+- Found in src/FolkCollectionManager.sol [Line: 242](src/FolkCollectionManager.sol#L242)
 
 	```solidity
 	        for (uint8 i = 0; i < workers.length; i++) {
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 318](src/FolkCollectionManager.sol#L318)
+- Found in src/FolkCollectionManager.sol [Line: 329](src/FolkCollectionManager.sol#L329)
 
 	```solidity
 	        for (
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 360](src/FolkCollectionManager.sol#L360)
+- Found in src/FolkCollectionManager.sol [Line: 371](src/FolkCollectionManager.sol#L371)
 
 	```solidity
 	        for (uint8 i = 0; i < _collectionIds.length; i++) {
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 376](src/FolkCollectionManager.sol#L376)
+- Found in src/FolkCollectionManager.sol [Line: 387](src/FolkCollectionManager.sol#L387)
 
 	```solidity
 	        for (uint8 i = 0; i < mintedTokenIds.length; i++) {
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 408](src/FolkCollectionManager.sol#L408)
+- Found in src/FolkCollectionManager.sol [Line: 419](src/FolkCollectionManager.sol#L419)
 
 	```solidity
 	        for (
 	```
 
-- Found in src/FolkMarket.sol [Line: 539](src/FolkMarket.sol#L539)
+- Found in src/FolkMarket.sol [Line: 550](src/FolkMarket.sol#L550)
 
 	```solidity
 	        for (uint8 i = 0; i < _agentIds.length; i++) {
 	```
 
-- Found in src/FolkNFT.sol [Line: 57](src/FolkNFT.sol#L57)
+- Found in src/FolkNFT.sol [Line: 68](src/FolkNFT.sol#L68)
 
 	```solidity
 	        for (uint8 i = 0; i < amount; i++) {
@@ -1578,157 +1578,157 @@ There are state variable changes in this function but no event is emitted. Consi
 <details><summary>26 Found Instances</summary>
 
 
-- Found in src/AgentFeedRule.sol [Line: 140](src/AgentFeedRule.sol#L140)
+- Found in src/AgentFeedRule.sol [Line: 151](src/AgentFeedRule.sol#L151)
 
 	```solidity
 	    function setAccessControls(
 	```
 
-- Found in src/FolkAccessControls.sol [Line: 199](src/FolkAccessControls.sol#L199)
+- Found in src/FolkAccessControls.sol [Line: 210](src/FolkAccessControls.sol#L210)
 
 	```solidity
 	    function setSkypodAccessControls(
 	```
 
-- Found in src/FolkAgents.sol [Line: 741](src/FolkAgents.sol#L741)
+- Found in src/FolkAgents.sol [Line: 752](src/FolkAgents.sol#L752)
 
 	```solidity
 	    function setAccessControls(
 	```
 
-- Found in src/FolkAgents.sol [Line: 747](src/FolkAgents.sol#L747)
+- Found in src/FolkAgents.sol [Line: 758](src/FolkAgents.sol#L758)
 
 	```solidity
 	    function setAgentManager(address payable _agentManager) external onlyAdmin {
 	```
 
-- Found in src/FolkAgents.sol [Line: 751](src/FolkAgents.sol#L751)
+- Found in src/FolkAgents.sol [Line: 762](src/FolkAgents.sol#L762)
 
 	```solidity
 	    function setSkypodAccessControls(
 	```
 
-- Found in src/FolkAgents.sol [Line: 757](src/FolkAgents.sol#L757)
+- Found in src/FolkAgents.sol [Line: 768](src/FolkAgents.sol#L768)
 
 	```solidity
 	    function setMarket(address _market) external onlyAdmin {
 	```
 
-- Found in src/FolkAgents.sol [Line: 761](src/FolkAgents.sol#L761)
+- Found in src/FolkAgents.sol [Line: 772](src/FolkAgents.sol#L772)
 
 	```solidity
 	    function setCollectionManager(
 	```
 
-- Found in src/FolkAgents.sol [Line: 767](src/FolkAgents.sol#L767)
+- Found in src/FolkAgents.sol [Line: 778](src/FolkAgents.sol#L778)
 
 	```solidity
 	    function setAmounts(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 370](src/FolkCollectionManager.sol#L370)
+- Found in src/FolkCollectionManager.sol [Line: 381](src/FolkCollectionManager.sol#L381)
 
 	```solidity
 	    function updateData(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 593](src/FolkCollectionManager.sol#L593)
+- Found in src/FolkCollectionManager.sol [Line: 604](src/FolkCollectionManager.sol#L604)
 
 	```solidity
 	    function setMarket(address _market) external onlyAdmin {
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 597](src/FolkCollectionManager.sol#L597)
+- Found in src/FolkCollectionManager.sol [Line: 608](src/FolkCollectionManager.sol#L608)
 
 	```solidity
 	    function setAccessControls(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 603](src/FolkCollectionManager.sol#L603)
+- Found in src/FolkCollectionManager.sol [Line: 614](src/FolkCollectionManager.sol#L614)
 
 	```solidity
 	    function setSkypodAccessControls(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 609](src/FolkCollectionManager.sol#L609)
+- Found in src/FolkCollectionManager.sol [Line: 620](src/FolkCollectionManager.sol#L620)
 
 	```solidity
 	    function setSkypodAgentManager(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 615](src/FolkCollectionManager.sol#L615)
+- Found in src/FolkCollectionManager.sol [Line: 626](src/FolkCollectionManager.sol#L626)
 
 	```solidity
 	    function setAgents(address payable _agents) external onlyAdmin {
 	```
 
-- Found in src/FolkFulfillerManager.sol [Line: 129](src/FolkFulfillerManager.sol#L129)
+- Found in src/FolkFulfillerManager.sol [Line: 140](src/FolkFulfillerManager.sol#L140)
 
 	```solidity
 	    function setAccessControls(
 	```
 
-- Found in src/FolkFulfillerManager.sol [Line: 135](src/FolkFulfillerManager.sol#L135)
+- Found in src/FolkFulfillerManager.sol [Line: 146](src/FolkFulfillerManager.sol#L146)
 
 	```solidity
 	    function setMarket(address _market) external onlyAdmin {
 	```
 
-- Found in src/FolkMarket.sol [Line: 604](src/FolkMarket.sol#L604)
+- Found in src/FolkMarket.sol [Line: 615](src/FolkMarket.sol#L615)
 
 	```solidity
 	    function fulfillIRLOrder(uint256 orderId) external onlyFulfillerManager {
 	```
 
-- Found in src/FolkMarket.sol [Line: 608](src/FolkMarket.sol#L608)
+- Found in src/FolkMarket.sol [Line: 619](src/FolkMarket.sol#L619)
 
 	```solidity
 	    function setCollectionManager(
 	```
 
-- Found in src/FolkMarket.sol [Line: 614](src/FolkMarket.sol#L614)
+- Found in src/FolkMarket.sol [Line: 625](src/FolkMarket.sol#L625)
 
 	```solidity
 	    function setFulfillerManager(address _fulfillerManager) external onlyAdmin {
 	```
 
-- Found in src/FolkMarket.sol [Line: 618](src/FolkMarket.sol#L618)
+- Found in src/FolkMarket.sol [Line: 629](src/FolkMarket.sol#L629)
 
 	```solidity
 	    function setNFT(address _nft) external onlyAdmin {
 	```
 
-- Found in src/FolkMarket.sol [Line: 622](src/FolkMarket.sol#L622)
+- Found in src/FolkMarket.sol [Line: 633](src/FolkMarket.sol#L633)
 
 	```solidity
 	    function setAccessControls(
 	```
 
-- Found in src/FolkMarket.sol [Line: 628](src/FolkMarket.sol#L628)
+- Found in src/FolkMarket.sol [Line: 639](src/FolkMarket.sol#L639)
 
 	```solidity
 	    function setAgentManager(address payable _agentManager) external onlyAdmin {
 	```
 
-- Found in src/FolkMarket.sol [Line: 632](src/FolkMarket.sol#L632)
+- Found in src/FolkMarket.sol [Line: 643](src/FolkMarket.sol#L643)
 
 	```solidity
 	    function setSkypodAccessControls(
 	```
 
-- Found in src/FolkMarket.sol [Line: 638](src/FolkMarket.sol#L638)
+- Found in src/FolkMarket.sol [Line: 649](src/FolkMarket.sol#L649)
 
 	```solidity
 	    function setAgents(address payable _agents) external onlyAdmin {
 	```
 
-- Found in src/FolkNFT.sol [Line: 81](src/FolkNFT.sol#L81)
+- Found in src/FolkNFT.sol [Line: 92](src/FolkNFT.sol#L92)
 
 	```solidity
 	    function setMarket(address _market) external onlyAdmin {
 	```
 
-- Found in src/FolkNFT.sol [Line: 85](src/FolkNFT.sol#L85)
+- Found in src/FolkNFT.sol [Line: 96](src/FolkNFT.sol#L96)
 
 	```solidity
 	    function setAccessControls(
@@ -1745,181 +1745,181 @@ Function returns a value but it is ignored. Consider checking the return value.
 <details><summary>30 Found Instances</summary>
 
 
-- Found in src/FolkAgents.sol [Line: 311](src/FolkAgents.sol#L311)
+- Found in src/FolkAgents.sol [Line: 322](src/FolkAgents.sol#L322)
 
 	```solidity
 	            _activatedAgents[agentId].activeCollectionIds.add(collectionId);
 	```
 
-- Found in src/FolkAgents.sol [Line: 313](src/FolkAgents.sol#L313)
+- Found in src/FolkAgents.sol [Line: 324](src/FolkAgents.sol#L324)
 
 	```solidity
 	            _activatedAgents[agentId].activeCollectionIds.remove(collectionId);
 	```
 
-- Found in src/FolkAgents.sol [Line: 321](src/FolkAgents.sol#L321)
+- Found in src/FolkAgents.sol [Line: 332](src/FolkAgents.sol#L332)
 
 	```solidity
 	            _activatedAgents[agentId].collectionIdsHistory.add(collectionId);
 	```
 
-- Found in src/FolkAgents.sol [Line: 451](src/FolkAgents.sol#L451)
+- Found in src/FolkAgents.sol [Line: 462](src/FolkAgents.sol#L462)
 
 	```solidity
 	                IERC20(token).transfer(_collectors[j], payment);
 	```
 
-- Found in src/FolkAgents.sol [Line: 467](src/FolkAgents.sol#L467)
+- Found in src/FolkAgents.sol [Line: 478](src/FolkAgents.sol#L478)
 
 	```solidity
 	            IERC20(token).transfer(owners[i], _ownerAmount / owners.length);
 	```
 
-- Found in src/FolkAgents.sol [Line: 537](src/FolkAgents.sol#L537)
+- Found in src/FolkAgents.sol [Line: 548](src/FolkAgents.sol#L548)
 
 	```solidity
 	                _activatedAgents[agentId].activeCollectionIds.add(collectionId);
 	```
 
-- Found in src/FolkAgents.sol [Line: 545](src/FolkAgents.sol#L545)
+- Found in src/FolkAgents.sol [Line: 556](src/FolkAgents.sol#L556)
 
 	```solidity
 	                _activatedAgents[agentId].collectionIdsHistory.add(
 	```
 
-- Found in src/FolkAgents.sol [Line: 567](src/FolkAgents.sol#L567)
+- Found in src/FolkAgents.sol [Line: 578](src/FolkAgents.sol#L578)
 
 	```solidity
 	            IERC20(token).transfer(msg.sender, _amount);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 131](src/FolkCollectionManager.sol#L131)
+- Found in src/FolkCollectionManager.sol [Line: 142](src/FolkCollectionManager.sol#L142)
 
 	```solidity
 	            _dropIdsByArtist[msg.sender].add(_dropValue);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 174](src/FolkCollectionManager.sol#L174)
+- Found in src/FolkCollectionManager.sol [Line: 185](src/FolkCollectionManager.sol#L185)
 
 	```solidity
 	            _collections[_collectionCounter].agentIds.add(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 183](src/FolkCollectionManager.sol#L183)
+- Found in src/FolkCollectionManager.sol [Line: 194](src/FolkCollectionManager.sol#L194)
 
 	```solidity
 	            _collections[_collectionCounter].erc20Tokens.add(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 188](src/FolkCollectionManager.sol#L188)
+- Found in src/FolkCollectionManager.sol [Line: 199](src/FolkCollectionManager.sol#L199)
 
 	```solidity
 	        _activeCollections[msg.sender].add(_collectionCounter);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 189](src/FolkCollectionManager.sol#L189)
+- Found in src/FolkCollectionManager.sol [Line: 200](src/FolkCollectionManager.sol#L200)
 
 	```solidity
 	        _drops[_dropValue].collectionIds.add(_collectionCounter);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 216](src/FolkCollectionManager.sol#L216)
+- Found in src/FolkCollectionManager.sol [Line: 227](src/FolkCollectionManager.sol#L227)
 
 	```solidity
 	        _checkArtistOrAgentOwner(collectionId, agentId, false);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 249](src/FolkCollectionManager.sol#L249)
+- Found in src/FolkCollectionManager.sol [Line: 260](src/FolkCollectionManager.sol#L260)
 
 	```solidity
 	        _checkArtistOrAgentOwner(collectionId, agentId, false);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 270](src/FolkCollectionManager.sol#L270)
+- Found in src/FolkCollectionManager.sol [Line: 281](src/FolkCollectionManager.sol#L281)
 
 	```solidity
 	        _checkArtistOrAgentOwner(collectionId, agentId, false);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 276](src/FolkCollectionManager.sol#L276)
+- Found in src/FolkCollectionManager.sol [Line: 287](src/FolkCollectionManager.sol#L287)
 
 	```solidity
 	        _activeCollections[_collections[collectionId].artist].remove(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 289](src/FolkCollectionManager.sol#L289)
+- Found in src/FolkCollectionManager.sol [Line: 300](src/FolkCollectionManager.sol#L300)
 
 	```solidity
 	        _checkArtistOrAgentOwner(collectionId, agentId, false);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 295](src/FolkCollectionManager.sol#L295)
+- Found in src/FolkCollectionManager.sol [Line: 306](src/FolkCollectionManager.sol#L306)
 
 	```solidity
 	        _activeCollections[_collections[collectionId].artist].add(collectionId);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 315](src/FolkCollectionManager.sol#L315)
+- Found in src/FolkCollectionManager.sol [Line: 326](src/FolkCollectionManager.sol#L326)
 
 	```solidity
 	            _drops[_dropId].collectionIds.remove(collectionId);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 327](src/FolkCollectionManager.sol#L327)
+- Found in src/FolkCollectionManager.sol [Line: 338](src/FolkCollectionManager.sol#L338)
 
 	```solidity
 	        _activeCollections[_artist].remove(collectionId);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 348](src/FolkCollectionManager.sol#L348)
+- Found in src/FolkCollectionManager.sol [Line: 359](src/FolkCollectionManager.sol#L359)
 
 	```solidity
 	            _drops[_oldDropId].collectionIds.remove(collectionId);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 351](src/FolkCollectionManager.sol#L351)
+- Found in src/FolkCollectionManager.sol [Line: 362](src/FolkCollectionManager.sol#L362)
 
 	```solidity
 	        _drops[dropId].collectionIds.add(collectionId);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 358](src/FolkCollectionManager.sol#L358)
+- Found in src/FolkCollectionManager.sol [Line: 369](src/FolkCollectionManager.sol#L369)
 
 	```solidity
 	        _checkArtistOrAgentOwner(dropId, agentId, true);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 364](src/FolkCollectionManager.sol#L364)
+- Found in src/FolkCollectionManager.sol [Line: 375](src/FolkCollectionManager.sol#L375)
 
 	```solidity
 	        _dropIdsByArtist[_drops[dropId].artist].remove(dropId);
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 388](src/FolkCollectionManager.sol#L388)
+- Found in src/FolkCollectionManager.sol [Line: 399](src/FolkCollectionManager.sol#L399)
 
 	```solidity
 	                _activeCollections[_collections[collectionId].artist].remove(
 	```
 
-- Found in src/FolkCollectionManager.sol [Line: 401](src/FolkCollectionManager.sol#L401)
+- Found in src/FolkCollectionManager.sol [Line: 412](src/FolkCollectionManager.sol#L412)
 
 	```solidity
 	        _checkArtistOrAgentOwner(collectionId, agentId, false);
 	```
 
-- Found in src/FolkFulfillerManager.sol [Line: 83](src/FolkFulfillerManager.sol#L83)
+- Found in src/FolkFulfillerManager.sol [Line: 94](src/FolkFulfillerManager.sol#L94)
 
 	```solidity
 	        _fulfillers[fulfillerId].activeOrders.add(orderId);
 	```
 
-- Found in src/FolkFulfillerManager.sol [Line: 94](src/FolkFulfillerManager.sol#L94)
+- Found in src/FolkFulfillerManager.sol [Line: 105](src/FolkFulfillerManager.sol#L105)
 
 	```solidity
 	        _fulfillers[fulfillerId].activeOrders.remove(orderId);
 	```
 
-- Found in src/FolkMarket.sol [Line: 567](src/FolkMarket.sol#L567)
+- Found in src/FolkMarket.sol [Line: 578](src/FolkMarket.sol#L578)
 
 	```solidity
 	        _buyerToOrderIds[msg.sender].add(_orderCounter);

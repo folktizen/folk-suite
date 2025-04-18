@@ -81,7 +81,7 @@ Consider using a different data structure or removing items by collecting them d
 <details><summary>1 Found Instances</summary>
 
 
-- Found in src/pools/BasePool.sol [Line: 255](src/pools/BasePool.sol#L255)
+- Found in src/pools/BasePool.sol [Line: 266](src/pools/BasePool.sol#L266)
 
 	```solidity
 	                _activeTokens.remove(_token);
@@ -98,25 +98,25 @@ Consider introducing checks for `msg.sender` to ensure the recipient of the mone
 <details><summary>4 Found Instances</summary>
 
 
-- Found in src/SkypodAccessControls.sol [Line: 202](src/SkypodAccessControls.sol#L202)
+- Found in src/SkypodAccessControls.sol [Line: 213](src/SkypodAccessControls.sol#L213)
 
 	```solidity
 	    function emergencyWithdraw(
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 193](src/SkypodPoolManager.sol#L193)
+- Found in src/SkypodPoolManager.sol [Line: 204](src/SkypodPoolManager.sol#L204)
 
 	```solidity
 	    function emergencyWithdraw(
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 142](src/SkypodUserManager.sol#L142)
+- Found in src/SkypodUserManager.sol [Line: 153](src/SkypodUserManager.sol#L153)
 
 	```solidity
 	    function emergencyWithdraw(
 	```
 
-- Found in src/pools/BasePool.sol [Line: 422](src/pools/BasePool.sol#L422)
+- Found in src/pools/BasePool.sol [Line: 433](src/pools/BasePool.sol#L433)
 
 	```solidity
 	    function emergencyWithdraw(
@@ -133,7 +133,7 @@ It appears that the contract includes a payable function to accept Ether but lac
 <details><summary>1 Found Instances</summary>
 
 
-- Found in src/SkypodAgentManager.sol [Line: 8](src/SkypodAgentManager.sol#L8)
+- Found in src/SkypodAgentManager.sol [Line: 19](src/SkypodAgentManager.sol#L19)
 
 	```solidity
 	contract SkypodAgentManager {
@@ -150,56 +150,56 @@ Changing state after an external call can lead to re-entrancy attacks.Use the ch
 <details><summary>13 Found Instances</summary>
 
 
-- Found in src/SkypodAgentManager.sol [Line: 117](src/SkypodAgentManager.sol#L117)
+- Found in src/SkypodAgentManager.sol [Line: 128](src/SkypodAgentManager.sol#L128)
 
 	State is changed at: `delete _agents[agentId]`
 	```solidity
 	            accessControls.removeAgent(_agents[agentId].wallets.at(i));
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 153](src/SkypodPoolManager.sol#L153)
+- Found in src/SkypodPoolManager.sol [Line: 164](src/SkypodPoolManager.sol#L164)
 
 	State is changed at: `_poolPercent[pools[i]] = percents[i]`
 	```solidity
 	            if (!accessControls.isPool(pools[i])) {
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 49](src/SkypodUserManager.sol#L49)
+- Found in src/SkypodUserManager.sol [Line: 60](src/SkypodUserManager.sol#L60)
 
 	State is changed at: `_userDeposited[msg.sender][token] += amount`
 	```solidity
 	        if (!accessControls.isAcceptedToken(token)) {
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 53](src/SkypodUserManager.sol#L53)
+- Found in src/SkypodUserManager.sol [Line: 64](src/SkypodUserManager.sol#L64)
 
 	State is changed at: `_userDeposited[msg.sender][token] += amount`
 	```solidity
 	        IERC20(token).transferFrom(msg.sender, address(this), amount);
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 67](src/SkypodUserManager.sol#L67)
+- Found in src/SkypodUserManager.sol [Line: 78](src/SkypodUserManager.sol#L78)
 
 	State is changed at: `_userDeposited[msg.sender][token] = 0`
 	```solidity
 	                IERC20(token).transfer(
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 75](src/SkypodUserManager.sol#L75)
+- Found in src/SkypodUserManager.sol [Line: 86](src/SkypodUserManager.sol#L86)
 
 	State is changed at: `_userDeposited[msg.sender][token] -= amount`
 	```solidity
 	            if (IERC20(token).transfer(msg.sender, amount)) {
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 108](src/SkypodUserManager.sol#L108)
+- Found in src/SkypodUserManager.sol [Line: 119](src/SkypodUserManager.sol#L119)
 
 	State is changed at: `_userDeposited[user][token] -= amount`
 	```solidity
 	        IERC20(token).transfer(msg.sender, amount);
 	```
 
-- Found in src/pools/BasePool.sol [Line: 98](src/pools/BasePool.sol#L98)
+- Found in src/pools/BasePool.sol [Line: 109](src/pools/BasePool.sol#L109)
 
 	State is changed at: `_userClaimedByCycle[_cycleCounter][msg.sender] = true`, `_userBalances[msg.sender] = 0`, `_userRewards[msg.sender] = 0`, `_additionalTokensUserBalances[_activeTokens.at(i)][
                     msg.sender
@@ -208,7 +208,7 @@ Changing state after an external call can lead to re-entrancy attacks.Use the ch
 	        if (!IERC20(novo).transfer(msg.sender, _balance)) {
 	```
 
-- Found in src/pools/BasePool.sol [Line: 111](src/pools/BasePool.sol#L111)
+- Found in src/pools/BasePool.sol [Line: 122](src/pools/BasePool.sol#L122)
 
 	State is changed at: `_additionalTokensUserBalances[_activeTokens.at(i)][
                     msg.sender
@@ -217,28 +217,28 @@ Changing state after an external call can lead to re-entrancy attacks.Use the ch
 	                    !IERC20(_activeTokens.at(i)).transfer(
 	```
 
-- Found in src/pools/BasePool.sol [Line: 216](src/pools/BasePool.sol#L216)
+- Found in src/pools/BasePool.sol [Line: 227](src/pools/BasePool.sol#L227)
 
 	State is changed at: `_totalPoolBalanceByToken[_activeTokens.at(j)] -= _tokenAmount`, `_totalPoolBalanceByToken[_activeTokens.at(j)] = 0`
 	```solidity
 	        if (IERC20(novo).balanceOf(address(this)) >= _amount) {
 	```
 
-- Found in src/pools/BasePool.sol [Line: 217](src/pools/BasePool.sol#L217)
+- Found in src/pools/BasePool.sol [Line: 228](src/pools/BasePool.sol#L228)
 
 	State is changed at: `_totalPoolBalanceByToken[_activeTokens.at(j)] -= _tokenAmount`, `_totalPoolBalanceByToken[_activeTokens.at(j)] = 0`
 	```solidity
 	            IERC20(novo).transfer(devTreasury, _amount);
 	```
 
-- Found in src/pools/BasePool.sol [Line: 236](src/pools/BasePool.sol#L236)
+- Found in src/pools/BasePool.sol [Line: 247](src/pools/BasePool.sol#L247)
 
 	State is changed at: `_totalPoolBalanceByToken[_activeTokens.at(j)] -= _tokenAmount`, `_totalPoolBalanceByToken[_activeTokens.at(j)] = 0`
 	```solidity
 	                IERC20(_activeTokens.at(j)).balanceOf(address(this)) >=
 	```
 
-- Found in src/pools/BasePool.sol [Line: 239](src/pools/BasePool.sol#L239)
+- Found in src/pools/BasePool.sol [Line: 250](src/pools/BasePool.sol#L250)
 
 	State is changed at: `_totalPoolBalanceByToken[_activeTokens.at(j)] -= _tokenAmount`, `_totalPoolBalanceByToken[_activeTokens.at(j)] = 0`
 	```solidity
@@ -258,55 +258,55 @@ ERC20 functions may not behave as expected. For example: return values are not a
 <details><summary>9 Found Instances</summary>
 
 
-- Found in src/SkypodPoolManager.sol [Line: 84](src/SkypodPoolManager.sol#L84)
+- Found in src/SkypodPoolManager.sol [Line: 95](src/SkypodPoolManager.sol#L95)
 
 	```solidity
 	            if (!IERC20(novo).transfer(_verifiedPools[i], _amounts[i])) {
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 53](src/SkypodUserManager.sol#L53)
+- Found in src/SkypodUserManager.sol [Line: 64](src/SkypodUserManager.sol#L64)
 
 	```solidity
 	        IERC20(token).transferFrom(msg.sender, address(this), amount);
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 67](src/SkypodUserManager.sol#L67)
+- Found in src/SkypodUserManager.sol [Line: 78](src/SkypodUserManager.sol#L78)
 
 	```solidity
 	                IERC20(token).transfer(
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 75](src/SkypodUserManager.sol#L75)
+- Found in src/SkypodUserManager.sol [Line: 86](src/SkypodUserManager.sol#L86)
 
 	```solidity
 	            if (IERC20(token).transfer(msg.sender, amount)) {
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 108](src/SkypodUserManager.sol#L108)
+- Found in src/SkypodUserManager.sol [Line: 119](src/SkypodUserManager.sol#L119)
 
 	```solidity
 	        IERC20(token).transfer(msg.sender, amount);
 	```
 
-- Found in src/pools/BasePool.sol [Line: 98](src/pools/BasePool.sol#L98)
+- Found in src/pools/BasePool.sol [Line: 109](src/pools/BasePool.sol#L109)
 
 	```solidity
 	        if (!IERC20(novo).transfer(msg.sender, _balance)) {
 	```
 
-- Found in src/pools/BasePool.sol [Line: 111](src/pools/BasePool.sol#L111)
+- Found in src/pools/BasePool.sol [Line: 122](src/pools/BasePool.sol#L122)
 
 	```solidity
 	                    !IERC20(_activeTokens.at(i)).transfer(
 	```
 
-- Found in src/pools/BasePool.sol [Line: 217](src/pools/BasePool.sol#L217)
+- Found in src/pools/BasePool.sol [Line: 228](src/pools/BasePool.sol#L228)
 
 	```solidity
 	            IERC20(novo).transfer(devTreasury, _amount);
 	```
 
-- Found in src/pools/BasePool.sol [Line: 239](src/pools/BasePool.sol#L239)
+- Found in src/pools/BasePool.sol [Line: 250](src/pools/BasePool.sol#L250)
 
 	```solidity
 	                IERC20(_activeTokens.at(j)).transfer(devTreasury, _tokenAmount);
@@ -436,139 +436,139 @@ Check for `address(0)` when assigning values to address state variables.
 <details><summary>23 Found Instances</summary>
 
 
-- Found in src/SkypodAccessControls.sol [Line: 165](src/SkypodAccessControls.sol#L165)
+- Found in src/SkypodAccessControls.sol [Line: 176](src/SkypodAccessControls.sol#L176)
 
 	```solidity
 	        agentsContract = _agentsContract;
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 66](src/SkypodAgentManager.sol#L66)
+- Found in src/SkypodAgentManager.sol [Line: 77](src/SkypodAgentManager.sol#L77)
 
 	```solidity
 	        accessControls = SkypodAccessControls(_accessControls);
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 249](src/SkypodAgentManager.sol#L249)
+- Found in src/SkypodAgentManager.sol [Line: 260](src/SkypodAgentManager.sol#L260)
 
 	```solidity
 	        accessControls = SkypodAccessControls(_accessControls);
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 61](src/SkypodPoolManager.sol#L61)
+- Found in src/SkypodPoolManager.sol [Line: 72](src/SkypodPoolManager.sol#L72)
 
 	```solidity
 	        accessControls = SkypodAccessControls(_accessControls);
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 65](src/SkypodPoolManager.sol#L65)
+- Found in src/SkypodPoolManager.sol [Line: 76](src/SkypodPoolManager.sol#L76)
 
 	```solidity
 	        novo = _novo;
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 66](src/SkypodPoolManager.sol#L66)
+- Found in src/SkypodPoolManager.sol [Line: 77](src/SkypodPoolManager.sol#L77)
 
 	```solidity
 	        pol = _pol;
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 182](src/SkypodPoolManager.sol#L182)
+- Found in src/SkypodPoolManager.sol [Line: 193](src/SkypodPoolManager.sol#L193)
 
 	```solidity
 	        accessControls = SkypodAccessControls(_accessControls);
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 186](src/SkypodPoolManager.sol#L186)
+- Found in src/SkypodPoolManager.sol [Line: 197](src/SkypodPoolManager.sol#L197)
 
 	```solidity
 	        novo = _novo;
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 190](src/SkypodPoolManager.sol#L190)
+- Found in src/SkypodPoolManager.sol [Line: 201](src/SkypodPoolManager.sol#L201)
 
 	```solidity
 	        pol = _pol;
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 43](src/SkypodUserManager.sol#L43)
+- Found in src/SkypodUserManager.sol [Line: 54](src/SkypodUserManager.sol#L54)
 
 	```solidity
 	        accessControls = SkypodAccessControls(_accessControls);
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 118](src/SkypodUserManager.sol#L118)
+- Found in src/SkypodUserManager.sol [Line: 129](src/SkypodUserManager.sol#L129)
 
 	```solidity
 	        accessControls = SkypodAccessControls(_accessControls);
 	```
 
-- Found in src/helpers/PoolSnapshots.sol [Line: 22](src/helpers/PoolSnapshots.sol#L22)
+- Found in src/helpers/PoolSnapshots.sol [Line: 33](src/helpers/PoolSnapshots.sol#L33)
 
 	```solidity
 	        accessControls = SkypodAccessControls(_accessControls);
 	```
 
-- Found in src/helpers/PoolSnapshots.sol [Line: 55](src/helpers/PoolSnapshots.sol#L55)
+- Found in src/helpers/PoolSnapshots.sol [Line: 66](src/helpers/PoolSnapshots.sol#L66)
 
 	```solidity
 	        accessControls = SkypodAccessControls(_accessControls);
 	```
 
-- Found in src/pools/BasePool.sol [Line: 82](src/pools/BasePool.sol#L82)
+- Found in src/pools/BasePool.sol [Line: 93](src/pools/BasePool.sol#L93)
 
 	```solidity
 	        accessControls = SkypodAccessControls(_accessControls);
 	```
 
-- Found in src/pools/BasePool.sol [Line: 83](src/pools/BasePool.sol#L83)
+- Found in src/pools/BasePool.sol [Line: 94](src/pools/BasePool.sol#L94)
 
 	```solidity
 	        userManager = SkypodUserManager(_userManager);
 	```
 
-- Found in src/pools/BasePool.sol [Line: 84](src/pools/BasePool.sol#L84)
+- Found in src/pools/BasePool.sol [Line: 95](src/pools/BasePool.sol#L95)
 
 	```solidity
 	        poolManager = _poolManager;
 	```
 
-- Found in src/pools/BasePool.sol [Line: 85](src/pools/BasePool.sol#L85)
+- Found in src/pools/BasePool.sol [Line: 96](src/pools/BasePool.sol#L96)
 
 	```solidity
 	        devTreasury = _devTreasury;
 	```
 
-- Found in src/pools/BasePool.sol [Line: 87](src/pools/BasePool.sol#L87)
+- Found in src/pools/BasePool.sol [Line: 98](src/pools/BasePool.sol#L98)
 
 	```solidity
 	        novo = _novo;
 	```
 
-- Found in src/pools/BasePool.sol [Line: 397](src/pools/BasePool.sol#L397)
+- Found in src/pools/BasePool.sol [Line: 408](src/pools/BasePool.sol#L408)
 
 	```solidity
 	        accessControls = SkypodAccessControls(_accessControls);
 	```
 
-- Found in src/pools/BasePool.sol [Line: 403](src/pools/BasePool.sol#L403)
+- Found in src/pools/BasePool.sol [Line: 414](src/pools/BasePool.sol#L414)
 
 	```solidity
 	        userManager = SkypodUserManager(_userManager);
 	```
 
-- Found in src/pools/BasePool.sol [Line: 409](src/pools/BasePool.sol#L409)
+- Found in src/pools/BasePool.sol [Line: 420](src/pools/BasePool.sol#L420)
 
 	```solidity
 	        poolManager = _poolManager;
 	```
 
-- Found in src/pools/BasePool.sol [Line: 413](src/pools/BasePool.sol#L413)
+- Found in src/pools/BasePool.sol [Line: 424](src/pools/BasePool.sol#L424)
 
 	```solidity
 	        novo = _novo;
 	```
 
-- Found in src/pools/BasePool.sol [Line: 419](src/pools/BasePool.sol#L419)
+- Found in src/pools/BasePool.sol [Line: 430](src/pools/BasePool.sol#L430)
 
 	```solidity
 	        devTreasury = _devTreasury;
@@ -585,271 +585,271 @@ If a function is marked public but is not used internally, consider marking it a
 <details><summary>45 Found Instances</summary>
 
 
-- Found in src/SkypodAccessControls.sol [Line: 164](src/SkypodAccessControls.sol#L164)
+- Found in src/SkypodAccessControls.sol [Line: 175](src/SkypodAccessControls.sol#L175)
 
 	```solidity
 	    function setAgentsContract(address _agentsContract) public onlyAdmin {
 	```
 
-- Found in src/SkypodAccessControls.sol [Line: 168](src/SkypodAccessControls.sol#L168)
+- Found in src/SkypodAccessControls.sol [Line: 179](src/SkypodAccessControls.sol#L179)
 
 	```solidity
 	    function isAdmin(address admin) public view returns (bool) {
 	```
 
-- Found in src/SkypodAccessControls.sol [Line: 172](src/SkypodAccessControls.sol#L172)
+- Found in src/SkypodAccessControls.sol [Line: 183](src/SkypodAccessControls.sol#L183)
 
 	```solidity
 	    function isVerifiedContract(
 	```
 
-- Found in src/SkypodAccessControls.sol [Line: 178](src/SkypodAccessControls.sol#L178)
+- Found in src/SkypodAccessControls.sol [Line: 189](src/SkypodAccessControls.sol#L189)
 
 	```solidity
 	    function isAgent(address _address) public view returns (bool) {
 	```
 
-- Found in src/SkypodAccessControls.sol [Line: 182](src/SkypodAccessControls.sol#L182)
+- Found in src/SkypodAccessControls.sol [Line: 193](src/SkypodAccessControls.sol#L193)
 
 	```solidity
 	    function isAcceptedToken(address token) public view returns (bool) {
 	```
 
-- Found in src/SkypodAccessControls.sol [Line: 186](src/SkypodAccessControls.sol#L186)
+- Found in src/SkypodAccessControls.sol [Line: 197](src/SkypodAccessControls.sol#L197)
 
 	```solidity
 	    function isPool(address token) public view returns (bool) {
 	```
 
-- Found in src/SkypodAccessControls.sol [Line: 190](src/SkypodAccessControls.sol#L190)
+- Found in src/SkypodAccessControls.sol [Line: 201](src/SkypodAccessControls.sol#L201)
 
 	```solidity
 	    function getVerifiedContracts() public view returns (address[] memory) {
 	```
 
-- Found in src/SkypodAccessControls.sol [Line: 194](src/SkypodAccessControls.sol#L194)
+- Found in src/SkypodAccessControls.sol [Line: 205](src/SkypodAccessControls.sol#L205)
 
 	```solidity
 	    function getVerifiedPools() public view returns (address[] memory) {
 	```
 
-- Found in src/SkypodAccessControls.sol [Line: 198](src/SkypodAccessControls.sol#L198)
+- Found in src/SkypodAccessControls.sol [Line: 209](src/SkypodAccessControls.sol#L209)
 
 	```solidity
 	    function getAcceptedTokens() public view returns (address[] memory) {
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 125](src/SkypodAgentManager.sol#L125)
+- Found in src/SkypodAgentManager.sol [Line: 136](src/SkypodAgentManager.sol#L136)
 
 	```solidity
 	    function revokeOwner(
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 133](src/SkypodAgentManager.sol#L133)
+- Found in src/SkypodAgentManager.sol [Line: 144](src/SkypodAgentManager.sol#L144)
 
 	```solidity
 	    function addOwner(
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 141](src/SkypodAgentManager.sol#L141)
+- Found in src/SkypodAgentManager.sol [Line: 152](src/SkypodAgentManager.sol#L152)
 
 	```solidity
 	    function revokeAgentWallet(
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 151](src/SkypodAgentManager.sol#L151)
+- Found in src/SkypodAgentManager.sol [Line: 162](src/SkypodAgentManager.sol#L162)
 
 	```solidity
 	    function addAgentWallet(
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 160](src/SkypodAgentManager.sol#L160)
+- Found in src/SkypodAgentManager.sol [Line: 171](src/SkypodAgentManager.sol#L171)
 
 	```solidity
 	    function scoreAgent(
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 178](src/SkypodAgentManager.sol#L178)
+- Found in src/SkypodAgentManager.sol [Line: 189](src/SkypodAgentManager.sol#L189)
 
 	```solidity
 	    function setAgentActive(uint256 agentId) public onlyVerifiedContract {
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 184](src/SkypodAgentManager.sol#L184)
+- Found in src/SkypodAgentManager.sol [Line: 195](src/SkypodAgentManager.sol#L195)
 
 	```solidity
 	    function setAgentInactive(uint256 agentId) public onlyVerifiedContract {
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 190](src/SkypodAgentManager.sol#L190)
+- Found in src/SkypodAgentManager.sol [Line: 201](src/SkypodAgentManager.sol#L201)
 
 	```solidity
 	    function getAgentCounter() public view returns (uint256) {
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 194](src/SkypodAgentManager.sol#L194)
+- Found in src/SkypodAgentManager.sol [Line: 205](src/SkypodAgentManager.sol#L205)
 
 	```solidity
 	    function getAgentWallets(
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 200](src/SkypodAgentManager.sol#L200)
+- Found in src/SkypodAgentManager.sol [Line: 211](src/SkypodAgentManager.sol#L211)
 
 	```solidity
 	    function getAgentMetadata(
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 206](src/SkypodAgentManager.sol#L206)
+- Found in src/SkypodAgentManager.sol [Line: 217](src/SkypodAgentManager.sol#L217)
 
 	```solidity
 	    function getAgentScorePositive(
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 212](src/SkypodAgentManager.sol#L212)
+- Found in src/SkypodAgentManager.sol [Line: 223](src/SkypodAgentManager.sol#L223)
 
 	```solidity
 	    function getAgentScoreNegative(
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 218](src/SkypodAgentManager.sol#L218)
+- Found in src/SkypodAgentManager.sol [Line: 229](src/SkypodAgentManager.sol#L229)
 
 	```solidity
 	    function getAgentOwners(
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 224](src/SkypodAgentManager.sol#L224)
+- Found in src/SkypodAgentManager.sol [Line: 235](src/SkypodAgentManager.sol#L235)
 
 	```solidity
 	    function getAgentActive(uint256 agentId) public view returns (uint256) {
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 228](src/SkypodAgentManager.sol#L228)
+- Found in src/SkypodAgentManager.sol [Line: 239](src/SkypodAgentManager.sol#L239)
 
 	```solidity
 	    function getAgentCreator(uint256 agentId) public view returns (address) {
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 232](src/SkypodAgentManager.sol#L232)
+- Found in src/SkypodAgentManager.sol [Line: 243](src/SkypodAgentManager.sol#L243)
 
 	```solidity
 	    function getIsAgentWallet(
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 239](src/SkypodAgentManager.sol#L239)
+- Found in src/SkypodAgentManager.sol [Line: 250](src/SkypodAgentManager.sol#L250)
 
 	```solidity
 	    function getIsAgentOwner(
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 71](src/SkypodPoolManager.sol#L71)
+- Found in src/SkypodPoolManager.sol [Line: 82](src/SkypodPoolManager.sol#L82)
 
 	```solidity
 	    function depositToPools() public onlyAdmin {
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 147](src/SkypodPoolManager.sol#L147)
+- Found in src/SkypodPoolManager.sol [Line: 158](src/SkypodPoolManager.sol#L158)
 
 	```solidity
 	    function setPoolPercents(
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 171](src/SkypodPoolManager.sol#L171)
+- Found in src/SkypodPoolManager.sol [Line: 182](src/SkypodPoolManager.sol#L182)
 
 	```solidity
 	    function getPoolPercent(address pool) public view returns (uint256) {
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 175](src/SkypodPoolManager.sol#L175)
+- Found in src/SkypodPoolManager.sol [Line: 186](src/SkypodPoolManager.sol#L186)
 
 	```solidity
 	    function getPoolTokenBalance(address token) public view returns (uint256) {
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 179](src/SkypodPoolManager.sol#L179)
+- Found in src/SkypodPoolManager.sol [Line: 190](src/SkypodPoolManager.sol#L190)
 
 	```solidity
 	    function setAccessControls(
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 185](src/SkypodPoolManager.sol#L185)
+- Found in src/SkypodPoolManager.sol [Line: 196](src/SkypodPoolManager.sol#L196)
 
 	```solidity
 	    function setNovoAddress(address _novo) public onlyAdmin {
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 189](src/SkypodPoolManager.sol#L189)
+- Found in src/SkypodPoolManager.sol [Line: 200](src/SkypodPoolManager.sol#L200)
 
 	```solidity
 	    function setPolAddress(address _pol) public onlyAdmin {
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 48](src/SkypodUserManager.sol#L48)
+- Found in src/SkypodUserManager.sol [Line: 59](src/SkypodUserManager.sol#L59)
 
 	```solidity
 	    function receiveTokensUser(address token, uint256 amount) public {
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 60](src/SkypodUserManager.sol#L60)
+- Found in src/SkypodUserManager.sol [Line: 71](src/SkypodUserManager.sol#L71)
 
 	```solidity
 	    function withdrawDeposited(address token, uint256 amount, bool max) public {
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 83](src/SkypodUserManager.sol#L83)
+- Found in src/SkypodUserManager.sol [Line: 94](src/SkypodUserManager.sol#L94)
 
 	```solidity
 	    function enableDepositUse(address token, bool allow) public {
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 89](src/SkypodUserManager.sol#L89)
+- Found in src/SkypodUserManager.sol [Line: 100](src/SkypodUserManager.sol#L100)
 
 	```solidity
 	    function setDepositAllowance(address token, uint256 allowance) public {
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 115](src/SkypodUserManager.sol#L115)
+- Found in src/SkypodUserManager.sol [Line: 126](src/SkypodUserManager.sol#L126)
 
 	```solidity
 	    function setAccessControls(
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 121](src/SkypodUserManager.sol#L121)
+- Found in src/SkypodUserManager.sol [Line: 132](src/SkypodUserManager.sol#L132)
 
 	```solidity
 	    function getUserTokenBalance(
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 128](src/SkypodUserManager.sol#L128)
+- Found in src/SkypodUserManager.sol [Line: 139](src/SkypodUserManager.sol#L139)
 
 	```solidity
 	    function getUserDepositAllowed(
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 135](src/SkypodUserManager.sol#L135)
+- Found in src/SkypodUserManager.sol [Line: 146](src/SkypodUserManager.sol#L146)
 
 	```solidity
 	    function getUserDepositAllowance(
 	```
 
-- Found in src/helpers/PoolSnapshots.sol [Line: 25](src/helpers/PoolSnapshots.sol#L25)
+- Found in src/helpers/PoolSnapshots.sol [Line: 36](src/helpers/PoolSnapshots.sol#L36)
 
 	```solidity
 	    function setSnapshot(
 	```
 
-- Found in src/helpers/PoolSnapshots.sol [Line: 38](src/helpers/PoolSnapshots.sol#L38)
+- Found in src/helpers/PoolSnapshots.sol [Line: 49](src/helpers/PoolSnapshots.sol#L49)
 
 	```solidity
 	    function getSnapshotTimestamp(
 	```
 
-- Found in src/helpers/PoolSnapshots.sol [Line: 45](src/helpers/PoolSnapshots.sol#L45)
+- Found in src/helpers/PoolSnapshots.sol [Line: 56](src/helpers/PoolSnapshots.sol#L56)
 
 	```solidity
 	    function getSnapshotData(
 	```
 
-- Found in src/helpers/PoolSnapshots.sol [Line: 52](src/helpers/PoolSnapshots.sol#L52)
+- Found in src/helpers/PoolSnapshots.sol [Line: 63](src/helpers/PoolSnapshots.sol#L63)
 
 	```solidity
 	    function setAccessControls(
@@ -866,13 +866,13 @@ Define and use `constant` variables instead of using literals. If the same const
 <details><summary>2 Found Instances</summary>
 
 
-- Found in src/SkypodPoolManager.sol [Line: 82](src/SkypodPoolManager.sol#L82)
+- Found in src/SkypodPoolManager.sol [Line: 93](src/SkypodPoolManager.sol#L93)
 
 	```solidity
 	                100;
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 160](src/SkypodPoolManager.sol#L160)
+- Found in src/SkypodPoolManager.sol [Line: 171](src/SkypodPoolManager.sol#L171)
 
 	```solidity
 	        if (total > 100) {
@@ -1002,13 +1002,13 @@ Consider removing the modifier or inlining the logic into the calling function.
 <details><summary>2 Found Instances</summary>
 
 
-- Found in src/SkypodAgentManager.sol [Line: 33](src/SkypodAgentManager.sol#L33)
+- Found in src/SkypodAgentManager.sol [Line: 44](src/SkypodAgentManager.sol#L44)
 
 	```solidity
 	    modifier onlyAdmin() {
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 35](src/SkypodUserManager.sol#L35)
+- Found in src/SkypodUserManager.sol [Line: 46](src/SkypodUserManager.sol#L46)
 
 	```solidity
 	    modifier onlyVerifiedContract() {
@@ -1025,7 +1025,7 @@ Consider removing empty blocks.
 <details><summary>1 Found Instances</summary>
 
 
-- Found in src/SkypodPoolManager.sol [Line: 93](src/SkypodPoolManager.sol#L93)
+- Found in src/SkypodPoolManager.sol [Line: 104](src/SkypodPoolManager.sol#L104)
 
 	```solidity
 	    function _handleSwap() internal {
@@ -1042,19 +1042,19 @@ Consider using or removing the unused error.
 <details><summary>3 Found Instances</summary>
 
 
-- Found in src/SkypodErrors.sol [Line: 22](src/SkypodErrors.sol#L22)
+- Found in src/SkypodErrors.sol [Line: 33](src/SkypodErrors.sol#L33)
 
 	```solidity
 	    error NotAgent();
 	```
 
-- Found in src/SkypodErrors.sol [Line: 28](src/SkypodErrors.sol#L28)
+- Found in src/SkypodErrors.sol [Line: 39](src/SkypodErrors.sol#L39)
 
 	```solidity
 	    error InvalidAmount();
 	```
 
-- Found in src/SkypodErrors.sol [Line: 35](src/SkypodErrors.sol#L35)
+- Found in src/SkypodErrors.sol [Line: 46](src/SkypodErrors.sol#L46)
 
 	```solidity
 	    error OnlyNovoAccepted();
@@ -1071,37 +1071,37 @@ Avoid `require` / `revert` statements in a loop because a single bad item can ca
 <details><summary>6 Found Instances</summary>
 
 
-- Found in src/SkypodAgentManager.sol [Line: 93](src/SkypodAgentManager.sol#L93)
+- Found in src/SkypodAgentManager.sol [Line: 104](src/SkypodAgentManager.sol#L104)
 
 	```solidity
 	        for (uint8 i = 0; i < wallets.length; i++) {
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 116](src/SkypodAgentManager.sol#L116)
+- Found in src/SkypodAgentManager.sol [Line: 127](src/SkypodAgentManager.sol#L127)
 
 	```solidity
 	        for (uint8 i = 0; i < _agents[agentId].wallets.length(); i++) {
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 79](src/SkypodPoolManager.sol#L79)
+- Found in src/SkypodPoolManager.sol [Line: 90](src/SkypodPoolManager.sol#L90)
 
 	```solidity
 	        for (uint8 i = 0; i < _verifiedPools.length; i++) {
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 152](src/SkypodPoolManager.sol#L152)
+- Found in src/SkypodPoolManager.sol [Line: 163](src/SkypodPoolManager.sol#L163)
 
 	```solidity
 	        for (uint8 i = 0; i < pools.length; i++) {
 	```
 
-- Found in src/pools/BasePool.sol [Line: 105](src/pools/BasePool.sol#L105)
+- Found in src/pools/BasePool.sol [Line: 116](src/pools/BasePool.sol#L116)
 
 	```solidity
 	        for (uint8 i = 0; i < _activeTokens.length(); i++) {
 	```
 
-- Found in src/pools/BasePool.sol [Line: 223](src/pools/BasePool.sol#L223)
+- Found in src/pools/BasePool.sol [Line: 234](src/pools/BasePool.sol#L234)
 
 	```solidity
 	        for (uint8 j = 0; j < _activeTokens.length(); j++) {
@@ -1118,73 +1118,73 @@ Invoking `SSTORE` operations in loops may waste gas. Use a local variable to hol
 <details><summary>12 Found Instances</summary>
 
 
-- Found in src/SkypodAgentManager.sol [Line: 80](src/SkypodAgentManager.sol#L80)
+- Found in src/SkypodAgentManager.sol [Line: 91](src/SkypodAgentManager.sol#L91)
 
 	```solidity
 	        for (uint8 i = 0; i < owners.length; i++) {
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 84](src/SkypodAgentManager.sol#L84)
+- Found in src/SkypodAgentManager.sol [Line: 95](src/SkypodAgentManager.sol#L95)
 
 	```solidity
 	        for (uint8 i = 0; i < wallets.length; i++) {
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 93](src/SkypodAgentManager.sol#L93)
+- Found in src/SkypodAgentManager.sol [Line: 104](src/SkypodAgentManager.sol#L104)
 
 	```solidity
 	        for (uint8 i = 0; i < wallets.length; i++) {
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 116](src/SkypodAgentManager.sol#L116)
+- Found in src/SkypodAgentManager.sol [Line: 127](src/SkypodAgentManager.sol#L127)
 
 	```solidity
 	        for (uint8 i = 0; i < _agents[agentId].wallets.length(); i++) {
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 164](src/SkypodPoolManager.sol#L164)
+- Found in src/SkypodPoolManager.sol [Line: 175](src/SkypodPoolManager.sol#L175)
 
 	```solidity
 	        for (uint8 i = 0; i < pools.length; i++) {
 	```
 
-- Found in src/pools/BasePool.sol [Line: 105](src/pools/BasePool.sol#L105)
+- Found in src/pools/BasePool.sol [Line: 116](src/pools/BasePool.sol#L116)
 
 	```solidity
 	        for (uint8 i = 0; i < _activeTokens.length(); i++) {
 	```
 
-- Found in src/pools/BasePool.sol [Line: 156](src/pools/BasePool.sol#L156)
+- Found in src/pools/BasePool.sol [Line: 167](src/pools/BasePool.sol#L167)
 
 	```solidity
 	        for (uint8 i = 0; i < _cycleUsers[_cycleCounter].length; i++) {
 	```
 
-- Found in src/pools/BasePool.sol [Line: 181](src/pools/BasePool.sol#L181)
+- Found in src/pools/BasePool.sol [Line: 192](src/pools/BasePool.sol#L192)
 
 	```solidity
 	        for (uint256 i = 0; i < tokens.length; i++) {
 	```
 
-- Found in src/pools/BasePool.sol [Line: 188](src/pools/BasePool.sol#L188)
+- Found in src/pools/BasePool.sol [Line: 199](src/pools/BasePool.sol#L199)
 
 	```solidity
 	            for (uint256 j = 0; j < _cycleUsers[_cycleCounter].length; j++) {
 	```
 
-- Found in src/pools/BasePool.sol [Line: 223](src/pools/BasePool.sol#L223)
+- Found in src/pools/BasePool.sol [Line: 234](src/pools/BasePool.sol#L234)
 
 	```solidity
 	        for (uint8 j = 0; j < _activeTokens.length(); j++) {
 	```
 
-- Found in src/pools/BasePool.sol [Line: 252](src/pools/BasePool.sol#L252)
+- Found in src/pools/BasePool.sol [Line: 263](src/pools/BasePool.sol#L263)
 
 	```solidity
 	        for (uint256 j = _activeTokens.length(); j > 0; j--) {
 	```
 
-- Found in src/pools/BasePool.sol [Line: 283](src/pools/BasePool.sol#L283)
+- Found in src/pools/BasePool.sol [Line: 294](src/pools/BasePool.sol#L294)
 
 	```solidity
 	        for (uint256 i = 0; i < users.length; i++) {
@@ -1201,73 +1201,73 @@ There are state variable changes in this function but no event is emitted. Consi
 <details><summary>12 Found Instances</summary>
 
 
-- Found in src/SkypodAccessControls.sol [Line: 164](src/SkypodAccessControls.sol#L164)
+- Found in src/SkypodAccessControls.sol [Line: 175](src/SkypodAccessControls.sol#L175)
 
 	```solidity
 	    function setAgentsContract(address _agentsContract) public onlyAdmin {
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 246](src/SkypodAgentManager.sol#L246)
+- Found in src/SkypodAgentManager.sol [Line: 257](src/SkypodAgentManager.sol#L257)
 
 	```solidity
 	    function setAccessControls(
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 179](src/SkypodPoolManager.sol#L179)
+- Found in src/SkypodPoolManager.sol [Line: 190](src/SkypodPoolManager.sol#L190)
 
 	```solidity
 	    function setAccessControls(
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 185](src/SkypodPoolManager.sol#L185)
+- Found in src/SkypodPoolManager.sol [Line: 196](src/SkypodPoolManager.sol#L196)
 
 	```solidity
 	    function setNovoAddress(address _novo) public onlyAdmin {
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 189](src/SkypodPoolManager.sol#L189)
+- Found in src/SkypodPoolManager.sol [Line: 200](src/SkypodPoolManager.sol#L200)
 
 	```solidity
 	    function setPolAddress(address _pol) public onlyAdmin {
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 115](src/SkypodUserManager.sol#L115)
+- Found in src/SkypodUserManager.sol [Line: 126](src/SkypodUserManager.sol#L126)
 
 	```solidity
 	    function setAccessControls(
 	```
 
-- Found in src/helpers/PoolSnapshots.sol [Line: 52](src/helpers/PoolSnapshots.sol#L52)
+- Found in src/helpers/PoolSnapshots.sol [Line: 63](src/helpers/PoolSnapshots.sol#L63)
 
 	```solidity
 	    function setAccessControls(
 	```
 
-- Found in src/pools/BasePool.sol [Line: 394](src/pools/BasePool.sol#L394)
+- Found in src/pools/BasePool.sol [Line: 405](src/pools/BasePool.sol#L405)
 
 	```solidity
 	    function setAccessControls(
 	```
 
-- Found in src/pools/BasePool.sol [Line: 400](src/pools/BasePool.sol#L400)
+- Found in src/pools/BasePool.sol [Line: 411](src/pools/BasePool.sol#L411)
 
 	```solidity
 	    function setUserManager(
 	```
 
-- Found in src/pools/BasePool.sol [Line: 406](src/pools/BasePool.sol#L406)
+- Found in src/pools/BasePool.sol [Line: 417](src/pools/BasePool.sol#L417)
 
 	```solidity
 	    function setPoolManager(
 	```
 
-- Found in src/pools/BasePool.sol [Line: 412](src/pools/BasePool.sol#L412)
+- Found in src/pools/BasePool.sol [Line: 423](src/pools/BasePool.sol#L423)
 
 	```solidity
 	    function setNovoAddress(address _novo) external override onlyAdmin {
 	```
 
-- Found in src/pools/BasePool.sol [Line: 416](src/pools/BasePool.sol#L416)
+- Found in src/pools/BasePool.sol [Line: 427](src/pools/BasePool.sol#L427)
 
 	```solidity
 	    function setDevTreasuryAddress(
@@ -1284,49 +1284,49 @@ State variables that are only changed in the constructor should be declared immu
 <details><summary>8 Found Instances</summary>
 
 
-- Found in src/SkypodAccessControls.sol [Line: 11](src/SkypodAccessControls.sol#L11)
+- Found in src/SkypodAccessControls.sol [Line: 22](src/SkypodAccessControls.sol#L22)
 
 	```solidity
 	    string public symbol;
 	```
 
-- Found in src/SkypodAccessControls.sol [Line: 12](src/SkypodAccessControls.sol#L12)
+- Found in src/SkypodAccessControls.sol [Line: 23](src/SkypodAccessControls.sol#L23)
 
 	```solidity
 	    string public name;
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 12](src/SkypodAgentManager.sol#L12)
+- Found in src/SkypodAgentManager.sol [Line: 23](src/SkypodAgentManager.sol#L23)
 
 	```solidity
 	    string public symbol;
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 13](src/SkypodAgentManager.sol#L13)
+- Found in src/SkypodAgentManager.sol [Line: 24](src/SkypodAgentManager.sol#L24)
 
 	```solidity
 	    string public name;
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 22](src/SkypodPoolManager.sol#L22)
+- Found in src/SkypodPoolManager.sol [Line: 33](src/SkypodPoolManager.sol#L33)
 
 	```solidity
 	    string public symbol;
 	```
 
-- Found in src/SkypodPoolManager.sol [Line: 23](src/SkypodPoolManager.sol#L23)
+- Found in src/SkypodPoolManager.sol [Line: 34](src/SkypodPoolManager.sol#L34)
 
 	```solidity
 	    string public name;
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 11](src/SkypodUserManager.sol#L11)
+- Found in src/SkypodUserManager.sol [Line: 22](src/SkypodUserManager.sol#L22)
 
 	```solidity
 	    string public symbol;
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 12](src/SkypodUserManager.sol#L12)
+- Found in src/SkypodUserManager.sol [Line: 23](src/SkypodUserManager.sol#L23)
 
 	```solidity
 	    string public name;
@@ -1343,115 +1343,115 @@ Function returns a value but it is ignored. Consider checking the return value.
 <details><summary>19 Found Instances</summary>
 
 
-- Found in src/SkypodAccessControls.sol [Line: 87](src/SkypodAccessControls.sol#L87)
+- Found in src/SkypodAccessControls.sol [Line: 98](src/SkypodAccessControls.sol#L98)
 
 	```solidity
 	        _verifiedContractsList.add(verifiedContract);
 	```
 
-- Found in src/SkypodAccessControls.sol [Line: 98](src/SkypodAccessControls.sol#L98)
+- Found in src/SkypodAccessControls.sol [Line: 109](src/SkypodAccessControls.sol#L109)
 
 	```solidity
 	        _verifiedContractsList.remove(verifiedContract);
 	```
 
-- Found in src/SkypodAccessControls.sol [Line: 108](src/SkypodAccessControls.sol#L108)
+- Found in src/SkypodAccessControls.sol [Line: 119](src/SkypodAccessControls.sol#L119)
 
 	```solidity
 	        _verifiedPoolsList.add(verifiedPool);
 	```
 
-- Found in src/SkypodAccessControls.sol [Line: 117](src/SkypodAccessControls.sol#L117)
+- Found in src/SkypodAccessControls.sol [Line: 128](src/SkypodAccessControls.sol#L128)
 
 	```solidity
 	        _verifiedPoolsList.remove(verifiedPool);
 	```
 
-- Found in src/SkypodAccessControls.sol [Line: 128](src/SkypodAccessControls.sol#L128)
+- Found in src/SkypodAccessControls.sol [Line: 139](src/SkypodAccessControls.sol#L139)
 
 	```solidity
 	        _acceptedTokensList.add(token);
 	```
 
-- Found in src/SkypodAccessControls.sol [Line: 140](src/SkypodAccessControls.sol#L140)
+- Found in src/SkypodAccessControls.sol [Line: 151](src/SkypodAccessControls.sol#L151)
 
 	```solidity
 	        _acceptedTokensList.remove(token);
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 78](src/SkypodAgentManager.sol#L78)
+- Found in src/SkypodAgentManager.sol [Line: 89](src/SkypodAgentManager.sol#L89)
 
 	```solidity
 	        _agents[_agentCounter].owners.add(msg.sender);
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 81](src/SkypodAgentManager.sol#L81)
+- Found in src/SkypodAgentManager.sol [Line: 92](src/SkypodAgentManager.sol#L92)
 
 	```solidity
 	            _agents[_agentCounter].owners.add(owners[i]);
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 85](src/SkypodAgentManager.sol#L85)
+- Found in src/SkypodAgentManager.sol [Line: 96](src/SkypodAgentManager.sol#L96)
 
 	```solidity
 	            _agents[_agentCounter].wallets.add(wallets[i]);
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 129](src/SkypodAgentManager.sol#L129)
+- Found in src/SkypodAgentManager.sol [Line: 140](src/SkypodAgentManager.sol#L140)
 
 	```solidity
 	        _agents[agentId].owners.remove(wallet);
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 137](src/SkypodAgentManager.sol#L137)
+- Found in src/SkypodAgentManager.sol [Line: 148](src/SkypodAgentManager.sol#L148)
 
 	```solidity
 	        _agents[agentId].owners.add(wallet);
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 145](src/SkypodAgentManager.sol#L145)
+- Found in src/SkypodAgentManager.sol [Line: 156](src/SkypodAgentManager.sol#L156)
 
 	```solidity
 	        _agents[agentId].wallets.remove(wallet);
 	```
 
-- Found in src/SkypodAgentManager.sol [Line: 155](src/SkypodAgentManager.sol#L155)
+- Found in src/SkypodAgentManager.sol [Line: 166](src/SkypodAgentManager.sol#L166)
 
 	```solidity
 	        _agents[agentId].wallets.add(wallet);
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 53](src/SkypodUserManager.sol#L53)
+- Found in src/SkypodUserManager.sol [Line: 64](src/SkypodUserManager.sol#L64)
 
 	```solidity
 	        IERC20(token).transferFrom(msg.sender, address(this), amount);
 	```
 
-- Found in src/SkypodUserManager.sol [Line: 108](src/SkypodUserManager.sol#L108)
+- Found in src/SkypodUserManager.sol [Line: 119](src/SkypodUserManager.sol#L119)
 
 	```solidity
 	        IERC20(token).transfer(msg.sender, amount);
 	```
 
-- Found in src/pools/BasePool.sol [Line: 186](src/pools/BasePool.sol#L186)
+- Found in src/pools/BasePool.sol [Line: 197](src/pools/BasePool.sol#L197)
 
 	```solidity
 	                _activeTokens.add((tokens[i]));
 	```
 
-- Found in src/pools/BasePool.sol [Line: 217](src/pools/BasePool.sol#L217)
+- Found in src/pools/BasePool.sol [Line: 228](src/pools/BasePool.sol#L228)
 
 	```solidity
 	            IERC20(novo).transfer(devTreasury, _amount);
 	```
 
-- Found in src/pools/BasePool.sol [Line: 239](src/pools/BasePool.sol#L239)
+- Found in src/pools/BasePool.sol [Line: 250](src/pools/BasePool.sol#L250)
 
 	```solidity
 	                IERC20(_activeTokens.at(j)).transfer(devTreasury, _tokenAmount);
 	```
 
-- Found in src/pools/BasePool.sol [Line: 255](src/pools/BasePool.sol#L255)
+- Found in src/pools/BasePool.sol [Line: 266](src/pools/BasePool.sol#L266)
 
 	```solidity
 	                _activeTokens.remove(_token);
