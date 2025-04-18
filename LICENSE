@@ -1,0 +1,25 @@
+GNU GENERAL PUBLIC LICENSE
+                       Version 3, 29 June 2007
+
+Copyright (C) 2025 Folktizen
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+# Additional License Notice
+
+This repository contains subcomponents and libraries that are distributed under different licenses, such as MIT, GPL-2.0-or-later, BUSL-1.1, and others. Please refer to the relevant subdirectory (e.g., `package.json` or file headers) for the specific license terms of each component. Your use of those components is subject to their respective licenses.
+
+For questions, contact Folktizen at hey@folktizen.xyz.
