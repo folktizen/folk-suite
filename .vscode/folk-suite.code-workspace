@@ -24,6 +24,10 @@
       "name": "◇ @subgraphs/folktizen",
       "path": "../subgraphs/folktizen"
     },
+    {
+      "name": "◇ @subgraphs/lavine",
+      "path": "../subgraphs/lavine"
+    }
   ],
   "settings": {
     "files.exclude": {

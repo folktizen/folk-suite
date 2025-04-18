@@ -1,0 +1,29 @@
+type WorkflowCreated @entity(immutable: true) {
+  id: Bytes!
+  workflowMetadata: WorkflowMetadata # string
+  creator: Bytes! # address
+  counter: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+  uri: String!
+}
+
+type WorkflowDeleted @entity(immutable: true) {
+  id: Bytes!
+  counter: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type WorkflowMetadata @entity(immutable: false) {
+  id: String!
+  name: String
+  description: String
+  tags: String
+  workflow: String
+  cover: String
+  setup: String
+  links: [String!]
+}

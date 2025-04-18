@@ -1,0 +1,42 @@
+specVersion: 1.2.0
+indexerHints:
+  prune: never
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: LavineWorkflows
+    network: matic
+    source:
+      address: "0x16d2ce32c39C223B001ac90D20876bB7009C0a82"
+      abi: LavineWorkflows
+      startBlock: 70470156
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - WorkflowCreated
+        - WorkflowDeleted
+      abis:
+        - name: LavineWorkflows
+          file: ./abis/LavineWorkflows.json
+      eventHandlers:
+        - event: WorkflowCreated(string,address,uint256)
+          handler: handleWorkflowCreated
+        - event: WorkflowDeleted(uint256)
+          handler: handleWorkflowDeleted
+      file: ./src/lavine-workflows.ts
+templates:
+  - name: WorkflowMetadata
+    kind: file/ipfs
+    mapping:
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      file: ./src/ds-handlers.ts
+      handler: handleWorkflowMetadata
+      entities:
+        - WorkflowMetadata
+      abis:
+        - name: LavineWorkflows
+          file: ./abis/LavineWorkflows.json
