@@ -255,7 +255,7 @@ type AgentCreated @entity(immutable: false) {
   collectionIdsHistory: [CollectionCreated!]
   activeCollectionIds: [CollectionCreated!]
   balances: [Balance!]
-  skyhunter: Boolean
+  skypod: Boolean
   studio: Boolean
 }
 

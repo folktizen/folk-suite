@@ -60,12 +60,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphprotocol/graph-cli@npm:0.96.0":
-  version: 0.96.0
-  resolution: "@graphprotocol/graph-cli@npm:0.96.0"
+"@graphprotocol/graph-cli@npm:0.97.0":
+  version: 0.97.0
+  resolution: "@graphprotocol/graph-cli@npm:0.97.0"
   dependencies:
     "@float-capital/float-subgraph-uncrashable": "npm:0.0.0-internal-testing.5"
-    "@oclif/core": "npm:4.2.6"
+    "@oclif/core": "npm:4.2.8"
     "@oclif/plugin-autocomplete": "npm:^3.2.11"
     "@oclif/plugin-not-found": "npm:^3.2.29"
     "@oclif/plugin-warn-if-update-available": "npm:^3.1.24"
@@ -74,7 +74,7 @@ __metadata:
     assemblyscript: "npm:0.19.23"
     chokidar: "npm:4.0.3"
     debug: "npm:4.4.0"
-    docker-compose: "npm:1.1.0"
+    docker-compose: "npm:1.1.1"
     fs-extra: "npm:11.3.0"
     glob: "npm:11.0.1"
     gluegun: "npm:5.2.0"
@@ -84,24 +84,24 @@ __metadata:
     js-yaml: "npm:4.1.0"
     kubo-rpc-client: "npm:^5.0.2"
     open: "npm:10.1.0"
-    prettier: "npm:3.4.2"
+    prettier: "npm:3.5.3"
     semver: "npm:7.7.1"
     tmp-promise: "npm:3.0.3"
-    undici: "npm:7.3.0"
+    undici: "npm:7.4.0"
     web3-eth-abi: "npm:4.4.1"
     yaml: "npm:2.7.0"
   bin:
     graph: bin/run.js
-  checksum: 10/f61c2f5a1eca4ef7377da9bb4acf2ac31af80ae1c262cde1721237d90dbce37ab0d5bffd227ee60a89507b1bfe4b43bf2848213abadf5f880d2109b892cb6d55
+  checksum: 10/bbe53ff4f4c51b9c6191d69633b7c4ff00a857263253a2d59b94e8225d4ef48f90b1239f08819c9085318bf87ce8935889d59efdb1b92ec44a62abfb8305809f
   languageName: node
   linkType: hard
 
-"@graphprotocol/graph-ts@npm:0.37.0":
-  version: 0.37.0
-  resolution: "@graphprotocol/graph-ts@npm:0.37.0"
+"@graphprotocol/graph-ts@npm:0.38.0":
+  version: 0.38.0
+  resolution: "@graphprotocol/graph-ts@npm:0.38.0"
   dependencies:
     assemblyscript: "npm:0.27.31"
-  checksum: 10/2ae14a36ff256518234e185de8e76fda4c9621b4a70b68cc97d67d0a1d02a2bb6c5272a3f312177b19ae88cdf49a10ddc29a06fa37f4dbdf3b0e7c3dbeb37048
+  checksum: 10/4f08c202b0f186a8912323c9eec5b52d5a6abd868ebc6208b6114f4a0eea6bba87110ea51c7634d30380ecdd13b0812d36944f5b5934f98bb009581a801b0f41
   languageName: node
   linkType: hard
 
@@ -531,12 +531,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oclif/core@npm:4.2.6":
-  version: 4.2.6
-  resolution: "@oclif/core@npm:4.2.6"
+"@oclif/core@npm:4.2.8":
+  version: 4.2.8
+  resolution: "@oclif/core@npm:4.2.8"
   dependencies:
     ansi-escapes: "npm:^4.3.2"
-    ansis: "npm:^3.10.0"
+    ansis: "npm:^3.16.0"
     clean-stack: "npm:^3.0.1"
     cli-spinners: "npm:^2.9.2"
     debug: "npm:^4.4.0"
@@ -553,7 +553,7 @@ __metadata:
     widest-line: "npm:^3.1.0"
     wordwrap: "npm:^1.0.0"
     wrap-ansi: "npm:^7.0.0"
-  checksum: 10/f9a76db5ab2d997cfa15161c691005c81f6308fd729f9d9102018946e2244aaa2a9eb99b3e63247ee7579d835477167fa685fec59210bab68be7d4e1382102a0
+  checksum: 10/f32e5305e6b864de817654f8704890eefd141a8ec7bd9484fb5382a153c7db7d1fe08bbc51c5ec2f7a04ae5009a1bf41453fb75203da16aea2ef7dbc99af5cdb
   languageName: node
   linkType: hard
 
@@ -694,8 +694,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@subgraphs/folktizen@workspace:."
   dependencies:
-    "@graphprotocol/graph-cli": "npm:0.96.0"
-    "@graphprotocol/graph-ts": "npm:0.37.0"
+    "@graphprotocol/graph-cli": "npm:0.97.0"
+    "@graphprotocol/graph-ts": "npm:0.38.0"
     matchstick-as: "npm:0.6.0"
   languageName: unknown
   linkType: soft
@@ -878,7 +878,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ansis@npm:^3.10.0, ansis@npm:^3.16.0, ansis@npm:^3.17.0":
+"ansis@npm:^3.16.0, ansis@npm:^3.17.0":
   version: 3.17.0
   resolution: "ansis@npm:3.17.0"
   checksum: 10/6fd6bc4d1187b894d9706f4c141c81b788e90766426617385486dae38f8b2f5a1726d8cc754939e44265f92a9db4647d5136cb1425435c39ac42b35e3acf4f3d
@@ -1411,12 +1411,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docker-compose@npm:1.1.0":
-  version: 1.1.0
-  resolution: "docker-compose@npm:1.1.0"
+"docker-compose@npm:1.1.1":
+  version: 1.1.1
+  resolution: "docker-compose@npm:1.1.1"
   dependencies:
     yaml: "npm:^2.2.2"
-  checksum: 10/59447ec147e8f6f693c5b1b6bb9f5efeb975d249945cc69a45f93b98c3258073a4d35bbcf10c94ba4c03ab7b566f4b82f0491e243c913999a4eb8250bc176e60
+  checksum: 10/23f87c925c5700798e2672a52b2167c8c6a5778a867fd44a49296eae0bcf035bfea1cb70f2ab10774ea7472c1acd392239781686979ea9f99db690293d2304bd
   languageName: node
   linkType: hard
 
@@ -3049,12 +3049,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:3.4.2":
-  version: 3.4.2
-  resolution: "prettier@npm:3.4.2"
+"prettier@npm:3.5.3":
+  version: 3.5.3
+  resolution: "prettier@npm:3.5.3"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 10/a3e806fb0b635818964d472d35d27e21a4e17150c679047f5501e1f23bd4aa806adf660f0c0d35214a210d5d440da6896c2e86156da55f221a57938278dc326e
+  checksum: 10/7050c08f674d9e49fbd9a4c008291d0715471f64e94cc5e4b01729affce221dfc6875c8de7e66b728c64abc9352eefb7eaae071b5f79d30081be207b53774b78
   languageName: node
   linkType: hard
 
@@ -3497,10 +3497,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:7.3.0":
-  version: 7.3.0
-  resolution: "undici@npm:7.3.0"
-  checksum: 10/8165c3a18cd045c70b009db006bee1784c5ba405634e8d2017107f65220a23190e2dfbbcb314bec71add1e43cabcd7515cd29b655c819f22e59b5e2e7025db20
+"undici@npm:7.4.0":
+  version: 7.4.0
+  resolution: "undici@npm:7.4.0"
+  checksum: 10/b2f659f2e2cdad422ad9ae6aff2bbba2669c0707708eed9cb56d85bcaf554c4e61be5fd437e58bb181d5ee6cd6c87def393fcfccd1633cc8ff2aa6b744abe520
   languageName: node
   linkType: hard
 

@@ -50,7 +50,7 @@
       { "name": "wallets", "type": "address[]", "internalType": "address[]" },
       { "name": "owners", "type": "address[]", "internalType": "address[]" },
       { "name": "metadata", "type": "string", "internalType": "string" },
-      { "name": "skyhunter", "type": "bool", "internalType": "bool" },
+      { "name": "skypod", "type": "bool", "internalType": "bool" },
       { "name": "studio", "type": "bool", "internalType": "bool" }
     ],
     "outputs": [],
@@ -140,7 +140,7 @@
   },
   {
     "type": "function",
-    "name": "getAgentSkyhunter",
+    "name": "getAgentSkypod",
     "inputs": [
       { "name": "agentId", "type": "uint256", "internalType": "uint256" }
     ],

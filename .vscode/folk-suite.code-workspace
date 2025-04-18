@@ -17,6 +17,10 @@
       "path": "../contracts/skypod"
     },
     {
+      "name": "◆ @contracts/lavine",
+      "path": "../contracts/lavine"
+    },
+    {
       "name": "◇ @subgraphs/folktizen",
       "path": "../subgraphs/folktizen"
     },
