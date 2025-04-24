@@ -4,10 +4,7 @@
 /contracts/**/zkout/
 
 # Ignores development broadcast logs
-/contracts/**/!/broadcast
-/contracts/**/broadcast/*/137/
-/contracts/**/broadcast/*/80002/
-/contracts/**/broadcast/**/dry-run/
+/contracts/**/broadcast/
 /contracts/**/install.log
 
 # Docs
