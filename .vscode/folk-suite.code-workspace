@@ -1,0 +1,55 @@
+{
+  "folders": [
+    {
+      "name": "⏏ ~/root",
+      "path": "../"
+    },
+    {
+      "name": "❖ @storage",
+      "path": "../storage"
+    },
+    {
+      "name": "◆ @contracts/folktizen",
+      "path": "../contracts/folktizen"
+    },
+    {
+      "name": "◆ @contracts/skypods",
+      "path": "../contracts/skypods"
+    },
+    {
+      "name": "◆ @contracts/lavine",
+      "path": "../contracts/lavine"
+    },
+    {
+      "name": "◇ @subgraphs/folktizen",
+      "path": "../subgraphs/folktizen"
+    },
+    {
+      "name": "◇ @subgraphs/lavine",
+      "path": "../subgraphs/lavine"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "contracts/": true,
+      "subgraphs/": true,
+      "storage/": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/.yarn": true,
+      "**/.cache": true,
+      "**/lib": true,
+      "**/libs": true,
+      "**/cache": true,
+      "**/out": true,
+      "**/broadcast": true,
+      "*-lock.yaml": true,
+      "*.lock": true
+    },
+    "editor.quickSuggestions": {
+      "strings": true
+    },
+    "solidity.compileUsingRemoteVersion": "v0.8.24+commit.e11b9ed9"
+  }
+}
