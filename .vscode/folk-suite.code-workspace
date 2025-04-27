@@ -21,12 +21,20 @@
       "path": "../contracts/lavine"
     },
     {
-      "name": "◇ @subgraphs/folktizen",
-      "path": "../subgraphs/folktizen"
+      "name": "◇ @subgraphs/folktizen-testnet",
+      "path": "../subgraphs/folktizen-testnet"
     },
     {
-      "name": "◇ @subgraphs/lavine",
-      "path": "../subgraphs/lavine"
+      "name": "◇ @subgraphs/lavine-testnet",
+      "path": "../subgraphs/lavine-testnet"
+    }
+    {
+      "name": "◇ @subgraphs/folktizen-mainnet",
+      "path": "../subgraphs/folktizen-mainnet"
+    },
+    {
+      "name": "◇ @subgraphs/lavine-mainnet",
+      "path": "../subgraphs/lavine-mainnet"
     }
   ],
   "settings": {

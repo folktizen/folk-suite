@@ -1,0 +1,28 @@
+{
+  "lens-testnet": {
+    "FolksyAccessControls": {
+      "address": "0x2CF0257c599ebf4d242756a0Ea78AD68BDF66FC6",
+      "startBlock": 3198085
+    },
+    "FolksyCollectionManager": {
+      "address": "0x94BAF3CB73bCCeC41496f8da648caD9d02aAA0ab",
+      "startBlock": 3198085
+    },
+    "FolksyAgents": {
+      "address": "0x652CE0ff95c1dECB1FCdaD09FB7919dB062e5969",
+      "startBlock": 3198085
+    },
+    "FolksyMarket": {
+      "address": "0x24fc6D07ea7afee744AA350D0df8EA4E61eB8D55",
+      "startBlock": 3198085
+    },
+    "SkypodsAgentManager": {
+      "address": "0x3025D279B6cd3312dB97AF923a27b6537E159C47",
+      "startBlock": 3198085
+    },
+    "FolksyFulfillerManager": {
+      "address": "0x2A11CF719e3E460cb809252c5Abb803811DCEA69",
+      "startBlock": 3198085
+    }
+  }
+}
